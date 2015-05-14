@@ -29,6 +29,11 @@
 (package-initialize)
 (setq url-http-attempt-keepalives nil)
 
+;;custom themes
+(add-to-list 'custom-theme-load-path
+	     (concat emacs-root "themes"))
+(load-theme 'hickey t)
+
 ;;multi-term and my key binding for it
 (add-to-list 'load-path
 	     (concat emacs-root "plugins/multi-term"))
