@@ -29,10 +29,13 @@
 (package-initialize)
 (setq url-http-attempt-keepalives nil)
 
-;;custom themes
+;;ido
+(require 'ido)
+(ido-mode t)
+
+;;custom themes (wilson and hickey are both great)
 (add-to-list 'custom-theme-load-path
-	     (concat emacs-root "themes"))
-(load-theme 'hickey t)
+             (concat emacs-root "themes"))
 
 ;;multi-term and my key binding for it
 (add-to-list 'load-path
