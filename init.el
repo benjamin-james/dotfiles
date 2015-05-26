@@ -36,7 +36,7 @@
 ;;custom themes (wilson and hickey are both great)
 (add-to-list 'custom-theme-load-path
 	     (concat emacs-root "themes"))
-(load-theme 'wilson t)
+(load-theme 'monokai t)
 
 ;;multi-term and my key binding for it
 (add-to-list 'load-path

@@ -1,0 +1,157 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/workgrant/Vending-Machine/" . "java-files/")
+ ("/Users/workgrant/Vending-Machine/java-files/" . "cores/")
+ ("/usr/" . "include/")
+ ("/Developer/Headers/" . "FlatCarbon/")
+ ("/Developer/" . "Headers/")
+ ("/" . "usr/")
+ ("/Users/workgrant/Documents/bengine3D/include/" . "io/")
+ ("/Users/workgrant/Documents/bengine3D/" . "include/")
+ ("/Users/workgrant/Documents/bengine2D/include/" . "physics/")
+ ("/Users/workgrant/Documents/bengine2D/src/" . "physics/")
+ ("/Users/workgrant/Documents/bengine2D/" . "include/")
+ ("/Users/workgrant/Documents/Arduino/libraries/" . "TFTLCD/")
+ ("/Users/workgrant/Documents/Arduino/" . "libraries/")
+ ("/Users/workgrant/Documents/" . "autobuilder/")
+ ("/Users/workgrant/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/workgrant/.emacs.d/"
+ "/Users/workgrant/Vending-Machine/java-files/io/"
+ "/Users/workgrant/Vending-Machine/java-files/testPrograms/"
+ "/Users/workgrant/Vending-Machine/"
+ "/Users/workgrant/Documents/graph/src/"
+ "/Users/workgrant/"
+ "/Users/workgrant/Documents/autobuilder/src/"
+ "/usr/include/"
+ "/usr/include/sys/"
+ "/Users/workgrant/Documents/pandora/"
+ "/Users/workgrant/Documents/"
+ "/Users/workgrant/Documents/robot/"
+ "/Users/workgrant/Documents/bengine3D/src/io/"
+ "/Users/workgrant/Documents/bengine3D/include/io/"
+ "/Users/workgrant/Documents/array/"
+ "/Users/workgrant/Downloads/"
+ "/Users/workgrant/Documents/Arduino/libraries/TFTLCD/"
+ "/Users/workgrant/Documents/Arduino/libraries/ben_util/"
+ "/Users/workgrant/Documents/bengine2D/src/math/"
+ "/Users/workgrant/Documents/bengine2D/include/math/"
+ "/Users/workgrant/Documents/bengine2D/include/physics/"
+ "/Users/workgrant/Documents/bengine2D/src/physics/"
+ "/Users/workgrant/Documents/Arduino/libraries/Time/"
+ "/Users/workgrant/Documents/Arduino/time_demo/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "init.el"
+ "BenSerialListener.java"
+ "newSerialTest.java"
+ "ComTestClass.java"
+ "Makefile.am"
+ ".bash_profile"
+ "scanner.c"
+ "autobuilder.c"
+ "dirent.h"
+ "dir.h"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/workgrant/.emacs.d/" (21855 23415 0 0) "themes/" "README.md" "plugins/" "LICENSE" "init.el" "ido.last~" "ido.last" "elpa/" "auto-save-list/" "ac-comphist.dat" ".gitmodules" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/workgrant/" (21860 50389 0 0) "todo" "temp/" "Sites/" "Public/" "Pictures/" "Music/" "Movies/" "monokai-emacs/" "logout.sh~" "logout.sh" "logout.png" "Library/" "emacs/" "Downloads/" "Documents/" "Desktop/" "cli-matrix/" "Arduino/" "Applications/" ":" ".Xcode/" ".Xauthority" ".viminfo" ".Trash/" ".ssh/" ".sh_history" ".pronsolerc~bak" ".pronsolerc" ".lesshst" ".gitconfig" ".gdb_history" ".fontconfig/" ".emacs.d/" ".DS_Store" ".cups/" ".CFUserTextEncoding" ".bash_profile~" ".bash_profile" ".bash_history" "../" "./")
+
+ ("/Users/workgrant/monokai-emacs/" (21860 50391 0 0) "README.md" "monokai-theme.el" ".git/" "../" "./")
+
+ ("/Users/workgrant/Documents/Arduino/SLUH_CardReaders_ben/" (21855 22639 0 0) "SLUH_CardReaders_ben.ino" "SLUH_CardReaders_ben.c" "PinChangeInt.h" "../" "./")
+
+ ("/Users/workgrant/Vending-Machine/java-files/testPrograms/" (21855 14086 0 0) "SerialTest.java" "newSerialTest.java" "ClassOfDestiny.java" "../" "./")
+
+ ("/Users/workgrant/Vending-Machine/java-files/cores/" (21855 11440 0 0) "VendingMachineRunner.java" "Soda.java" "Prices.java" "Inventory.java" "Coordinate.java" "../" "./")
+
+ ("/Users/workgrant/Vending-Machine/java-files/io/" (21855 13927 0 0) "TouchScreen.java" "SerialListener.java" "MoneyHandler.java" "Display.java" "BenSerialListener.java" "../" "./")
+
+ ("/Users/workgrant/Documents/" (21854 323 0 0) "send.c~" "send.c" "send" "robot/" "regex_ext.h~" "regex_ext.h" "regex_ext.c~" "regex_ext.c" "README.txt" "pandora/" "Microsoft User Data/" "client.c" "client" "ben_alarm.h" "ben_alarm.c" "autobuilder/" "Arduino/" "alarmdemo.c" "alarmdemo" "About Stacks.pdf" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/workgrant/Vending-Machine/java-files/" (21855 11440 0 0) "testPrograms/" "io/" "gui/" "cores/" "../" "./")
+
+ ("/Users/workgrant/Vending-Machine/" (21855 11440 0 0) "README.md" "lib/" "java-files/" "ComTestClass.java" "arduino/" ".project" ".gitmodules" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/workgrant/Documents/graph/src/" (21854 250 0 0) "Makefile.am" "graph.h" "graph.c" "../" "./")
+
+ ("/Users/workgrant/Documents/graph/" (21854 250 0 0) "src/" "README.md" "Makefile.am" "LICENSE" "configure.ac" "autogen.sh" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/workgrant/Documents/autobuilder/src/" (21854 168 0 0) "zzz/" "src/" "scanner.c~" "scanner.c" "include/" "data/" "autobuilder.c~" "autobuilder.c" "autobuilder" ".#scanner.c" "#scanner.c#" "../" "./")
+
+ ("/Users/workgrant/Documents/robot/" (21852 63030 0 0) "src/" "README.md" "Makefile" "LICENSE" ".git/" "#Makefile#" "#configure.ac#" "#autobuilder.sh#" "#autobuilder.c#" "##autobuilder.sh##" "../" "./")
+
+ ("/Users/workgrant/Documents/pandora/" (21852 63023 0 0) "Time.h" "Time.c" "TFTLCD.h~" "TFTLCD.h" "TFTLCD.cpp" "temp.c~" "temp.c" "shell.h~" "shell.h" "shell.c~" "shell.c" "relays.h" "relays.c" "pandora.h~" "pandora.h" "pandora.c~" "pandora.c" "old_pandora.c" "constants.h" "command.h" "command.c~" "command.c" "client.c" "../" "./")
+
+ ("/Users/workgrant/Documents/autobuilder/" (21852 49516 0 0) "src/" "../" "./")
+
+ ("/usr/include/sys/" (19998 65145 0 0) "xattr.h" "wait.h" "vstat.h" "vnode_if.h" "vnode.h" "vnioctl.h" "vmparam.h" "vmmeter.h" "vm.h" "vcmd.h" "vadvise.h" "utsname.h" "utfconv.h" "user.h" "unpcb.h" "unistd.h" "un.h" "uio.h" "ucred.h" "ucontext.h" "ubc.h" "types.h" "ttydev.h" "ttydefaults.h" "ttycom.h" "ttychars.h" "tty.h" "trace.h" "tprintf.h" "times.h" "timeb.h" "time.h" "termios.h" "syslog.h" "syslimits.h" "sysctl.h" "syscall.h" "sys_domain.h" "statvfs.h" "stat.h" "spawn.h" "sockio.h" "socketvar.h" "socket.h" "signalvar.h" "signal.h" "shm.h" "semaphore.h" "sem.h" "select.h" "sdt.h" "sbuf.h" "resourcevar.h" "resource.h" "reboot.h" "random.h" "quota.h" "queue.h" "ptrace.h" "protosw.h" "proc_info.h" "proc.h" "posix_shm.h" "posix_sem.h" "poll.h" "pipe.h" "paths.h" "param.h" "netport.h" "msgbuf.h" "msg.h" "mount.h" "mman.h" "mbuf.h" "malloc.h" "lockf.h" "lock.h" "loadable_fs.h" "lctx.h" "kernel_types.h" "kernel.h" "kern_memorystatus.h" "kern_event.h" "kern_control.h" "kdebug.h" "kauth.h" "ipc.h" "ioctl_compat.h" "ioctl.h" "ioccom.h" "gmon.h" "filio.h" "filedesc.h" "file.h" "fcntl.h" "fasttrap_isa.h" "fasttrap.h" "event.h" "ev.h" "errno.h" "dtrace_impl.h" "dtrace_glue.h" "dtrace.h" "domain.h" "dkstat.h" "disk.h" "dirent.h" "dir.h" "conf.h" "cdefs.h" "buf.h" "attr.h" "appleapiopts.h" "aio.h" "acl.h" "acct.h" "_types.h" "_structs.h" "_select.h" "_endian.h" "../" "./")
+
+ ("/usr/include/" (19998 65145 0 0) "zlib.h" "zconf.h" "Xplugin.h" "xlocale.h" "xlocale/" "xar/" "X11/" "wx-2.8/" "wordexp.h" "wctype.h" "wchar.h" "vproc.h" "vis.h" "vfs/" "varargs.h" "uuid/" "utmpx.h" "utmp.h" "utime.h" "util.h" "unistd.h" "unctrl.h" "ulimit.h" "ufs/" "ucontext.h" "tzfile.h" "ttyent.h" "tkPlatDecls.h" "tkMacOSX.h" "tkIntXlibDecls.h" "tkDecls.h" "tk.h" "timeconv.h" "time.h" "tidy/" "tic.h" "termios.h" "termcap.h" "term_entry.h" "term.h" "tcpd.h" "tclTomMathDecls.h" "tclTomMath.h" "tclPlatDecls.h" "tclDecls.h" "tcl.h" "TargetConfig.h" "TargetConditionals.h" "tar.h" "syslog.h" "sysexits.h" "sys/" "subversion-1/" "struct.h" "strings.h" "stringlist.h" "string.h" "strhash.h" "stdlib.h" "stdio.h" "stdint.h" "stddef.h" "stdbool.h" "stdarg.h" "standards.h" "stab.h" "sqlucode.h" "sqltypes.h" "sqlite3ext.h" "sqlite3.h" "sqlext.h" "sql.h" "spawn.h" "slapi-plugin.h" "signal.h" "sgtty.h" "setjmp.h" "servers/" "semaphore.h" "security/" "secure/" "search.h" "sched.h" "Saturn.h" "sasl/" "sandbox.h" "runetype.h" "rune.h" "rpcsvc/" "rpc/" "resolv.h" "removefile.h" "regex.h" "readpassphrase.h" "readline/" "ranlib.h" "python2.6/" "python2.5/" "pwd.h" "pthread_impl.h" "pthread.h" "protocols/" "profile.h" "ppc/" "poll.h" "php/" "pexpert/" "pcap.h" "pcap-namedb.h" "pcap-bpf.h" "pcap/" "paths.h" "panel.h" "openssl/" "openmpi/" "odbcinst.h" "objc/" "ntsid.h" "NSSystemDirectories.h" "notify_keys.h" "notify.h" "nlist.h" "nl_types.h" "nfs/" "netkey/" "netinet6/" "netinet/" "netdb.h" "net-snmp/" "net/" "ndbm.h" "ncurses_dll.h" "ncurses.h" "nc_tparm.h" "nameser.h" "mpool.h" "mpi.h" "monitor.h" "monetary.h" "miscfs/" "menu.h" "memory.h" "membership.h" "mecab.h" "math.h" "malloc/" "machine/" "mach_debug/" "mach-o/" "mach/" "ltdl.h" "locale.h" "localcharset.h" "limits.h" "libxslt/" "libxml2/" "libunwind.h" "libproc.h" "libltdl/" "libkern/" "libgen.h" "libexslt/" "libcharset.h" "libc.h" "ldap_utf8.h" "ldap_schema.h" "ldap_features.h" "ldap_cdefs.h" "ldap.h" "lber_types.h" "lber.h" "launch.h" "langinfo.h" "krb5.h" "krb5/" "isqltypes.h" "isqlext.h" "isql.h" "iso646.h" "iodbcunix.h" "iodbcinst.h" "iodbcext.h" "inttypes.h" "ifaddrs.h" "iconv.h" "i386/" "histedit.h" "hfs/" "gssapi.h" "gssapi/" "grp.h" "glob.h" "getopt.h" "get_compat.h" "gcc/" "ftw.h" "fts.h" "fstab.h" "fsproperties.h" "form.h" "fnmatch.h" "fmtmsg.h" "float.h" "FlexLexer.h" "ffi/" "fenv.h" "fcntl.h" "fcgios.h" "fcgio.h" "fcgimisc.h" "fcgiapp.h" "fcgi_stdio.h" "fcgi_config.h" "fastcgi.h" "expat_external.h" "expat.h" "execinfo.h" "eti.h" "errno.h" "err.h" "editline/" "dtrace.h" "DNSServiceDiscovery/" "dns_util.h" "dns_sd.h" "dns.h" "dlfcn.h" "dispatch/" "disktab.h" "dirent.h" "device/" "default_pager/" "db.h" "curses.h" "curl/" "cups/" "ctype.h" "crt_externs.h" "cpio.h" "copyfile.h" "complex.h" "CommonCrypto/" "com_err.h" "checkint.h" "cache_callbacks.h" "cache.h" "c++/" "bzlib.h" "bsm/" "Block.h" "bitstring.h" "AvailabilityMacros.h" "AvailabilityInternal.h" "Availability.h" "AssertMacros.h" "assert.h" "asl.h" "arpa/" "architecture/" "ar.h" "apr-1/" "apache2/" "alloca.h" "aio.h" "_xlocale.h" "_wctype.h" "_types.h" "_structs.h" "_locale.h" "../" "./")
+
+ ("/usr/" (19511 21846 0 0) "X11R6/" "X11/" "standalone/" "share/" "sbin/" "local/" "llvm-gcc-4.2/" "libexec/" "lib/" "include/" "etc/" "bin/" "../" "./")
+
+ ("/Developer/Headers/FlatCarbon/" (18961 38450 0 0) "ZoomedVideo.h" "WorldScript.h" "Windows.r" "Windows.h" "VideoServices.h" "Video.r" "Video.h" "vfp.h" "vectorOps.h" "vDSP.h" "vBLAS.h" "vBigNum.h" "vBasicOps.h" "UTCUtils.h" "USB.h" "URLAccess.h" "UnicodeUtilities.r" "UnicodeUtilities.h" "UnicodeConverter.r" "UnicodeConverter.h" "Unicode.h" "TypeSelect.h" "Types.r" "Types.h" "TSMTE.h" "Traps.h" "TranslationExtensions.r" "TranslationExtensions.h" "Translation.h" "ToolUtils.h" "Timer.h" "Threads.h" "TextUtils.h" "TextServices.h" "TextEncodingPlugin.h" "TextEncodingConverter.h" "TextEdit.h" "TextCommon.r" "TextCommon.h" "TerminalTools.h" "Terminals.h" "Telephones.h" "SysTypes.r" "Strings.h" "StringCompare.h" "Start.h" "StandardFile.h" "SpeechSynthesis.h" "SpeechRecognition.h" "Speech.h" "SoundSprocket.h" "SoundInput.r" "SoundInput.h" "SoundComponents.r" "SoundComponents.h" "Sound.r" "Sound.k.h" "Sound.h" "SocketServices.h" "Slots.r" "Slots.h" "ShutDown.h" "SFNTTypes.h" "SFNTLayoutTypes.h" "Serial.h" "SegLoad.h" "SCSI.h" "Script.r" "Script.h" "Scrap.h" "ScalerTypes.h" "ScalerStreamTypes.h" "ROMDefs.h" "Retrace.h" "Resources.h" "RAVESystem.h" "RAVE.h" "QuickTimeVRFormat.h" "QuickTimeVR.h" "QuickTimeStreaming.h" "QuickTimeMusic.k.h" "QuickTimeMusic.h" "QuickTimeComponents.r" "QuickTimeComponents.k.h" "QuickTimeComponents.h" "QuickTime.r" "QuickTime.h" "QuickdrawText.h" "Quickdraw.r" "Quickdraw.h" "QTStreamingComponents.r" "QTStreamingComponents.k.h" "QTStreamingComponents.h" "QTSMovie.r" "QTSMovie.k.h" "QTSMovie.h" "QTML.h" "QDOffscreen.h" "QD3DWinViewer.h" "QD3DViewer.h" "QD3DView.h" "QD3DTransform.h" "QD3DStyle.h" "QD3DString.h" "QD3DStorage.h" "QD3DShader.h" "QD3DSet.h" "QD3DRenderer.h" "QD3DPick.h" "QD3DMath.h" "QD3DLight.h" "QD3DIO.h" "QD3DGroup.h" "QD3DGeometry.h" "QD3DExtension.h" "QD3DErrors.h" "QD3DDrawContext.h" "QD3DCustomElements.h" "QD3DController.h" "QD3DCamera.h" "QD3DAcceleration.h" "QD3D.h" "Processes.r" "Processes.h" "Printing.h" "PPCToolbox.r" "PPCToolbox.h" "Power.h" "PMDefinitions.h" "PMCore.h" "PMApplication.h" "PLStringFuncs.h" "PictUtils.r" "PictUtils.h" "Pict.r" "PEFBinaryFormat.h" "PCI.h" "PCCardTuples.h" "PCCardEnablerPlugin.r" "PCCardEnablerPlugin.h" "PCCardAdapterPlugin.h" "PCCard.h" "Patches.h" "Palettes.r" "Palettes.h" "Packages.h" "OTConfig.r" "OSUtils.r" "OSUtils.h" "OSAGeneric.h" "OSAComp.h" "OSA.k.h" "OSA.h" "OpenTransportUNIX.h" "OpenTransportProviders.r" "OpenTransportProviders.h" "OpenTransportProtocol.r" "OpenTransportProtocol.h" "OpenTransportKernel.r" "OpenTransportKernel.h" "OpenTransport.r" "OpenTransport.h" "OpenTptXTI.h" "OpenTptSerial.h" "OpenTptPCISupport.h" "OpenTptModule.h" "OpenTptLinks.h" "OpenTptISDN.h" "OpenTptInternet.h" "OpenTptGlobalNew.h" "OpenTptDevLinks.h" "OpenTptConfig.h" "OpenTptCommon.h" "OpenTptClient.h" "OpenTptAppleTalk.h" "NumberFormatting.h" "NSLCore.h" "NSL.h" "Notification.h" "NetworkSetup.r" "NetworkSetup.h" "NetSprocket.h" "Navigation.h" "NameRegistry.h" "MultiprocessingInfo.h" "Multiprocessing.h" "MoviesFormat.h" "Movies.k.h" "Movies.h" "MixedMode.r" "MixedMode.h" "MIDI.h" "Menus.r" "Menus.h" "Memory.h" "MediaHandlers.k.h" "MediaHandlers.h" "Math64.h" "MacWindows.r" "MacWindows.h" "MacTypes.r" "MacTypes.h" "MacTextEditor.h" "MacTCP.h" "MacMemory.h" "MacLocales.h" "MachineExceptions.h" "MacHelp.h" "MacErrors.h" "MacApplication.h" "LowMem.h" "LocationManager.r" "LocationManager.k.h" "LocationManager.h" "Lists.h" "LaunchServices.h" "LanguageAnalysis.h" "KeychainHI.h" "KeychainCore.h" "Keychain.h" "Keyboards.h" "Kernel.h" "JManager.h" "IsochronousDataHandler.r" "IsochronousDataHandler.k.h" "IsochronousDataHandler.h" "IntlResources.r" "IntlResources.h" "Interrupts.h" "InternetConfig.h" "InputSprocket.r" "InputSprocket.h" "ImageCompression.r" "ImageCompression.k.h" "ImageCompression.h" "ImageCodec.r" "ImageCodec.k.h" "ImageCodec.h" "Icons.r" "Icons.h" "ICADevice.h" "ICACamera.h" "ICAApplication.h" "IBCarbonRuntime.h" "IAExtractor.r" "IAExtractor.h" "HyperXCmd.h" "HTMLRendering.h" "HID.h" "HFSVolumes.h" "GXTypes.h" "GXPrinting.h" "GXPrinterDrivers.h" "GXMessages.h" "GXMath.h" "GXLayout.h" "GXGraphics.h" "GXFonts.h" "GXErrors.h" "GXEnvironment.h" "GoggleSprocket.h" "Gestalt.r" "Gestalt.h" "FSM.h" "fp.h" "FontSync.h" "Fonts.r" "Fonts.h" "Folders.r" "Folders.h" "FixMath.h" "FinderRegistry.r" "FinderRegistry.h" "Finder.r" "Finder.h" "FindByContent.h" "FileTypesAndCreators.r" "FileTypesAndCreators.h" "FileTransferTools.h" "FileTransfers.h" "FileSigning.h" "Files.h" "Events.h" "Errors.h" "EPPC.r" "EPPC.h" "ENET.h" "Endian.h" "Editions.h" "DriverSynchronization.h" "DriverSupport.h" "DriverServices.h" "DriverGestalt.h" "DriverFamilyMatching.h" "DrawSprocket.h" "Drag.h" "Displays.r" "Displays.h" "Disks.h" "DiskInit.h" "Dictionary.h" "Dialogs.r" "Dialogs.h" "Devices.r" "Devices.h" "DeviceControl.k.h" "DeviceControl.h" "DesktopPrinting.r" "DesktopPrinting.h" "DeskBus.h" "Debugging.h" "DateTimeUtils.h" "DatabaseAccess.r" "DatabaseAccess.h" "CursorDevices.h" "CTBUtilities.h" "CryptoMessageSyntax.h" "CRMSerialDevices.h" "CoreServices.r" "CoreServices.h" "ControlStrip.h" "Controls.r" "Controls.h" "ControlDefinitions.r" "ControlDefinitions.h" "ConnectionTools.h" "Connections.h" "ConditionalMacros.r" "ConditionalMacros.h" "Components.r" "Components.k.h" "Components.h" "CommResources.r" "CommResources.h" "ColorPickerComponents.h" "ColorPicker.h" "Collections.r" "Collections.h" "CodeFragmentTypes.r" "CodeFragments.r" "CodeFragments.h" "CMTypes.h" "CMScriptingPlugin.h" "CMPRComponent.h" "CMMComponent.h" "CMICCProfile.h" "CMDeviceIntegration.h" "CMConversions.h" "CMComponent.h" "CMCalibrator.h" "CMApplication.h" "CMAcceleration.h" "CGWindowLevel.h" "CGRemoteOperation.h" "CGPDFDocument.h" "CGPDFContext.h" "CGPattern.h" "CGImage.h" "CGGeometry.h" "CGFont.h" "CGError.h" "CGDirectPalette.h" "CGDirectDisplay.h" "CGDataProvider.h" "CGDataConsumer.h" "CGContext.h" "CGColorSpace.h" "CGBitmapContext.h" "CGBase.h" "CGAffineTransform.h" "CFXMLParser.h" "CFXMLNode.h" "CFUUID.h" "CFURLAccess.h" "CFURL.h" "CFTree.h" "CFTimeZone.h" "CFStringEncodingExt.h" "CFString.h" "CFSet.h" "CFPropertyList.h" "CFPreferences.h" "CFPlugInCOM.h" "CFPlugIn.h" "CFNumber.h" "CFDictionary.h" "CFDate.h" "CFData.h" "CFCharacterSet.h" "CFBundle.h" "CFBase.h" "CFBag.h" "CFArray.h" "CardServices.h" "CarbonEvents.r" "CarbonEvents.h" "Carbon.r" "Carbon.h" "BalloonTypes.r" "Balloons.r" "Balloons.h" "AVLTree.h" "AVComponents.r" "AVComponents.k.h" "AVComponents.h" "ATSUnicode.h" "ATSTypes.h" "ATSLayoutTypes.h" "ATSFont.h" "ATA.h" "ASRegistry.r" "ASRegistry.h" "ASDebugging.h" "ApplicationServices.r" "ApplicationServices.h" "AppleTalk.h" "AppleScript.h" "AppleHelp.h" "AppleGuide.h" "AppleEvents.r" "AppleEvents.h" "AppleDiskPartitions.h" "Appearance.r" "Appearance.h" "Aliases.h" "AIFF.h" "AEWideUserTermTypes.r" "AEUserTermTypes.r" "AEUserTermTypes.h" "AERegistry.r" "AERegistry.h" "AEPackObject.h" "AEObjects.r" "AEObjects.h" "AEMach.h" "AEInteraction.h" "AEHelpers.h" "AEDataModel.r" "AEDataModel.h" "ADSP.h" "../" "./")
+
+ ("/Developer/Headers/" (18961 38450 0 0) "FlatHeaderConversion/" "FlatCarbon/" "../" "./")
+
+ ("/Developer/" (19998 65034 0 0) "usr/" "Tools/" "SDKs/" "Platforms/" "Makefiles/" "Library/" "Icon
+" "Headers/" "Extras/" "Examples/" "Documentation/" "Applications/" "About Xcode.pdf" "About Xcode.app/" "../" "./")
+
+ ("/Users/" (21817 23683 0 0) "workgrant/" "Shared/" "Deleted Users/" "admin1/" "admin/" ".localized" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine3D/include/io/" (21852 43875 0 0) "resource.h" "file.h" "configure.scan" "autoscan.log" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine3D/src/io/" (21852 43217 0 0) "resource.c" "file.c" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine3D/src/" (21852 43217 0 0) "util/" "math/" "io/" "geometry/" "display/" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine3D/include/" (21852 43217 0 0) "util/" "math/" "io/" "gui/" "geometry/" "display/" "bengine.h" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine3D/" (21852 43217 0 0) "src/" "README.md" "Makefile" "LICENSE" "include/" ".git/" "../" "./")
+
+ ("/Users/workgrant/Documents/array/" (21852 42617 0 0) "src/" "README.md" "Makefile.am" "LICENSE" "configure.ac" "autogen.sh" ".git/" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine2D/include/math/" (21851 20603 0 0) "matrix.h" "common.h" "bezier.h~" "bezier.h" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine2D/src/math/" (21851 20609 0 0) "matrix.c" "common.c" "bezier.c~" "bezier.c" "../" "./")
+
+ ("/Users/workgrant/Documents/Arduino/libraries/ben_util/" (21851 28054 0 0) "ben_util.h" "ben_util.c" ".DS_Store" "#ben_util.c#" "../" "./")
+
+ ("/Users/workgrant/Downloads/" (21851 30109 0 0) "wlan_util_intel_25210C.exe" "wlan_intel_25209C.exe" "WindowsXP-KB936929-SP3-x86-ENU.exe" "ubuntu-12.04.5-desktop-i386.iso.torrent" "Time.zip" "Time/" "tbios27.exe" "ta8wlanax.exe" "ta8tcm_24743.exe" "ta8fputil_24842A.exe" "ta8btstackx.exe" "ta8audiox.exe" "ta6gblanx.exe" "ta6chipsetix.exe" "SportsMomentDraftNickWilmsmeyerII.docx" "sluh1.svg" "sluh1.png" "sluh.scad" "sluh.psd" "sluh.jpg" "sluh.html" "SLUH-logo-full-hori-bluetext/" "sluh (1).scad" "Silverlight.dmg" "scad.png" "run" "Printrun-Mac-03Feb2015.zip" "Printrun-Mac-03Feb2015.app/" "pinchangeint-v2.19beta.zip" "pinchangeint-v2.19beta/" "munkitools-1.0.0.1864.0.dmg" "modem_driver_25237A.exe" "Math Ring_export.gcode" "iTerm2_v2_0.zip" "iTerm.app/" "ipod_stand.zip" "ipod_stand/" "iPhoneConfigUtility.dmg" "iPad3,4_7.1.1_11D201_Restore.ipsw" "intel_video_24809D.exe" "git-1.7.6.1-x86_64-snow-leopard.dmg" "FTDIUSBSerialDriver_v2_2_18.dmg" "emacs-24.tar.gz" "emacs-24.5/" "emacs/" "echoserver.c" "echoclient.c" "bjoern-arduino_osc-14667490521f.zip" "bjoern-arduino_osc-14667490521f/" "bezier.scad" "autopkg-master.zip" "autopkg-master/" "autopkg-0.3.0.pkg" "arm.gsp" "About Downloads.pdf" ".localized" ".DS_Store" "#echoclient.c#" "../" "./")
+
+ ("/Users/workgrant/Documents/Arduino/libraries/TFTLCD/" (21393 58641 0 0) "TFTLCD.h" "TFTLCD.cpp" "glcdfont.c" "examples/" "bitmaps/" ".DS_Store" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine2D/include/physics/" (21851 16976 0 0) "types.h" "polygon.h" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine2D/src/physics/" (21851 16877 0 0) "polygon.c" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine2D/src/" (21851 15829 0 0) "util/" "physics/" "math/" "io/" "core/" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine2D/include/" (21851 15829 0 0) "util/" "physics/" "math/" "io/" "core/" "../" "./")
+
+ ("/Users/workgrant/Documents/bengine2D/" (21851 15829 0 0) "src/" "README.md" "LICENSE" "include/" "autogen.sh" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/workgrant/Downloads/emacs-24.5/" (21851 15394 0 0) "src/" "site-lisp/" "README" "oldXMenu/" "nt/" "nextstep/" "msdos/" "Makefile.in" "make-dist" "m4/" "lwlib/" "lisp/" "lib-src/" "lib/" "leim/" "INSTALL" "info/" "etc/" "doc/" "COPYING" "configure.ac" "configure" "config.log" "config.bat" "ChangeLog" "build-aux/" "BUGS" "autogen.sh" "admin/" "aclocal.m4" ".dir-locals.el" "../" "./")
+
+ ("/Users/workgrant/Documents/Arduino/libraries/" (21650 61385 0 0) "UdpBytewise/" "TouchScreenLibrary/" "TimeAlarms/" "Time/" "TFTLCD/" "Stack/" "readme.txt" "PinChangeInt/" "cppfix/" "ben_util/" ".DS_Store" "../" "./")
+
+ ("/Users/workgrant/Documents/Arduino/libraries/Time/" (21850 7359 0 0) "Time.h" "Time.cpp" "Readme.txt" "keywords.txt" "Examples/" "DateStrings.cpp" ".DS_Store" "../" "./")
+
+ ("/Users/workgrant/Documents/Arduino/time_demo/" (21843 40512 0 0) "time_demo.ino" ".DS_Store" "#time_demo.ino#" "../" "./")
+
+ ("/Users/workgrant/Documents/Arduino/" (21464 78 0 0) "working_paint/" "touchscreen_demo/" "time_demo/" "SLUH_CardReaders_ben/" "sketch_jul21e/" "screen/" "RelayController/" "libraries/" "lcd_demo/" "interrupt_test/" "command/" "blinky_lights/" ".DS_Store" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
