@@ -22,12 +22,21 @@
 ;;eldoc enabled - displays function headers
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
-;;melpa - package archive
+;;package archive list
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
+	     '("org" . "http://orgmode.org/elpa/") t)
+
 (package-initialize)
 (setq url-http-attempt-keepalives nil)
+
+;;slime - make sure to change /usr/bin/sbcl if sbcl is not there for you
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(setq slime-contribs '(slime-fancy))
 
 ;;ido
 (require 'ido)
