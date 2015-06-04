@@ -132,9 +132,12 @@ Non-interactive arguments are Begin End Regexp"
 
 (add-hook 'c-mode-common-hook
           (lambda ()
-            ;; Add kernel style
+	    (setq indent-tabs-mode t)
+	    (setq show-trailing-whitespace t)
+	    (setq nuke-trailing-whitespace t)
+            ;; Add my style
             (c-add-style
-             "linux-tabs-only"
+             "ben-style"
              '("linux" (c-offsets-alist
                         (arglist-cont-nonempty
                          c-lineup-gcc-asm-reg
@@ -147,7 +150,7 @@ Non-interactive arguments are Begin End Regexp"
 	    (setq indent-tabs-mode t)
 	    (setq show-trailing-whitespace t)
 	    (setq nuke-trailing-whitespace t)
-	    (c-set-style "linux-tabs-only")))
+	    (c-set-style "ben-style")))
 ;;
 ;; Variables for emacs in X
 ;;
