@@ -48,8 +48,8 @@
 (load-theme 'monokai t)
 
 ;;multi-term and my key binding for it
-(add-to-list 'load-path
-	     (concat emacs-root "plugins/multi-term"))
+;(add-to-list 'load-path
+;	     (concat emacs-root "plugins/multi-term"))
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
 (global-set-key (kbd "M-t") 'multi-term)
@@ -61,12 +61,12 @@
 (global-set-key (kbd "C-x M-c") 'multi-term-dedicated-close)
 
 ;;yasnippet and autocomplete
-(add-to-list 'load-path
-	     (concat emacs-root "plugins/yasnippet"))
+;(add-to-list 'load-path
+;	     (concat emacs-root "plugins/yasnippet"))
 (require 'yasnippet)
 (yas-global-mode 1)
-(add-to-list 'load-path
-	     (concat emacs-root "plugins/autocomplete"))
+;(add-to-list 'load-path
+;	     (concat emacs-root "plugins/autocomplete"))
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
 	     (concat emacs-root "ac-dict"))

@@ -1,5 +1,7 @@
 * .emacs.d
 ** My emacs configuration
-* Configuration
-** To make sure the dependencies load, clone using <code>git clone --recursive git://github.com/benjamin-james/.emacs.d.git</code>
-** <br>Note - requires <code>sbcl</code> or another Common Lisp evaluator for SLIME to work, also needs emacs version capable of elpa (i.e. emacs 24). If <code>sbcl</code> isn't at <code>/usr/bin/sbcl</code>, you must specify your path to your lisp interpreter in init.el.
+* Dependencies/concerns
+** Requires <code>clisp</code>, <code>sbcl</code>, or another Common Lisp evaluator for SLIME to work, If <code>sbcl</code> isn't at <code>/usr/bin/sbcl</code>, you must specify your path to your lisp interpreter in init.el.
+** <br>Also needs emacs version capable of ELPA (i.e. emacs 24). 
+** <br>Also may need to update ELPA files, to do so, type <code>M-x list-packages</code> and press <code>U x</code> to update any needed packages.
+** <br>This configuration also uses the ttf-dejavu fonts with X, but if you don't have the fonts, Emacs (in X) can render them as a non-fixed width font.
