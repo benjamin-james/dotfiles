@@ -1,6 +1,6 @@
 * .emacs.d
-My emacs configuration
+*** My emacs configuration
 * Dependencies/concerns
-Requires <code>clisp</code>, <code>sbcl</code>, or another Common Lisp evaluator for SLIME to work.
-<br>Also you need emacs version capable of ELPA (i.e. emacs 24). 
-<br>So, you may need to update ELPA files. To do so, type <code>M-x list-packages</code> and press <code>U x</code> to update any needed packages. 
+*** Requires clisp, sbcl, or another Common Lisp evaluator for SLIME to work.
+*** Also you need an emacs version capable of using ELPA (i.e. >= emacs 24).
+*** So, you may need to update ELPA files. To do so, type "M-x list-packages" and press "U x" to update any needed packages.
