@@ -48,8 +48,6 @@
 (load-theme 'monokai t)
 
 ;;multi-term and my key binding for it
-;(add-to-list 'load-path
-;	     (concat emacs-root "plugins/multi-term"))
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
 (global-set-key (kbd "M-t") 'multi-term)
@@ -61,12 +59,8 @@
 (global-set-key (kbd "C-x M-c") 'multi-term-dedicated-close)
 
 ;;yasnippet and autocomplete
-;(add-to-list 'load-path
-;	     (concat emacs-root "plugins/yasnippet"))
 (require 'yasnippet)
 (yas-global-mode 1)
-;(add-to-list 'load-path
-;	     (concat emacs-root "plugins/autocomplete"))
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
 	     (concat emacs-root "ac-dict"))
@@ -148,18 +142,12 @@ Non-interactive arguments are Begin End Regexp"
 
 (add-hook 'c-mode-hook
           (lambda ()
-            (let ((filename (buffer-file-name)))
-              ;; Enable kernel mode for the appropriate files
-              (when (and filename
-                         (string-match (expand-file-name (concat emacs-root "../"))
-                                       filename))
-                (setq indent-tabs-mode t)
-                (setq show-trailing-whitespace t)
-		(setq nuke-trailing-whitespace t)
-                (c-set-style "linux-tabs-only")))))
-
-
-
+	    (add-to-list 'ac-sources 'ac-source-c-headers)
+	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)
+	    (setq indent-tabs-mode t)
+	    (setq show-trailing-whitespace t)
+	    (setq nuke-trailing-whitespace t)
+	    (c-set-style "linux-tabs-only")))
 ;;
 ;; Variables for emacs in X
 ;;
@@ -168,12 +156,7 @@ Non-interactive arguments are Begin End Regexp"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(font-use-system-font t)
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
