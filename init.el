@@ -35,7 +35,7 @@
 (setq url-http-attempt-keepalives nil)
 
 ;;slime - make sure to change /usr/bin/sbcl if sbcl is not there for you
-(setq inferior-lisp-program "/usr/bin/sbcl")
+(setq inferior-lisp-program "/usr/bin/clisp")
 (setq slime-contribs '(slime-fancy))
 
 ;;ido
@@ -74,10 +74,7 @@
 ;;trigger key
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
-(setq browse-url-browser-function 'w3m-browse-url)
- (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
- ;; optional keyboard short-cut
- (global-set-key "\C-xm" 'browse-url-at-point)
+(nyan-mode)
 
 ;;
 ;; spacing and formatting
@@ -163,3 +160,20 @@ Non-interactive arguments are Begin End Regexp"
 
 
 
+;;
+;; Variables for emacs in X
+;;
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
