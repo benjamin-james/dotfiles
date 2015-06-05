@@ -3,4 +3,3 @@
 * Dependencies/concerns
 *** Requires clisp, sbcl, or another Common Lisp evaluator for SLIME to work.
 *** Also you need an emacs version capable of using ELPA (i.e. >= emacs 24).
-*** So, you may need to update ELPA files. To do so, type "M-x list-packages" and press "U x" to update any needed packages.
