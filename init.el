@@ -52,7 +52,7 @@
 (setq slime-contribs '(slime-fancy))
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
-	     (concat emacs-root "ac-dict")
+	     (concat emacs-root "ac-dict"))
 (ac-config-default)
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
