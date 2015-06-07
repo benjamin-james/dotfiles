@@ -10,6 +10,7 @@
 (defconst my-packages
   '(c-eldoc
     auto-complete
+    ac-c-headers
     monokai-theme
     nyan-mode
     slime
@@ -40,7 +41,7 @@
 (require 'cl)
 (require 'cl-lib)
 (require 'whitespace)
-
+(require 'ac-c-headers)
 (require 'ido)
 (ido-mode t)
 (require 'nyan-mode)
@@ -93,7 +94,9 @@
 
 ;;displays function header in minibuffer
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-
+(add-hook 'c-mode-hook
+	  (lambda ()
+	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)))
 ;;
 ;; Variables for emacs in X
 ;;
