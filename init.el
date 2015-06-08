@@ -12,11 +12,13 @@
     auto-complete
     ac-c-headers
     monokai-theme
+    multi-term
     nyan-mode
     slime
-    multi-term
     yasnippet))
-
+;;
+;;Auto-installation of my-packages !!!
+;;
 (defun install-packages ()
   "Install the packages"
   (interactive)
@@ -27,6 +29,7 @@
       (package-install package))))
 (install-packages)
 
+;;cross-platform "root directory"
 (defvar emacs-root
   (eval-when-compile
     (if (or (eq system-type 'cygwin)
