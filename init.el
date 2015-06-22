@@ -19,6 +19,7 @@
     multi-term
     nyan-mode
     slime
+    stumpwm-mode
     yasnippet))
 ;;
 ;;Auto-installation of my-packages !!!
@@ -114,5 +115,14 @@
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
  '(scroll-bar-mode nil)
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "smtp.gmail.com")
+ '(smtpmail-smtp-service 465)
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
