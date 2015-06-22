@@ -56,6 +56,8 @@
 (nyan-mode)
 (require 'yasnippet)
 (yas-global-mode 1)
+(add-hook 'term-mode-hook (lambda()
+			    (setq yas-dont-activate t)))
 (require 'slime)
 (setq inferior-lisp-program "/usr/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
