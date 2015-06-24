@@ -20,7 +20,8 @@
     nyan-mode
     slime
     stumpwm-mode
-    yasnippet))
+    yasnippet
+    zenburn-theme))
 ;;
 ;;Auto-installation of my-packages !!!
 ;;
@@ -52,8 +53,9 @@
 (require 'ac-c-headers)
 (require 'ido)
 (ido-mode t)
-(require 'nyan-mode)
-(nyan-mode)
+(when (display-graphic-p)
+  (require 'nyan-mode)
+  (nyan-mode))
 (require 'yasnippet)
 (yas-global-mode 1)
 (add-hook 'term-mode-hook (lambda()
@@ -94,7 +96,7 @@
 	    (setq nuke-trailing-whitespace t)))
 ;;my theme
 (load-theme 'monokai t)
-
+;(load-theme 'zenburn t)
 (c-add-style "ben-style"
 	     '("linux" (c-offsets-alist
 			(arglist-cont-nonempty
@@ -107,6 +109,7 @@
 (add-hook 'c-mode-hook
 	  (lambda ()
 	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)))
+
 ;;
 ;; Variables for emacs in X
 ;;
@@ -116,6 +119,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
+ '(fringe-mode 0 nil (fringe))
+ '(menu-bar-mode nil)
  '(scroll-bar-mode nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(smtpmail-smtp-server "smtp.gmail.com")
