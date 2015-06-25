@@ -12,10 +12,11 @@
 (package-initialize)
 
 (defconst my-packages
-  '(c-eldoc
-    auto-complete
+  '(auto-complete
     ac-c-headers
+    arduino-mode
     chess
+    c-eldoc
     cl-generic
     golden-ratio
     helm
@@ -27,6 +28,7 @@
     multi-term
     nyan-mode
     slime
+    smart-compile
     sr-speedbar
     yasnippet
     zenburn-theme))
@@ -90,9 +92,13 @@
 (helm-autoresize-mode t)
 (helm-mode 1)
 
+(require 'projectile)
 (projectile-global-mode)
+(setq projectile-enable-caching t)
+
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
+(setq projectile-indexing-method 'alien)
 
 ;(defun pl/helm-alive-p ()
 ;  (if (boudp 'helm-alive-p)
@@ -101,6 +107,8 @@
 (when (display-graphic-p)
   (require 'nyan-mode)
   (nyan-mode))
+(require 'smart-compile)
+(add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -o %n %f"))
 (require 'sr-speedbar)
 (setq speedbar-show-unknown-files t)
 (require 'yasnippet)
@@ -122,7 +130,10 @@
 (require 'magit)
 (setq magit-last-seen-setup-instructions "1.4.0")
 (global-set-key (kbd "M-g s") 'magit-status)
-
+(global-set-key (kbd "M-g m") 'magit-commit)
+(global-set-key (kbd "M-g u") 'magit-push)
+(global-set-key (kbd "M-g l") 'magit-pull)
+(global-set-key (kbd "M-g f") 'magit-fetch)
 (require 'multi-term)
 (require 'helm-mt)
 (global-set-key (kbd "C-x t") 'helm-mt)
@@ -164,7 +175,7 @@
 	  (lambda ()
 	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)))
 
-(global-set-key (kbd "<f5>") 'compile)
+(global-set-key (kbd "<f5>") 'smart-compile)
 (global-set-key (kbd "<f6>") 'gdb)
 ;;
 ;; Variables for emacs in X
