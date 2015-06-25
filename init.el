@@ -2,6 +2,9 @@
 ;;;; Ben's emacs init file
 ;;;;
 
+;;;TODO: break up into different .el files
+;;; i.e. my-style.el, custom-functions.el, my-helm.el
+;;; and use "use-package"
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -12,11 +15,11 @@
 (package-initialize)
 
 (defconst my-packages
-  '(auto-complete
-    ac-c-headers
+  '(ac-c-headers
+    auto-complete
     arduino-mode
-    chess
     c-eldoc
+    chess
     cl-generic
     golden-ratio
     helm
@@ -64,7 +67,7 @@
 (require 'chess)
 (require 'golden-ratio)
 (golden-ratio-mode 1)
-
+`
 ;;; I really should organize this
 (require 'helm)
 (require 'helm-config)
@@ -108,9 +111,10 @@
   (require 'nyan-mode)
   (nyan-mode))
 (require 'smart-compile)
-(add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -o %n %f"))
+(add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -g -o %n %f"))
 (require 'sr-speedbar)
 (setq speedbar-show-unknown-files t)
+(global-set-key (kbd "C-c C-f") 'sr-speedbar-toggle)
 (require 'yasnippet)
 (yas-global-mode 1)
 (add-hook 'term-mode-hook (lambda()
@@ -125,7 +129,6 @@
 (ac-config-default)
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
-
 
 (require 'magit)
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -146,8 +149,6 @@
 (global-set-key (kbd "C-x M-s") 'multi-term-dedicated-select)
 (global-set-key (kbd "C-x M-c") 'multi-term-dedicated-close)
 
-
-
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 
@@ -162,6 +163,8 @@
 	    (setq nuke-trailing-whitespace t)))
 ;;my theme
 (load-theme 'zenburn t)
+
+;;my-style
 (c-add-style "ben-style"
 	     '("linux" (c-offsets-alist
 			(arglist-cont-nonempty
@@ -177,6 +180,7 @@
 
 (global-set-key (kbd "<f5>") 'smart-compile)
 (global-set-key (kbd "<f6>") 'gdb)
+
 ;;
 ;; Variables for emacs in X
 ;;

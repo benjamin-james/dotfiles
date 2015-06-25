@@ -11,6 +11,8 @@ c-eldoc (Displays headers of c functions in minibuf)
 
 chess
 
+cl-generic (Common lisp bindings for emacs)
+
 golden-ratio (Resizes screen to golden ratio)
 
 Helm
@@ -29,7 +31,7 @@ SR-Speedbar (graphical same frame dired mode)
 
 YASnippet (macro templates)
 
-Monokai/Zenburn themes
+Zenburn/Monokai themes
 * Thinking about:
 
 ac-helm / ac-slime / ac-clang
@@ -41,6 +43,8 @@ rtags / ggtags / helm-gtags
 aggressive-indent
 
 flycheck / flymake / flylisp / helm-fly*
+
+use-package
 * Dependencies/concerns
 Requires clisp, sbcl, or another Common Lisp evaluator for SLIME to work.
 Also you need an emacs version capable of using ELPA (i.e. >= emacs 24)
