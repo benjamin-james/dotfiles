@@ -1,5 +1,27 @@
 * .emacs.d
-*** My emacs configuration
+My emacs configuration
+* Features
+auto-complete (Shows list of possible entries)
+ac-c-headers (autocomplete c headers)
+c-eldoc (Displays headers of c functions in minibuf)
+chess
+golden-ratio (Resizes screen to golden ratio)
+Helm
+Magit (Emacs git mode)
+Markdown-mode
+Multi-term (and helm-mt) (Multiple terminal interface)
+Projectile (and helm-projectile)
+SLIME (Superior Lisp Interaction Mode for Emacs)
+SR-Speedbar (graphical same frame dired mode)
+YASnippet (macro templates)
+Monokai/Zenburn themes
+
+Thinking about:
+ac-helm / ac-slime / ac-clang
+company
+rtags / ggtags / helm-gtags
+aggressive-indent
+flycheck / flymake / flylisp
 * Dependencies/concerns
-*** Requires clisp, sbcl, or another Common Lisp evaluator for SLIME to work.
-*** Also you need an emacs version capable of using ELPA (i.e. >= emacs 24).
+Requires clisp, sbcl, or another Common Lisp evaluator for SLIME to work.
+Also you need an emacs version capable of using ELPA (i.e. >= emacs 24)

@@ -5,8 +5,8 @@
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+;(add-to-list 'package-archives
+;	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
 	     '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
@@ -15,11 +15,19 @@
   '(c-eldoc
     auto-complete
     ac-c-headers
+    chess
+    cl-generic
+    golden-ratio
+    helm
+    helm-mt
+    helm-projectile
+    magit
+    markdown-mode
     monokai-theme
     multi-term
     nyan-mode
     slime
-    stumpwm-mode
+    sr-speedbar
     yasnippet
     zenburn-theme))
 ;;
@@ -51,11 +59,50 @@
 (require 'cl-lib)
 (require 'whitespace)
 (require 'ac-c-headers)
-(require 'ido)
-(ido-mode t)
+(require 'chess)
+(require 'golden-ratio)
+(golden-ratio-mode 1)
+
+;;; I really should organize this
+(require 'helm)
+(require 'helm-config)
+(require 'helm-projectile)
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z")  'helm-select-action)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+(when (executable-find "ack-grep")
+  (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
+	helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
+
+(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+(setq helm-split-window-in-side-p           t
+      helm-move-to-line-cycle-in-source     t
+      helm-ff-search-library-in-sexp        t
+      helm-scroll-amount                    8
+      helm-ff-file-name-history-use-recentf t)
+(helm-autoresize-mode t)
+(helm-mode 1)
+
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+;(defun pl/helm-alive-p ()
+;  (if (boudp 'helm-alive-p)
+;      (symbol-value 'helm-alive-p)))
+;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 (when (display-graphic-p)
   (require 'nyan-mode)
   (nyan-mode))
+(require 'sr-speedbar)
+(setq speedbar-show-unknown-files t)
 (require 'yasnippet)
 (yas-global-mode 1)
 (add-hook 'term-mode-hook (lambda()
@@ -63,6 +110,7 @@
 (require 'slime)
 (setq inferior-lisp-program "/usr/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
+(slime-setup '(slime-fancy slime-asdf))
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
 	     (concat emacs-root "ac-dict"))
@@ -70,7 +118,14 @@
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 
+
+(require 'magit)
+(setq magit-last-seen-setup-instructions "1.4.0")
+(global-set-key (kbd "M-g s") 'magit-status)
+
 (require 'multi-term)
+(require 'helm-mt)
+(global-set-key (kbd "C-x t") 'helm-mt)
 (setq multi-term-program "/bin/bash")
 (global-set-key (kbd "M-t") 'multi-term)
 (global-set-key (kbd "M-n") 'multi-term-next)
@@ -95,8 +150,7 @@
 	    (setq show-trailing-whitespace t)
 	    (setq nuke-trailing-whitespace t)))
 ;;my theme
-(load-theme 'monokai t)
-;(load-theme 'zenburn t)
+(load-theme 'zenburn t)
 (c-add-style "ben-style"
 	     '("linux" (c-offsets-alist
 			(arglist-cont-nonempty
@@ -110,6 +164,8 @@
 	  (lambda ()
 	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)))
 
+(global-set-key (kbd "<f5>") 'compile)
+(global-set-key (kbd "<f6>") 'gdb)
 ;;
 ;; Variables for emacs in X
 ;;
