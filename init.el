@@ -14,7 +14,9 @@
 	     '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
 (defconst my-packages
-  '(arduino-mode
+  '(aggressive-indent
+    arduino-mode
+    bash-completion
     c-eldoc
     chess
     company
@@ -22,6 +24,7 @@
     cl-generic
     ecb
     flycheck
+    flycheck-color-mode-line
     flycheck-irony
     golden-ratio
     helm
@@ -35,6 +38,8 @@
     monokai-theme
     multi-term
     nyan-mode
+    projectile
+    projectile-speedbar
     slime
     slime-company
     smart-compile
@@ -70,11 +75,18 @@
 (require 'cl-lib)
 (require 'whitespace)
 
-(require 'ac-c-headers)
+(require 'aggressive-indent)
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+(require 'bash-completion)
+(bash-completion-setup)
 (require 'chess)
 (require 'ecb)
+(global-set-key (kbd "C-c C-e") 'ecb-minor-mode)
 (require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(require 'flycheck-color-mode-line)
+(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
 (require 'flycheck-irony)
 (eval-after-load 'flycheck
       '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
@@ -153,9 +165,11 @@
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-(when (display-graphic-p)
-  (require 'nyan-mode)
-  (nyan-mode))
+
+(require 'nyan-mode)
+(nyan-mode)
+(nyan-start-animation)
+
 (require 'smart-compile)
 (add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -g -o %n %f"))
 (require 'sr-speedbar)
@@ -189,6 +203,8 @@
 (global-set-key (kbd "C-x M-h") 'multi-term-dedicated-toggle)
 (global-set-key (kbd "C-x M-s") 'multi-term-dedicated-select)
 (global-set-key (kbd "C-x M-c") 'multi-term-dedicated-close)
+
+(require 'projectile-speedbar)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
