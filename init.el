@@ -8,29 +8,34 @@
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
-;(add-to-list 'package-archives
-;	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives
+;; 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
 	     '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
-
 (defconst my-packages
-  '(ac-c-headers
-    auto-complete
-    arduino-mode
+  '(arduino-mode
     c-eldoc
     chess
+    company
+    company-irony
     cl-generic
+    flycheck
+    flycheck-irony
     golden-ratio
     helm
+    helm-company
     helm-mt
     helm-projectile
+    irony
+    irony-eldoc
     magit
     markdown-mode
     monokai-theme
     multi-term
     nyan-mode
     slime
+    slime-company
     smart-compile
     sr-speedbar
     yasnippet
@@ -63,12 +68,14 @@
 (require 'cl)
 (require 'cl-lib)
 (require 'whitespace)
+
 (require 'ac-c-headers)
 (require 'chess)
-(require 'golden-ratio)
-(golden-ratio-mode 1)
-`
-;;; I really should organize this
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(require 'flycheck-irony)
+(eval-after-load 'flycheck
+      '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 (require 'helm)
 (require 'helm-config)
 (require 'helm-projectile)
@@ -82,9 +89,9 @@
 (global-set-key (kbd "C-c h o") 'helm-occur)
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))
-(when (executable-find "ack-grep")
-  (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
-	helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
+(when (executable-find "/usr/bin/vendor_perl/ack")
+  (setq helm-grep-default-command "/usr/bin/vendor_perl/ack -Hn --no-group --no-color %e %p %f"
+	helm-grep-default-recurse-command "/usr/bin/vendor_perl/ack -H --no-group --no-color %e %p %f"))
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 (setq helm-split-window-in-side-p           t
@@ -103,10 +110,47 @@
 (helm-projectile-on)
 (setq projectile-indexing-method 'alien)
 
+(require 'helm-company)
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
 ;(defun pl/helm-alive-p ()
 ;  (if (boudp 'helm-alive-p)
 ;      (symbol-value 'helm-alive-p)))
 ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key (kbd "C-<tab>") 'company-complete-common)
+(global-set-key (kbd "C-TAB") 'company-complete-common)
+
+;(require 'color)
+;(let ((bg (face-attribute 'default :background)))
+;  (custom-set-faces
+;   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+;   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+;   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+;   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+;   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+;;;;May have to M-x irony-install-server
+
+(require 'irony-eldoc)
+(require 'irony)
+(add-hook 'c-mode-hook 'irony-mode)
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion at point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-eldoc)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(require 'company-irony)
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 (when (display-graphic-p)
   (require 'nyan-mode)
   (nyan-mode))
@@ -119,16 +163,11 @@
 (yas-global-mode 1)
 (add-hook 'term-mode-hook (lambda()
 			    (setq yas-dont-activate t)))
+(require 'slime-company)
 (require 'slime)
 (setq inferior-lisp-program "/usr/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
-(slime-setup '(slime-fancy slime-asdf))
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories
-	     (concat emacs-root "ac-dict"))
-(ac-config-default)
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
+(slime-setup '(slime-fancy slime-asdf slime-company))
 
 (require 'magit)
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -162,7 +201,7 @@
 	    (setq show-trailing-whitespace t)
 	    (setq nuke-trailing-whitespace t)))
 ;;my theme
-(load-theme 'zenburn t)
+(load-theme 'monokai t)
 
 ;;my-style
 (c-add-style "ben-style"
@@ -174,10 +213,12 @@
 
 ;;displays function header in minibuffer
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-(add-hook 'c-mode-hook
-	  (lambda ()
-	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)))
-
+(add-hook 'gud-mode-hook
+	  '(lambda()
+	     (global-set-key (kbd "<f7>") 'gud-next)
+	     (global-set-key (kbd "<f8>") 'gud-step)))
+(setq gdb-many-windows t)
+(setq gdb-show-main t)
 (global-set-key (kbd "<f5>") 'smart-compile)
 (global-set-key (kbd "<f6>") 'gdb)
 

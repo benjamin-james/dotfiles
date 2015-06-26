@@ -1,10 +1,7 @@
 * .emacs.d
 My emacs configuration
+
 * Features
-auto-complete (Shows list of possible entries)
-
-ac-c-headers (autocomplete c headers)
-
 arduino-mode
 
 c-eldoc (Displays headers of c functions in minibuf)
@@ -13,10 +10,13 @@ chess
 
 cl-generic (Common lisp bindings for emacs)
 
+company (Autocomplete based on clang) NOTE: Autocompletion is C-<tab>, not <tab>
+
 golden-ratio (Resizes screen to golden ratio)
 
-Helm
+Helm (and helm-company)
 
+irony (and company-irony) (C minor mode with integration from company-irony)
 Magit (Emacs git mode)
 
 Markdown-mode
@@ -34,17 +34,20 @@ YASnippet (macro templates)
 Zenburn/Monokai themes
 * Thinking about:
 
-ac-helm / ac-slime / ac-clang
-
-company
-
 rtags / ggtags / helm-gtags
 
 aggressive-indent
 
 flycheck / flymake / flylisp / helm-fly*
 
+company-flycheck
+
+company-eldoc
+
 use-package
 * Dependencies/concerns
 Requires clisp, sbcl, or another Common Lisp evaluator for SLIME to work.
 Also you need an emacs version capable of using ELPA (i.e. >= emacs 24)
+
+Needs clang for company to work,
+and for irony, you may have to type M-x irony-install-server
