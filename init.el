@@ -20,6 +20,7 @@
     c-eldoc
     chess
     company
+    company-c-headers
     company-irony
     cl-generic
     ecb
@@ -139,6 +140,8 @@
 (global-set-key (kbd "C-<tab>") 'company-complete-common)
 (global-set-key (kbd "C-TAB") 'company-complete-common)
 
+(require 'company-c-headers)
+(add-to-list 'company-backends 'company-c-headers)
 ;(require 'color)
 ;(let ((bg (face-attribute 'default :background)))
 ;  (custom-set-faces
