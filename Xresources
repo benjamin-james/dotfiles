@@ -1,0 +1,8 @@
+Xft*antialias: true
+Xft*autohint: true
+XTerm*background: black
+XTerm*foreground: white
+XTerm*cursorColor: grey
+XTerm*scrollBar: true
+XTerm*faceName: DejaVu Sans Mono
+XTerm*toolBar: off
