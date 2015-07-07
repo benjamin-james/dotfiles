@@ -7,7 +7,10 @@ mkdir -p ~/.emacs.d && cp init.el ~/.emacs.d
 if [[ $(which systemctl 2>/dev/null) ]]; then
     mkdir -p ~/.config/systemd/user/ && cp emacsd.service ~/.config/systemd/user/
 fi
-sudo ./makeissue
+./makeissue
+sudo mv issue /etc/issue
+sudo chmod +x /etc/issue
+sudo cp bashrc /root/bashrc
 mkdir -p ~/.config/git && cp gitignore ~/.config/git/ignore
 cp gitconfig ~/.gitconfig
 #This installs all ELPA stuff and also installs irony server

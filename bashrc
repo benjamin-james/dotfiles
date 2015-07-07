@@ -54,7 +54,7 @@ bold=$(tput bold)
 if [[ "$?" != "0" ]]; then #if last command didn't return 0
     PS1='\[$brown\]\u\[$blue\]\w \[$bold\]\[$brown\]\$ \[$reset\]'
 elif [[ "$(whoami)" == "root" ]]; then
-    PS1='\[$red\]\u \[$blue\]\w \$[bold\]\[$red\]\$ \[$reset\]'
+    PS1='\[$red\]\u \[$blue\]\w \[$bold\]\[$red\]\$ \[$reset\]'
 else
     PS1='\[$green\]\u \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
 fi
