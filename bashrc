@@ -5,8 +5,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#very useful ls aliases
-alias ls='ls --color=auto'
+#only use ls --color=auto if available
+if [[ $(ls --help | grep -e 'color=auto') ]]; then
+    alias ls='ls --color=auto'
+fi
 alias ll='ls -alh'
 alias la='ls -a'
 alias l='ls -CFlh'
@@ -39,7 +41,23 @@ END { if ( last != "")
 | awk '"'"'{ print $1 }'"'"' \
 | xargs -I __ echo kill %__'
 
-PS1='[\u@\h \W]\$ '
+reset=$(tput sgr0)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+brown=$(tput setaf 3)
+blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+cyan=$(tput setaf 6)
+white=$(tput setaf 7)
+bold=$(tput bold)
+#Prompt coloring
+if [[ "$?" != "0" ]]; then #if last command didn't return 0
+    PS1='\[$brown\]\u\[$blue\]\w \[$bold\]\[$brown\]\$ \[$reset\]'
+elif [[ "$(whoami)" == "root" ]]; then
+    PS1='\[$red\]\u \[$blue\]\w \$[bold\]\[$red\]\$ \[$reset\]'
+else
+    PS1='\[$green\]\u \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
+fi
 
 #large history is useful for "history | grep foo"
 export HISTFILESIZE=20000
@@ -62,6 +80,16 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 if [[ $(which most 2>/dev/null) ]]; then
     export PAGER="/usr/bin/most -s"
 fi
-export TERM=xterm-256color
+
+if [ "$TERM" = "linux" ]; then
+    _SEDCMD='s/.*\*color\([0-9]\{1,\}\).*#\([0-9a-fA-F]\{6\}\).*/\1 \2/p'
+    for i in $(sed -n "$_SEDCMD" $HOME/.Xdefaults | \
+		      awk '$1 < 16 {printf "\\e]P%X%s", $1, $2}'); do
+	echo -en "$i"
+    done
+    clear
+fi
+[[ "$PS1" ]] && echo -e "$brown $(fortune | cowsay) $reset"
+
 export VISUAL=emacs
 export EDITOR=$VISUAL
