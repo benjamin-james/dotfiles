@@ -11,7 +11,7 @@ fi
 ./makeissue
 sudo mv issue /etc/issue
 sudo chmod +x /etc/issue
-sudo cp bashrc /root/bashrc
+sudo cp bashrc /root/.bashrc
 mkdir -p ~/.config/git && cp gitignore ~/.config/git/ignore
 cp gitconfig ~/.gitconfig
 
