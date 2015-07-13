@@ -1,9 +1,15 @@
-Xft*antialias: true
-Xft*autohint: true
-XTerm*background: black
-XTerm*foreground: white
-XTerm*cursorColor: grey
-XTerm*scrollBar: true
-XTerm*faceName: BitStream Vera Sans Mono
-XTerm*faceSize: 12
+Xft*antialias:		true
+Xft*autohint:		true
+XTerm*alternateScroll:	true
+XTerm*charClass:	33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+XTerm*fullscreen:	never
+XTerm*metaSendsEscape:	true
+XTerm*scrollKey:	true
+XTerm*background:	black
+XTerm*foreground:	white
+XTerm*cursorColor:	grey
+XTerm*faceName:		Liberation Mono:size=9:antialias=true
+XTerm*termName:		xterm-256color
+XTerm*utf8:		1
+Xterm*borderWidth:	0
 XTerm*toolBar: off
