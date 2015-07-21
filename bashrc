@@ -87,9 +87,7 @@ if [ "$TERM" = "linux" ]; then
 		      awk '$1 < 16 {printf "\\e]P%X%s", $1, $2}'); do
 	echo -en "$i"
     done
-    clear
 fi
-[[ "$PS1" ]] && echo -e "$brown $(fortune | cowsay) $reset"
 
 export VISUAL=emacs
 export EDITOR=$VISUAL

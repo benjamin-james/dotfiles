@@ -1,5 +1,48 @@
+! Black
+*color0:  #353535
+*color8:  #555555
+! Red
+*color1:  #D11793
+*color9:  #E480C2
+! Green
+*color2:   #93D117
+*color10:  #CCE698
+! Yellow
+*color3:   #ECDC21
+*color11:  #FFF78A
+! Blue
+*color4:   #3B92FF
+*color12:  #91D5F7
+! Magneta
+*color5:   #9B17D1
+*color13:  #D8BBE7
+! Cyan
+*color6:   #1EC7AA
+*color14:  #A0FEEE
+! White
+*color7:   #CACACA
+*color15:  #FFFFFF
+
 Xft*antialias:		true
 Xft*autohint:		true
+Xft*dpi:		92
+
+URxvt.scrollTtyOutput: false
+URxvt.scrollTtyKeypress: true
+URxvt.scrollWithBuffer: true
+URxvt.loginShell: false
+URxvt.saveLines: 3000
+
+URxvt.secondaryWheel: true
+URxvt.cursorUnderline: false
+URxvt.font: xft:Terminus:autohint=true
+URxvt.transparent: true
+URxvt.borderless: true
+URxvt.shading: 35
+URxvt.urgentOnBell: true
+URxvt.scrollBar_right:	true
+URxvt.scrollstyle:	plain
+
 XTerm*alternateScroll:	true
 XTerm*charClass:	33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
 XTerm*fullscreen:	never
