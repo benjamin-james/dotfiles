@@ -1,5 +1,5 @@
-userresources=$XDG_CONFIG_HOME/Xresources
-usermodmap=$XDG_CONFIG_HOME/Xmodmap
+userresources=$XDG_CONFIG_HOME/xorg/Xresources
+usermodmap=$XDG_CONFIG_HOME/xorg/Xmodmap
 sysresources=/etc/X11/xinit/Xresources
 sysmodmap=/etc/X11/xinit/Xmodmap
 
@@ -10,5 +10,7 @@ exec >> $XDG_DATA_HOME/xorg/xsession-errors 2>&1
 [[ -f $sysmodmap ]] && xmodmap $sysmodmap
 [[ -f $userresources ]] && xrdb -merge $userresources
 [[ -f $usermodmap ]] && xmodmap $usermodmap
+feh --bg-scale /home/ben/Pictures/wallpaper.jpg
+exec i3
+#exec stumpwm
 
-exec stumpwm

@@ -28,9 +28,9 @@ function fawk {
 function gc() {
     git commit -m "$*"
 }
+alias enterprise="play -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +14"
+alias soundsofhome="find ~ -type f -exec cat '{}' \; | play -r 44100 -b 16 -c 1 -e signed-integer -t raw - lowpass 4k flanger 0 7 reverb 100"
 alias grep='grep --color=auto'
-alias emacsd='/usr/bin/emacs -nw'
-alias emacs='/usr/bin/emacsclient -nw -a ""'
 alias please='sudo $(history -p !!)'
 alias kl='jobs | awk '"'"'BEGIN {cur="";}
 /./ { last=cur ; cur=$0 ; }
@@ -81,13 +81,14 @@ if [[ $(which most 2>/dev/null) ]]; then
     export PAGER="/usr/bin/most -s"
 fi
 
-if [ "$TERM" = "linux" ]; then
-    _SEDCMD='s/.*\*color\([0-9]\{1,\}\).*#\([0-9a-fA-F]\{6\}\).*/\1 \2/p'
-    for i in $(sed -n "$_SEDCMD" $HOME/.Xdefaults | \
-		      awk '$1 < 16 {printf "\\e]P%X%s", $1, $2}'); do
-	echo -en "$i"
-    done
-fi
+#if [ "$TERM" = "linux" ]; then
+#    _SEDCMD='s/.*\*color\([0-9]\{1,\}\).*#\([0-9a-fA-F]\{6\}\).*/\1 \2/p'
+#    for i in $(sed -n "$_SEDCMD" $HOME/.Xdefaults | \
+#		      awk '$1 < 16 {printf "\\e]P%X%s", $1, $2}'); do
+#	echo -en "$i"
+#    done
+#    clear
+#fi
 
-export VISUAL=emacs
+export VISUAL="emacsclient -a ''"
 export EDITOR=$VISUAL

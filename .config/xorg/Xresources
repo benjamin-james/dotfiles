@@ -1,0 +1,61 @@
+! Black
+!*color0:  #2E3436
+!*color8:  #555753
+! Red
+!*color1:  #A40000
+!*color9:  #EF2929
+! Green
+!*color2:   #4E9A06
+!*color10:  #8AE234
+! Yellow
+!*color3:   #C4A000
+!*color11:  #FCE94F
+! Blue
+!*color4:   #3465A4
+!*color12:  #729FCF
+! Magneta
+!*color5:   #75507B
+!*color13:  #AD7FA8
+! Cyan
+!*color6:   #CE5C00
+!*color14:  #FCAF3E
+! White
+!*color7:   #BABDB9
+!*color15:  #EEEEEC
+
+Xft*antialias:		true
+Xft*autohint:		true
+Xft*dpi:		92
+
+URxvt*foreground:	white
+URxvt*scrollTtyOutput: false
+URxvt*scrollTtyKeypress: true
+URxvt*scrollWithBuffer: true
+URxvt*loginShell: false
+URxvt*saveLines: 3000
+
+URxvt*secondaryWheel: true
+URxvt*cursorUnderline: false
+URxvt*font: xft:DejaVu Sans Mono:autohint=true
+!URxvt.transparent: true
+URxvt*borderless: true
+!URxvt.shading: 35
+URxvt*depth: 32
+URxvt*background: [50]#000000
+URxvt*urgentOnBell: true
+URxvt*scrollBar_right:	true
+URxvt*scrollstyle:	plain
+
+XTerm*alternateScroll:	true
+XTerm*charClass:	33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+XTerm*fullscreen:	never
+XTerm*metaSendsEscape:	true
+XTerm*scrollKey:	true
+XTerm*background:	black
+XTerm*foreground:	white
+XTerm*cursorColor:	grey
+XTerm*faceName:		Liberation Mono:size=9:antialias=true
+XTerm*termName:		xterm-256color
+XTerm*utf8:		1
+Xterm*borderWidth:	0
+XTerm*toolBar: off

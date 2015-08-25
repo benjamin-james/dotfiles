@@ -11,3 +11,4 @@ export XDG_VTNR=${XDG_VTNR:-${active#tty}}
 
 [[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && startx
 
+eval $(ssh-agent)

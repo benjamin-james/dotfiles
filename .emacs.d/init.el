@@ -38,12 +38,14 @@
     markdown-mode
     monokai-theme
     multi-term
-    nyan-mode
+    powerline
     projectile
     projectile-speedbar
+    seethru
     slime
     slime-company
     smart-compile
+    smart-tabs-mode
     sr-speedbar
     yasnippet
     zenburn-theme))
@@ -69,7 +71,43 @@
 
 (require 'cl)
 (require 'cl-lib)
+(defun transparency (value)
+  "Sets the transparency of the frame window. 0=transparent, 100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
+(defun make-class-getter-setter (type var)
+  (format
+   (concat "public %s get_%s()\n{ return %s; }\n"
+           "public %s set_%s(%s %s)\n{\nthis.%s = %s;\n}\n")
+   type (capitalize var) var                    ; getter line
+   type (capitalize var) type var var var))     ; setter line
 
+(defun extract-class-variables (&rest modifiers)
+  (let ((regexp
+	 (concat
+	  "^\\([ \t]*\\)"
+	  "\\(" (mapconcat (lambda (m) (format "%S" m)) modifiers "\\|") "\\)"
+	  "\\([ \t]*\\)"
+	  "\\([A-Za-z0-9<>]+\\)"
+	  "\\([ \t]*\\)"
+	  "\\([a-zA-Z0-9]+\\);$")))
+    (save-excursion
+      (goto-char (point-min))
+      (loop for pos = (search-forward-regexp regexp nil t)
+	    while pos collect (let ((modifier (match-string 2))
+				    (type (match-string 4))
+				    (name (match-string 6)))
+				(list modifier type name))))))
+
+(defun generate-class-getter-setter (&rest modifiers)
+  (let ((oldpoint (point)))
+    (insert
+     (mapconcat (lambda (var) (apply 'make-class-getter-setter (rest var)))
+                (apply 'extract-class-variables modifiers)
+                "\n"))
+    (c-indent-region oldpoint (point) t)))
+
+(global-set-key (kbd "<f4>") 'generate-class-getter-setter)
 (defun get-first-existing (items)
   "Returns the first string in ITEMS to exist within $PATH"
   (let ((output nil))
@@ -160,7 +198,7 @@ Non-interactive arguments are Begin End Regexp"
       '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 (require 'helm)
 (require 'helm-config)
-(require 'helm-projectile)
+;(require 'helm-projectile)
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
@@ -189,14 +227,14 @@ Non-interactive arguments are Begin End Regexp"
 (setq projectile-enable-caching t)
 
 (setq projectile-completion-system 'helm)
-(helm-projectile-on)
-(setq projectile-indexing-method 'alien)
+;(helm-projectile-on)
+;(setq projectile-indexing-method 'alien)
 
-(require 'helm-company)
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map (kbd "C-:") 'helm-company)
-     (define-key company-active-map (kbd "C-:") 'helm-company)))
+;(require 'helm-company)
+;(eval-after-load 'company
+;  '(progn
+;     (define-key company-mode-map (kbd "C-:") 'helm-company)
+;     (define-key company-active-map (kbd "C-:") 'helm-company)))
 ;(defun pl/helm-alive-p ()
 ;  (if (boudp 'helm-alive-p)
 ;      (symbol-value 'helm-alive-p)))
@@ -227,9 +265,6 @@ Non-interactive arguments are Begin End Regexp"
   '(add-to-list 'company-backends 'company-irony))
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
-(require 'nyan-mode)
-(nyan-mode)
-(nyan-start-animation)
 
 (require 'smart-compile)
 (add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -g -o %n %f"))
@@ -247,7 +282,6 @@ Non-interactive arguments are Begin End Regexp"
 (slime-setup '(slime-fancy slime-asdf slime-company))
 
 (require 'magit)
-(setq magit-last-seen-setup-instructions "1.4.0")
 (global-set-key (kbd "M-g s") 'magit-status)
 (global-set-key (kbd "M-g m") 'magit-commit)
 (global-set-key (kbd "M-g u") 'magit-push)
@@ -265,6 +299,8 @@ Non-interactive arguments are Begin End Regexp"
 (global-set-key (kbd "C-x M-s") 'multi-term-dedicated-select)
 (global-set-key (kbd "C-x M-c") 'multi-term-dedicated-close)
 
+(require 'powerline)
+;(powerline-center-theme)
 (require 'projectile-speedbar)
 
 (setq inhibit-splash-screen t)
@@ -273,14 +309,23 @@ Non-interactive arguments are Begin End Regexp"
 ;;formatting
 (setq-default indent-tabs-mode t)
 (setq-default tab-width 8)
-
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (interactive)
 	    (setq show-trailing-whitespace t)
 	    (setq nuke-trailing-whitespace t)))
 ;;my theme
-(load-theme 'zenburn t)
+(require 'seethru)
+(seethru 55)
+;(if (not (eq window-system nil))
+;    (progn
+;      (require 'nyan-mode)
+;      (load-theme 'zenburn t)
+;      (nyan-mode)
+;      (nyan-start-animation)))
+
+;(if (display-graphic-p)
+;    (load-theme 'zenburn t))
 
 ;;my-style
 (c-add-style "ben-style"
@@ -289,6 +334,13 @@ Non-interactive arguments are Begin End Regexp"
 			 c-lineup-gcc-asm-reg
 			 c-lineup-arglist-tabs-only))))
 (setq c-default-style "ben-style")
+(add-hook 'java-mode-hook
+	  (lambda()
+	    (setq c-basic-offset 8
+		  tab-width 8
+		  indent-tabs-mode nil
+		  c-comment-start-regexp "(@|/(/|[*][*]?))")
+	    (modify-syntax-entry ?@ "< b" java-mode-syntax-table)))
 
 ;;displays function header in minibuffer
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
@@ -308,10 +360,16 @@ Non-interactive arguments are Begin End Regexp"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
+ '(custom-enabled-themes nil)
+ '(custom-safe-themes
+   (quote
+    ("54e916f82010313f8dad24e2b6641f67063d0adcb7d8f7e3b4627025504e1a56" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" "108b3724e0d684027c713703f663358779cc6544075bc8fd16ae71470497304f" "a444b2e10bedc64e4c7f312a737271f9a2f2542c67caa13b04d525196562bf38" "2e5705ad7ee6cfd6ab5ce81e711c526ac22abed90b852ffaf0b316aa7864b11f" "e8a9dfa28c7c3ae126152210e3ccc3707eedae55bdc4b6d3e1bb3a85dfb4e670" "c006bc787154c31d5c75e93a54657b4421e0b1a62516644bd25d954239bc9933" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" "de8fa309eed1effea412533ca5d68ed33770bdf570dcaa458ec21eab219821fd" "95a6ac1b01dcaed4175946b581461e16e1b909d354ada79770c0821e491067c6" default)))
  '(ecb-compile-window-height 0.25)
  '(ecb-compile-window-temporally-enlarge (quote after-selection))
  '(ecb-compile-window-width (quote edit-window))
-
+ '(fci-rule-color "#383838")
  '(font-use-system-font t)
  '(fringe-mode 0 nil (fringe))
  '(menu-bar-mode nil)
@@ -326,7 +384,7 @@ Non-interactive arguments are Begin End Regexp"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
 
 (defun reload-init ()
   "reload the init.el file"
