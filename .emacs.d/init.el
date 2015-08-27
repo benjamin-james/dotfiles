@@ -75,39 +75,6 @@
   "Sets the transparency of the frame window. 0=transparent, 100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
-(defun make-class-getter-setter (type var)
-  (format
-   (concat "public %s get_%s()\n{ return %s; }\n"
-           "public %s set_%s(%s %s)\n{\nthis.%s = %s;\n}\n")
-   type (capitalize var) var                    ; getter line
-   type (capitalize var) type var var var))     ; setter line
-
-(defun extract-class-variables (&rest modifiers)
-  (let ((regexp
-	 (concat
-	  "^\\([ \t]*\\)"
-	  "\\(" (mapconcat (lambda (m) (format "%S" m)) modifiers "\\|") "\\)"
-	  "\\([ \t]*\\)"
-	  "\\([A-Za-z0-9<>]+\\)"
-	  "\\([ \t]*\\)"
-	  "\\([a-zA-Z0-9]+\\);$")))
-    (save-excursion
-      (goto-char (point-min))
-      (loop for pos = (search-forward-regexp regexp nil t)
-	    while pos collect (let ((modifier (match-string 2))
-				    (type (match-string 4))
-				    (name (match-string 6)))
-				(list modifier type name))))))
-
-(defun generate-class-getter-setter (&rest modifiers)
-  (let ((oldpoint (point)))
-    (insert
-     (mapconcat (lambda (var) (apply 'make-class-getter-setter (rest var)))
-                (apply 'extract-class-variables modifiers)
-                "\n"))
-    (c-indent-region oldpoint (point) t)))
-
-(global-set-key (kbd "<f4>") 'generate-class-getter-setter)
 (defun get-first-existing (items)
   "Returns the first string in ITEMS to exist within $PATH"
   (let ((output nil))
@@ -317,15 +284,6 @@ Non-interactive arguments are Begin End Regexp"
 ;;my theme
 (require 'seethru)
 (seethru 55)
-;(if (not (eq window-system nil))
-;    (progn
-;      (require 'nyan-mode)
-;      (load-theme 'zenburn t)
-;      (nyan-mode)
-;      (nyan-start-animation)))
-
-;(if (display-graphic-p)
-;    (load-theme 'zenburn t))
 
 ;;my-style
 (c-add-style "ben-style"
@@ -334,13 +292,6 @@ Non-interactive arguments are Begin End Regexp"
 			 c-lineup-gcc-asm-reg
 			 c-lineup-arglist-tabs-only))))
 (setq c-default-style "ben-style")
-(add-hook 'java-mode-hook
-	  (lambda()
-	    (setq c-basic-offset 8
-		  tab-width 8
-		  indent-tabs-mode nil
-		  c-comment-start-regexp "(@|/(/|[*][*]?))")
-	    (modify-syntax-entry ?@ "< b" java-mode-syntax-table)))
 
 ;;displays function header in minibuffer
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
@@ -379,12 +330,14 @@ Non-interactive arguments are Begin End Regexp"
  '(smtpmail-smtp-service 465)
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+
+(if (display-graphic-p)
+    (custom-set-faces
+     ;; custom-set-faces was added by Custom.
+     ;; If you edit it by hand, you could mess it up, so be careful.
+     ;; Your init file should contain only one such instance.
+     ;; If there is more than one, they won't work right.
+     '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))))
 
 (defun reload-init ()
   "reload the init.el file"
