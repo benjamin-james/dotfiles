@@ -41,6 +41,9 @@ set $right semicolon
 
 #exec compton --config ~/.config/compton/compton.conf -b
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nm-applet --sm-disable
+exec --no-startup-id blueman-applet
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -86,6 +89,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+bindsym Print exec scrot -e 'mv $f /home/ben/Pictures/scrot/$f'
 # split in horizontal orientation
 bindsym $mod+h split h
 
