@@ -39,16 +39,16 @@ set $down k
 set $left j
 set $right semicolon
 
-#exec compton --config ~/.config/compton/compton.conf -b
 exec --no-startup-id compton -b --backend glx --vsync opengl-swc
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet --sm-disable
 exec --no-startup-id blueman-applet
+exec --no-startup-id devmon
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 bindsym $mod+c exec urxvt
 bindsym Mod1+$mod+space exec urxvt -e emacsclient -t &
@@ -89,6 +89,13 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# pacvol.sh is from github.com/nicklan/i3config
+#bindsym XF86AudioRaiseVolume exec /home/ben/bin/pacvol.sh up
+#bindsym XF86AudioLowerVolume exec /home/ben/bin/pacvol.sh down
+#bindsym XF86AudioMute exec /home/ben/bin/pacvol.sh toggle
+
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym Print exec scrot -e 'mv $f /home/ben/Pictures/scrot/$f'
 # split in horizontal orientation
 bindsym $mod+h split h
