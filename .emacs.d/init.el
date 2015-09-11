@@ -279,9 +279,12 @@ If not `nil` and not `t`, query for each instance."
   (interactive)
   (load user-init-file))
 
-(if (and (fboundp 'server-running-p)
-	 (not (server-running-p)))
-    (server-start))
+(require 'server)
+(global-set-key (kbd "<C-return>") 'server-edit)
+(if (not (server-running-p))
+    (progn
+      (message "Starting server")
+      (server-start)))
 
 (when window-system
   (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
