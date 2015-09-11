@@ -73,9 +73,14 @@ If not `nil` and not `t`, query for each instance."
 			 c-lineup-gcc-asm-reg
 			 c-lineup-arglist-tabs-only))))
 (setq c-default-style "ben-style")
+(linum-mode -1)
+(setq linum-format " %.4d ")
+
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (interactive)
+	    (linum-mode 1)
+	    (set-face-attribute 'linum nil :background (face-attribute 'fringe :background))
 	    (setq show-trailing-whitespace t)
 	    (setq nuke-trailing-whitespace t)))
 
@@ -180,6 +185,10 @@ If not `nil` and not `t`, query for each instance."
 (use-package helm-projectile
   :ensure t)
 
+(use-package hlinum
+  :ensure t
+  :config (hlinum-activate))
+
 (use-package irony
   :ensure t
   :init
@@ -210,6 +219,11 @@ If not `nil` and not `t`, query for each instance."
 
 (use-package projectile-speedbar
   :ensure t)
+
+(use-package seethru
+  :ensure t
+  :config (if (display-graphic-p)
+	      (seethru 90)))
 
 (use-package slime-company
   :ensure t)
@@ -273,6 +287,7 @@ If not `nil` and not `t`, query for each instance."
   :config
   (if (display-graphic-p)
       (load-theme 'zenburn)))
+
 
 (defun reload-init ()
   "reload the init file"
