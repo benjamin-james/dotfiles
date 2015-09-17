@@ -1,0 +1,45 @@
+;; -*- lisp -*-
+(in-package :stumpwm)
+
+(defun load-file (file)
+  (load (concatenate 'string "~/.config/stumpwm/" file ".lisp")))
+
+(load-file "swank")
+(define-key *root-map* (kbd "C-e") "emacs")
+(defcommand firefox() ()
+	"Start firefox"
+	(run-or-raise "firefox"
+	'(:title "firefox-primary")))
+(define-key *root-map* (kbd "C-f") "firefox")
+(defcommand urxvt() ()
+	    "Start uxrvt"
+	    (run-or-raise "urxvt"
+			  '(:title "urxvt-primary")))
+(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
+(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
+(define-key *top-map* (kbd "Print") "exec scrot -e 'mv $f $HOME/Pictures/scrot/$f'")
+
+(defcommand increase-volume () ()
+  "Increase the volume"
+  (run-shell-command "amixer sset PCM 5+ unmute"))
+
+(defcommand decrease-volume () ()
+  "Decrease the volume"
+  (run-shell-command "amixer sset PCM 5- unmute"))
+
+(defcommand mute () ()
+  "Mute the volume"
+  (run-shell-command "amixer sset PCM mute"))
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "increase-volume")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "decrease-volume")
+(define-key *top-map* (kbd "XF86AudioMute") "mute-volume")
+(define-key *root-map* (kbd "C-c") "urxvt")
+(define-key *root-map* (kbd "c") "urxvt")
+(define-key *root-map* (kbd "C-d")
+  "exec dmenu_run -i -b -p \"run command:\"")
+
+(define-key *root-map* (kbd "C-s") "swank")
+;(stumpwm:toggle-mode-line (stumpwm:current-screen)
+;  (stumpwm:current-head))
+;(if (not (head-mode-line (current-head)))
+;    (toggle-mode-line (current-screen) (current-head)))
