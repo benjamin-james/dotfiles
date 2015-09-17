@@ -39,21 +39,20 @@ set $down k
 set $left j
 set $right semicolon
 
-exec --no-startup-id compton -b --backend glx --vsync opengl-swc
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nm-applet --sm-disable
-exec --no-startup-id blueman-applet
-exec --no-startup-id devmon
+bindsym Ctrl+t mode "prefix"
+
+mode "prefix" {
+     bindsym Ctrl+c	exec urxvt;	mode "default"
+     bindsym c	    	exec urxvt;	mode "default"
+     bindsym e	    	exec emacs;	mode "default"
+     bindsym Ctrl+f	exec firefox;	mode "default"
+     bindsym Ctrl+e	exec emacs;	mode "default"
+     bindsym Ctrl+g	     		mode "default"
+     #bindsym e [class="(?i)emacs"] focus; mode "default"
+}
+
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier $mod
-
-# start a terminal
-bindsym $mod+Return exec urxvt
-
-bindsym $mod+c exec urxvt
-bindsym Mod1+$mod+space exec urxvt -e emacsclient -t &
-bindsym Mod1+$mod+Return exec /usr/bin/emacs
-bindsym Mod1+$mod+f exec firefox
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -192,23 +191,10 @@ bindsym $mod+r mode "resize"
 bar {
 	position top
         status_command i3status
-	tray_output lvds
+#	workspace_buttons yes
+#	tray_output eDP1
 	colors{
 		background #262626
 		statusline #DCDCDC
 	}
 }
-
-#battery 0 {
-#	format = "%status %percentage %remaining"
-#	path = "/sys/class/power_supply/BAT1/uevent"
-#}
-#######################################################################
-# automatically start i3-config-wizard to offer the user to create a
-# keysym-based config which used their favorite modifier (alt or windows)
-#
-# i3-config-wizard will not launch if there already is a config file
-# in ~/.i3/config.
-#
-# Please remove the following exec line:
-#######################################################################
