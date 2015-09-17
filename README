@@ -1,0 +1,14 @@
+					DOTFILES
+				My personal configurations
+INSTALL
+Basically use the makefile.
+
+At the end of installing quicklisp, press ENTER to confirm the installation.
+
+Then, the rest of the files will copy in, and you can exit Emacs once it loads
+after downloading everything.
+
+DEPENDENCIES
+Requires SBCL for SLIME and StumpWM to work.
+For irony-mode in emacs, you need llvm, clang, and cmake installed also.
+
