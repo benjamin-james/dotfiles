@@ -1,0 +1,33 @@
+[global]
+	font = DejaVu Sans Mono 10
+	sort = yes
+	alignment = right
+	word_wrap = yes
+	ignore_newline = no
+	geometry = "300x5-24+48"
+	transparency = 10
+	idle_threshold = 120
+	sticky_history = yes
+	history_length = 20
+
+[frame]
+	width = 0
+	color = "#111113"
+
+[shortcuts]
+	close = ctrl+space
+	close_all = ctrl+shift+space
+
+[urgency_low]
+	background = "#26282B"
+	foreground = "#CECFD1"
+	timeout = 5
+
+[urgency_normal]
+	background = "#26282B"
+	foreground = "#CECFD1"
+	timeout = 5
+
+[urgency_critical]
+	background = "#26282B"
+	foreground = "#CECFD1"

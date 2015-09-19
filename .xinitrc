@@ -19,6 +19,7 @@ pulseaudio --start &
 feh --bg-scale $HOME/Pictures/wallpaper.jpg
 compton -b --backend glx --vsync opengl-swc
 xfce4-panel &
+dunst &
 (sleep 2 && devmon) &
 (sleep 2 && nm-applet --sm-disable) &
 (sleep 2 && blueman-applet) &
