@@ -1,3 +1,9 @@
+;;; init.el --- Summary
+;;;
+;;; Commentary:
+;;; My init file
+;;;
+;;; Code:
 (defconst emacs-start-time (current-time))
 (unless noninteractive
   (message "Loading %s..." load-file-name))
@@ -109,9 +115,13 @@ If not `nil` and not `t`, query for each instance."
 
 ;; X custom settings
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" default)))
+    ("877530ef4d4423b5b184daff52953d398bb3533ec5e7393c238ac732b19135dd" "108b3724e0d684027c713703f663358779cc6544075bc8fd16ae71470497304f" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" default)))
  '(font-use-system-font t)
  '(fringe-mode 0 nil (fringe))
  '(menu-bar-mode nil)
@@ -288,7 +298,6 @@ If not `nil` and not `t`, query for each instance."
   (if (display-graphic-p)
       (load-theme 'zenburn)))
 
-
 (defun reload-init ()
   "reload the init file"
   (interactive)
@@ -304,3 +313,11 @@ If not `nil` and not `t`, query for each instance."
 (when window-system
   (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
     (message "Loading %s...done (%.3fs)" load-file-name elapsed)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(provide 'init)
+;;; init.el ends here
