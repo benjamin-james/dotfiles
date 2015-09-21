@@ -20,6 +20,7 @@ DEPENDENCIES				FOR
 	dmenu				application launching
 	xfce4-panel			status bar
 	devmon				auto mounting devices
+	dunst				desktop notification daemon
 	NetworkManager and nm-applet	network control
 	blueman and blueman-applet	bluetooth
 	scrot	    			screenshots
@@ -27,3 +28,5 @@ DEPENDENCIES				FOR
 	amixer				setting volume
 	pulseaudio			volume applet
 	xbacklight			setting brightness
+	Numix				gtk theme
+	DejaVu fonts			system wide font
