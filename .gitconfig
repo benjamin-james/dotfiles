@@ -1,6 +1,6 @@
 [user]
 	name = Benjamin James
-	email = benjamin-james@utulsa.edu
+	email = benjames375@gmail.com
 [color]
 	ui = true
 	diff = always
@@ -8,3 +8,5 @@
 	user = benjamin-james
 [push]
 	default = matching
+[core]
+	excludesfile = ~/.config/git/ignore

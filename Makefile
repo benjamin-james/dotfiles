@@ -12,8 +12,9 @@ install:
 	cp .bash_profile ~
 	cp .xinitrc ~
 	cp .stumpwmrc ~
-	cp gitconfig ~/.gitconfig
+	cp .gitconfig ~
 	mkdir -p ~/.config/git && cp gitignore ~/.config/git/ignore
+	git config --global core.excludesfile '~/.config/git/ignore'
 	cp -r .config ~
 	cp -r .emacs.d ~
 	emacs -nw --eval '(irony-server-install)'
