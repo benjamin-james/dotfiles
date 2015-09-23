@@ -17,9 +17,10 @@ xsetroot -cursor_name left_ptr
 pulseaudio --start &
 
 feh --bg-scale $HOME/Pictures/wallpaper.jpg
-compton -b --backend glx --vsync opengl-swc
+compton --config $XDG_CONFIG_HOME/compton/compton.conf &
 xfce4-panel &
 dunst &
+humans &
 (sleep 2 && devmon) &
 (sleep 2 && nm-applet --sm-disable) &
 (sleep 2 && blueman-applet) &
