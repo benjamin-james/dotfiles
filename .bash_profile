@@ -9,6 +9,4 @@ export XDG_CACHE_HOME=$HOME/.cache \
 
 export XDG_VTNR=${XDG_VTNR:-${active#tty}}
 
-[[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && (startx || logout)
-
-eval $(ssh-agent)
+[[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && (startx || exit)
