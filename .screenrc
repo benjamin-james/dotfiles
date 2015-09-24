@@ -1,0 +1,6 @@
+
+# Don't display the startup message
+startup_message off
+
+# Set the escape sequence (default ^Aa)
+escape ^Jj

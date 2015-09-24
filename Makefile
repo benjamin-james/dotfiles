@@ -10,10 +10,11 @@ ql: quicklisp.lisp install.lisp
 install:
 	cp .bashrc ~
 	cp .bash_profile ~
-	cp .xinitrc ~
-	cp .stumpwmrc ~
 	cp .gitconfig ~
 	cp .gnus ~
+	cp .screenrc ~
+	cp .stumpwmrc ~
+	cp .xinitrc ~
 	cp -r .config ~
 	cp -r .emacs.d ~
 	git config --global core.excludesfile '~/.config/git/ignore'
