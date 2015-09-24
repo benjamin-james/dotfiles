@@ -9,23 +9,25 @@ Then, the rest of the files will copy in, and you can exit Emacs once it loads
 after downloading everything.
 
 DEPENDENCIES				FOR
-	sbcl				SLIME, StumpWM
-	clang				company, irony-mode
-	cmake				irony-mode
-	llvm-libs			irony-mode
-	compton				transparency
-	firefox				web browser
-	GNU emacs			everything
-	rxvt-unicode			terminal
-	GNU screen			terminal multiplexer
-	dmenu				autocompleting application launcher
-	devmon				auto mounting devices
-	dunst				desktop notification daemon
-	NetworkManager			network control
-	blueman				bluetooth control
-	scrot	    			screenshots
-	feh				setting background
 	amixer				setting volume
+	blueman				bluetooth control
+	compton				transparency
+	cmake				compiling irony-mode
+	DejaVu fonts			system wide fonts
+	devmon				auto mounting devices
+	dmenu				autocompleting application launcher
+	dunst				desktop notification daemon
+	feh				setting background, image viewer
+	firefox				web browser
+	GNU emacs			text editor and alot more
+	GNU screen			terminal multiplexer
+	libclang			company, irony-mode
+	mpd				music player daemon
+	ncmpcpp				mpd client
+	NetworkManager			network control
+	Numix				GTK2/3 theme
+	pulseaudio			audio for mpd output
+	sbcl				SLIME, StumpWM
+	scrot				screenshots
+	rxvt-unicode			terminal emulator
 	xbacklight			setting brightness
-	Numix				gtk theme
-	DejaVu fonts			system wide font

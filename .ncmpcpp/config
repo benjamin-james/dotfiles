@@ -1,0 +1,36 @@
+# song format
+song_list_format = "{$8(%l)$9 }{%a - }{%t}|{$8%f$9}"
+song_library_format = {%n_}{%t}|{%f}
+tag_editor_album_format = {(%y) }%b
+browser_playlist_prefix = $7playlist$9
+selected_item_prefix = $8
+selected_item_suffix = $9
+
+# display settings
+user_interface = alternative
+playlist_disable_highlight_delay = 0
+song_columns_list_format = (22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}
+display_bitrate = yes
+media_library_primary_tag = album_artist
+mouse_support = no
+progressbar_boldness = yes
+data_fetching_delay = no
+ask_before_clearing_playlists = no
+playlist_display_mode = columns
+browser_display_mode = columns
+incremental_seeking = yes
+autocenter_mode = yes
+header_visibility = yes
+statusbar_visibility = yes
+follow_now_playing_lyrics = yes
+header_text_scrolling = yes
+ignore_leading_the = yes
+
+#visualization
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_sync_interval = "30"
+visualizer_in_stereo = "yes"
+visualizer_type = "spectrum"
+visualizer_color = "yellow"
+#spectrum or wave
