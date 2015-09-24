@@ -18,13 +18,13 @@ pulseaudio --start &
 
 feh --bg-scale $HOME/Pictures/wallpaper.jpg
 compton --config $XDG_CONFIG_HOME/compton/compton.conf &
-xfce4-panel &
+# xfce4-panel &
 dunst &
 humans &
+urxvtd &
 (sleep 2 && devmon) &
 (sleep 2 && nm-applet --sm-disable) &
 (sleep 2 && blueman-applet) &
 
-#exec i3
 exec sbcl --load $XDG_CONFIG_HOME/stumpwm/start-stump.lisp
 

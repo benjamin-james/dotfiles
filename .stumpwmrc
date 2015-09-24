@@ -16,7 +16,7 @@
 
 (defcommand urxvt() ()
 	    "Start uxrvt"
-	    (run-or-raise "urxvt"
+	    (run-or-raise "urxvtc"
 			  '(:title "urxvt-primary")))
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
@@ -81,7 +81,7 @@
 
 (define-key *root-map* (kbd "C-a") "rotate-windows")
 
-;(stumpwm:toggle-mode-line (stumpwm:current-screen)
-;  (stumpwm:current-head))
-;(if (not (head-mode-line (current-head)))
-;    (toggle-mode-line (current-screen) (current-head)))
+(stumpwm:toggle-mode-line (stumpwm:current-screen)
+ (stumpwm:current-head))
+(if (not (head-mode-line (current-head)))
+   (toggle-mode-line (current-screen) (current-head)))
