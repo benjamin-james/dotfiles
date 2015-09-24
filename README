@@ -17,16 +17,15 @@ DEPENDENCIES				FOR
 	firefox				web browser
 	GNU emacs			everything
 	rxvt-unicode			terminal
-	dmenu				application launching
-	xfce4-panel			status bar
+	GNU screen			terminal multiplexer
+	dmenu				autocompleting application launcher
 	devmon				auto mounting devices
 	dunst				desktop notification daemon
-	NetworkManager and nm-applet	network control
-	blueman and blueman-applet	bluetooth
+	NetworkManager			network control
+	blueman				bluetooth control
 	scrot	    			screenshots
 	feh				setting background
 	amixer				setting volume
-	pulseaudio			volume applet
 	xbacklight			setting brightness
 	Numix				gtk theme
 	DejaVu fonts			system wide font

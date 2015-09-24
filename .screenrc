@@ -4,3 +4,11 @@ startup_message off
 
 # Set the escape sequence (default ^Aa)
 escape ^Jj
+
+# Sets the terminal to use 256 colors (8 by default)
+term screen-256color
+
+# Turns off ugly visual bell
+vbell off
+
+
