@@ -13,8 +13,8 @@ install:
 	cp .xinitrc ~
 	cp .stumpwmrc ~
 	cp .gitconfig ~
+	cp .gnus ~
 	cp -r .config ~
 	cp -r .emacs.d ~
 	git config --global core.excludesfile '~/.config/git/ignore'
 	emacs -nw --eval '(irony-server-install)'
-
