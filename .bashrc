@@ -53,8 +53,10 @@ bold=$(tput bold)
 #Prompt coloring
 if [[ "$(whoami)" == "root" ]]; then
     PS1='\[$red\]\u \[$blue\]\w \[$bold\]\[$red\]\$ \[$reset\]'
-else
+elif [ -z $STY ]; then
     PS1='\[$green\]\u\[$blue\]@\[$brown\]\h \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
+else
+    PS1='\[$green\]\u\[$blue\]@\[$brown\]$STY \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
 fi
 
 #large history is useful for "history | grep foo"
