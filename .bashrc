@@ -51,12 +51,10 @@ cyan=$(tput setaf 6)
 white=$(tput setaf 7)
 bold=$(tput bold)
 #Prompt coloring
-if [[ "$?" != "0" ]]; then #if last command didn't return 0
-    PS1='\[$brown\]\u\[$blue\]\w \[$bold\]\[$brown\]\$ \[$reset\]'
-elif [[ "$(whoami)" == "root" ]]; then
+if [[ "$(whoami)" == "root" ]]; then
     PS1='\[$red\]\u \[$blue\]\w \[$bold\]\[$red\]\$ \[$reset\]'
 else
-    PS1='\[$green\]\u \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
+    PS1='\[$green\]\u\[$blue\]@\[$brown\]\h \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
 fi
 
 #large history is useful for "history | grep foo"
