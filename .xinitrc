@@ -14,11 +14,8 @@ exec >> $XDG_DATA_HOME/xorg/xsession-errors 2>&1
 xsetroot -solid gray35
 xsetroot -cursor_name left_ptr
 
-pulseaudio --start &
-
 feh --bg-scale $HOME/Pictures/wallpaper.jpg
 compton --config $XDG_CONFIG_HOME/compton/compton.conf &
-# xfce4-panel &
 dunst &
 humans &
 urxvtd &
@@ -27,4 +24,3 @@ urxvtd &
 (sleep 2 && blueman-applet) &
 
 exec sbcl --load $XDG_CONFIG_HOME/stumpwm/start-stump.lisp
-
