@@ -11,6 +11,7 @@
 (load-file "swank")
 (load-file "swap-window")
 (load-file "defprogram")
+(load-file "vikeys")
 
 (defvar *terminal* "urxvtc")
 
@@ -26,6 +27,7 @@
 (global "XF86AudioMute" "mute")
 (global "Print" "screenshot")
 
+;; Using super (Windows, Command on Mac, etc) key for fancy window functions
 (global "s-n" "next")
 (global "s-p" "prev")
 (global "s-r" "rotate-windows")
