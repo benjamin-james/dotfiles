@@ -4,82 +4,54 @@
 (defun load-file (file)
   (load (concatenate 'string "~/.config/stumpwm/" file ".lisp")))
 
+(load-file "commands")
+(load-file "custom")
+(load-file "rotate-windows")
+(load-file "shifting")
 (load-file "swank")
+(load-file "swap-window")
+(load-file "defprogram")
 
-(define-key *root-map* (kbd "C-e") "emacs")
+(defvar *terminal* "urxvtc")
 
-(defcommand firefox() ()
-	"Start firefox"
-	(run-or-raise "firefox"
-	'(:title "firefox-primary")))
-(define-key *root-map* (kbd "C-f") "firefox")
+(defprogram firefox "firefox" "x" '(:class "Firefox"))
+(defprogram conkeror "conkeror" "f" '(:class "Conkeror") :rat t)
+(defprogram emacs "emacs" "e" '(:class "Emacs"))
+(defprogram urxvt *terminal* "c" '(:class "URxvt"))
 
-(defcommand urxvt() ()
-	    "Start uxrvt"
-	    (run-or-raise "urxvtc"
-			  '(:title "urxvt-primary")))
-(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
-(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
-(define-key *top-map* (kbd "Print") "exec scrot -e 'mv $f $HOME/Pictures/scrot/$f'")
+(global "XF86MonBrightnessUp" "increase-brightness")
+(global "XF86MonBrightnessDown" "decrease-brightness")
+(global "XF86AudioRaiseVolume" "increase-volume")
+(global "XF86AudioLowerVolume" "decrease-volume")
+(global "XF86AudioMute" "mute")
+(global "Print" "screenshot")
 
-(defcommand increase-volume () ()
-  "Increase the volume"
-  (run-shell-command "amixer sset PCM 5+ unmute"))
+(global "s-n" "next")
+(global "s-p" "prev")
+(global "s-r" "rotate-windows")
+(global "s-s" "swap-window")
 
-(defcommand decrease-volume () ()
-  "Decrease the volume"
-  (run-shell-command "amixer sset PCM 5- unmute"))
-
-(defcommand mute () ()
-  "Mute the volume"
-  (run-shell-command "amixer sset PCM mute"))
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "increase-volume")
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "decrease-volume")
-(define-key *top-map* (kbd "XF86AudioMute") "mute-volume")
-
-(define-key *root-map* (kbd "C-c") "urxvt")
-(define-key *root-map* (kbd "c") "urxvt")
-
-(define-key *root-map* (kbd "C-d")
-  "exec dmenu_run -i -b -p \"run command:\"")
-
-(define-key *root-map* (kbd "C-s") "swank")
-
+(bind "C-d" "dmenu")
+(bind "C-s" "swank")
 
 ;; look and feel
-(stumpwm:set-fg-color "white")
-(stumpwm:set-bg-color "black")
-(set-bg-color "grey20")
+(set-fg-color "grey95")
+(set-bg-color "grey15")
+(set-win-bg-color "black")
 (set-border-color "grey10")
-(set-unfocus-color "grey10")
+(set-focus-color "grey72")
+(set-unfocus-color "grey30")
 
 (setf *startup-message* nil)
 
 (setf *maxsize-border-width* 3)
 (setf *normal-border-width* 3)
 (setf *window-border-style* :thin)
+(setf *mode-line-border-color* "grey15")
 (set-msg-border-width 1)
 (set-frame-outline-width 1)
 
 (set-normal-gravity :center)
-
-
-;; A nifty little recursive window shifter
-(defun shift-windows-forward (frames window)
-  (when frames
-    (let ((frame (car frames)))
-      (shift-windows-forward (cdr frames)
-			     (frame-window frame))
-      (when window
-	(pull-window window frame)))))
-
-(defcommand rotate-windows () ()
-  "Rotate windows"
-  (let* ((frames (group-frames (current-group)))
-	 (window (frame-window (car (last frames)))))
-    (shift-windows-forward frames window)))
-
-(define-key *root-map* (kbd "C-a") "rotate-windows")
 
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
  (stumpwm:current-head))
