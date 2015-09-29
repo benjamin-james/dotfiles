@@ -15,11 +15,16 @@
 
 (defvar *terminal* "urxvtc")
 
-(defprogram firefox "firefox" "x" '(:class "Firefox"))
+;;; defprogram sets the keys to be
+;;;  s-(key) for just shelling out (command)
+;;;  s-(uppercase key) for focusing the window named (command)
+;;;  C-t C-(upcase key) for "run-or-pull"-ing the window named (command)
 (defprogram conkeror "conkeror" "f" '(:class "Conkeror") :rat t)
 (defprogram emacs "emacs" "e" '(:class "Emacs"))
+(defprogram firefox "firefox" "x" '(:class "Firefox"))
 (defprogram urxvt *terminal* "c" '(:class "URxvt"))
 
+;;; Keyboard special keys
 (global "XF86MonBrightnessUp" "increase-brightness")
 (global "XF86MonBrightnessDown" "decrease-brightness")
 (global "XF86AudioRaiseVolume" "increase-volume")
@@ -27,12 +32,13 @@
 (global "XF86AudioMute" "mute")
 (global "Print" "screenshot")
 
-;; Using super (Windows, Command on Mac, etc) key for fancy window functions
+;;; Using super (Windows, Command on Mac, etc) key for fancy window functions
 (global "s-n" "next")
 (global "s-p" "prev")
 (global "s-r" "rotate-windows")
 (global "s-s" "swap-window")
 
+;;; programs that are under the stumpwm root map
 (bind "C-d" "dmenu")
 (bind "C-s" "swank")
 
@@ -52,9 +58,9 @@
 (setf *mode-line-border-color* "grey15")
 (set-msg-border-width 1)
 (set-frame-outline-width 1)
-
 (set-normal-gravity :center)
 
+;;; starts the mode-line
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
  (stumpwm:current-head))
 (if (not (head-mode-line (current-head)))
