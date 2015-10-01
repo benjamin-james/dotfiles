@@ -50,13 +50,22 @@ magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
 white=$(tput setaf 7)
 bold=$(tput bold)
-#Prompt coloring
+
+# Prompt coloring
 if [[ "$(whoami)" == "root" ]]; then
-    PS1='\[$red\]\u \[$blue\]\w \[$bold\]\[$red\]\$ \[$reset\]'
-elif [ -z $STY ]; then
-    PS1='\[$green\]\u\[$blue\]@\[$brown\]\h \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
+    PS1='\[$red\]\u\[$blue\]@'
 else
-    PS1='\[$green\]\u\[$blue\]@\[$brown\]$STY \[$blue\]\w \[$bold\]\[$green\]\$ \[$reset\]'
+    PS1='\[$green\]\u\[$blue\]@'
+fi
+if [ -z $STY ]; then
+    PS1=$PS1'\[$brown\]\h \[$blue\]\w \[$bold\]'
+else
+    PS1=$PS1'\[$brown\]$STY \[$blue\]\w \[$bold\]'
+fi
+if [[ "$(whoami)" == "root" ]]; then
+    PS1=$PS1'\[$red\]\$ \[$reset\]'
+else
+    PS1=$PS1'\[$green\]\$ \[$reset\]'
 fi
 
 #large history is useful for "history | grep foo"
