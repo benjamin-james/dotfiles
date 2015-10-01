@@ -25,7 +25,6 @@
     (unless (package-installed-p 'use-package)
       (package-install 'use-package))
     (require 'use-package))
-
   ;; Gets the first executable
   (defun get-first-existing (items)
     "returns the first string in ITEMS to exist within $PATH"
@@ -73,6 +72,9 @@ If not `nil` and not `t`, query for each instance."
   (setq inhibit-splash-screen t)
   (setq inhibit-startup-message t)
 
+  ;; Make sure all packages are downloaded
+  (setq use-package-always-ensure t)
+
   ;; My personal settings
   (setq-default indent-tabs-mode t)
   (setq-default tab-width 8)
@@ -82,7 +84,7 @@ If not `nil` and not `t`, query for each instance."
 			   c-lineup-gcc-asm-reg
 			   c-lineup-arglist-tabs-only))))
   (setq c-default-style "ben-style")
-  (linum-mode -1)
+  (linum-mode -1) ;;;because not all buffers need line numbers
   (setq linum-format " %.4d ")
 
   (add-hook 'prog-mode-hook
@@ -135,48 +137,37 @@ If not `nil` and not `t`, query for each instance."
   (setq mode-require-final-newline t)
 
   (use-package bash-completion
-    :ensure t
     :config
     (bash-completion-setup))
 
   (use-package c-eldoc
-    :ensure t
     :config
     (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode))
 
   (use-package company
-    :ensure t
     :bind (("C-<tab>" . company-complete-common)
 	   ("C-TAB" . company-complete-common))
     :config
     (add-hook 'after-init-hook 'global-company-mode))
 
   (use-package company-c-headers
-    :ensure t
     :config
     (add-to-list 'company-backends 'company-c-headers))
 
   (use-package company-irony
-    :ensure t
     :config
-    (eval-after-load 'company
-      '(add-to-list 'company-backends 'company-irony)))
+    (add-to-list 'company-backends 'company-irony))
 
   (use-package flycheck
-    :ensure t
     :config (add-hook 'after-init-hook #'global-flycheck-mode))
 
   (use-package flycheck-color-mode-line
-    :ensure t
     :config (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
   (use-package flycheck-irony
-    :ensure t
-    :config (eval-after-load 'flycheck
-	      '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
+    :config (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
   (use-package helm
-    :ensure t
     :bind (("C-c h" . helm-command-prefix)
 	   ("C-x C-f" . helm-find-files)
 	   ("M-x" . helm-M-x))
@@ -192,18 +183,14 @@ If not `nil` and not `t`, query for each instance."
     (helm-mode 1))
 
   (use-package helm-mt
-    :ensure t
     :bind ("C-x t" . helm-mt))
 
-  (use-package helm-projectile
-    :ensure t)
+  (use-package helm-projectile)
 
   (use-package hlinum
-    :ensure t
     :config (hlinum-activate))
 
   (use-package irony
-    :ensure t
     :init
     (defun my-irony-mode-hook ()
       (define-key irony-mode-map [remap completion-at-point]
@@ -218,66 +205,48 @@ If not `nil` and not `t`, query for each instance."
     (add-hook 'c-mode-hook 'irony-mode))
 
   (use-package irony-eldoc
-    :ensure t
     :config
     (add-hook 'irony-mode-hook 'irony-eldoc))
 
   (use-package projectile
-    :ensure t
     :config
     (setq projectile-enable-caching t)
     (setq projectile-indexing-method 'alien)
     (setq projectile-completion-system 'helm)
     (projectile-global-mode))
 
-  (use-package projectile-speedbar
-    :ensure t)
+  (use-package projectile-speedbar)
 
   (use-package seethru
-    :ensure t
     :config (if (display-graphic-p)
 		(seethru 90)))
 
-  (use-package slime-company
-    :ensure t)
+  (use-package slime-company)
 
   (use-package slime
-    :ensure t
     :config
-    (eval-after-load 'slime-company
-      '(progn
-	 (setq inferior-lisp-program (get-first-existing '("sbcl" "clisp")))
-	 (setq slime-contribs '(slime-fancy))
-	 (slime-setup '(slime-fancy slime-asdf slime-company)))))
+    (setq inferior-lisp-program (get-first-existing '("sbcl" "clisp")))
+    (setq slime-contribs '(slime-fancy))
+    (slime-setup '(slime-fancy slime-asdf slime-company)))
 
   (use-package smart-compile
-    :ensure t
     :bind ("<f5>" . smart-compile)
     :config (add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -O2 -g -o %n %f")))
 
   (use-package smart-mode-line
-    :ensure t
-    :config
-    (if (display-graphic-p)
-	(progn
-	  (setq sml/theme 'respectful)
-	  (add-hook 'after-init-hook 'sml/setup))))
+    :if window-system
+    :init
+    (setq sml/theme 'respectful)
+    (add-hook 'after-init-hook 'sml/setup))
 
   (use-package sr-speedbar
-    :ensure t
     :bind ("C-c C-f" . sr-speedbar-toggle)
     :config (setq speedbar-show-unknown-files t))
 
   (use-package magit
-    :ensure t
-    :bind (("M-g s" . magit-status)
-	   ("M-g c" . magit-commit)
-	   ("M-g p" . magit-push)
-	   ("M-g f" . magit-fetch)
-	   ("M-g m" . magit-merge)))
+    :bind ("C-x g" . magit-status))
 
   (use-package multi-term
-    :ensure t
     :bind (("M-t" . multi-term)
 	   ("M-n" . multi-term-next)
 	   ("M-p" . multi-term-prev)
@@ -288,7 +257,6 @@ If not `nil` and not `t`, query for each instance."
     :config (setq multi-term-program "/bin/bash"))
 
   (use-package yasnippet
-    :ensure t
     :config
     (add-hook 'term-mode-hook (lambda()
 				(setq yas-dont-activate t)))
@@ -296,26 +264,22 @@ If not `nil` and not `t`, query for each instance."
     (yas-global-mode 1))
 
   (use-package zenburn-theme
-    :ensure t
+    :if window-system
     :config
-    (if (display-graphic-p)
-	(load-theme 'zenburn)))
+    (load-theme 'zenburn))
 
   (defun reload-init ()
     "reload the init file"
     (interactive)
     (load user-init-file))
 
-  (require 'server)
-  (global-set-key (kbd "<C-return>") 'server-edit)
-  (if (not (server-running-p))
-      (progn
-	(message "Starting server")
-	(server-start)))
+  (use-package server
+    :if window-system
+    :init
+    (add-hook 'after-init-hook 'server-start t))
 
-  (when window-system
-    (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
-      (message "Loading %s...done (%.3fs)" load-file-name elapsed)))
+  (message "Loading %s...done (%.3fs)" load-file-name (float-time (time-subtract (current-time) emacs-start-time)))
+
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

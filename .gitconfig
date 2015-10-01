@@ -3,9 +3,13 @@
 	email = benjames375@gmail.com
 [color]
 	ui = true
-	diff = always
 [github]
 	user = benjamin-james
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = benjames375@gmail.com
+	smtpserverport = 587
 [push]
 	default = matching
 [core]
