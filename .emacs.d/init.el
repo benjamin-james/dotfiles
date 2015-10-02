@@ -68,6 +68,21 @@ If not `nil` and not `t`, query for each instance."
       (* (max steps 1)
 	 c-basic-offset)))
 
+  (defmacro bind-key-file (key file)
+    "Sets a keybinding to open a file"
+    (let ((filename (intern (concat "open-" file))))
+      `(progn
+	 (defun ,filename ()
+	   (interactive)
+	   (find-file ,file))
+	 (global-set-key (kbd ,key) ',filename))))
+
+  (bind-key-file "<f2> e" "~/.emacs.d/init.el")
+  (bind-key-file "<f2> s" "~/.stumpwmrc")
+  (bind-key-file "<f2> C-s" "~/.config/stumpwm/")
+  (bind-key-file "<f2> p" "~/src/")
+  (bind-key-file "<f2> x" "~/.xinitrc")
+
   ;; Graphics settings
   (setq inhibit-splash-screen t)
   (setq inhibit-startup-message t)
