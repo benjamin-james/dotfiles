@@ -295,12 +295,6 @@ If not `nil` and not `t`, query for each instance."
 
   (message "Loading %s...done (%.3fs)" load-file-name (float-time (time-subtract (current-time) emacs-start-time)))
 
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   )
   (provide 'init)
 )
 ;;; init.el ends here
