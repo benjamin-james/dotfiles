@@ -6,6 +6,11 @@ You may want to clone this repository with
 'git clone --depth=1 git://github.com/benjamin-james/dotfiles.git'
 because its entire history is a few MB's.
 
+Also, be aware that I have changed the keyboard layout which is now similar to
+the Space Cadet keyboard. The details are in .config/xorg/Xmodmap. If you don't
+like it, just comment out the line in .xinitrc:
+[[ -f $usermodmap ]] && xmodmap $usermodmap
+
 INSTALL
 Basically use the Makefile.
 When quicklisp is installing, you have to press ENTER to confirm the installation.
