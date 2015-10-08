@@ -10,6 +10,8 @@ Also, be aware that I have changed the keyboard layout which is now similar to
 the Space Cadet keyboard. The details are in .config/xorg/Xmodmap. If you don't
 like it, just comment out the line in .xinitrc:
 [[ -f $usermodmap ]] && xmodmap $usermodmap
+If you want to undo this, type
+setxkbmap -layout us
 
 INSTALL
 Basically use the Makefile.
