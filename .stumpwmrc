@@ -4,8 +4,10 @@
 (defun load-file (file)
   (load (concatenate 'string "~/.config/stumpwm/" file ".lisp")))
 
+(set-module-dir "~/src/stumpwm/contrib")
 (load-file "commands")
 (load-file "custom")
+(load-file "mode-line")
 (load-file "rotate-windows")
 (load-file "shifting")
 (load-file "swank")
