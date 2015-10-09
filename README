@@ -15,7 +15,6 @@ setxkbmap -layout us
 
 INSTALL
 Basically use the Makefile.
-When quicklisp is installing, you have to press ENTER to confirm the installation.
 After the install is finished, start up Emacs to download and install all its
 packages.
 Then, in Emacs, type 'M-x irony-server-install' to compile and install irony-mode.

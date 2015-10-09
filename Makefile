@@ -9,11 +9,15 @@ FILES = .bashrc .bash_profile .gitconfig .gnus .sbclrc .screenrc .stumpwmrc .xin
 	.ncmpcpp/config
 
 all: $(addprefix $(DESTDIR)/, $(FILES))
-
+	cat .bash_profile | grep XDG | sed '/VTNR/d' | bash #updates variables
+	mkdir -p $(DESTDIR)/$XDG_CONFIG_HOME
+	mkdir -p $(DESTDIR)/$XDG_CACHE_HOME
+	mkdir -p $(DESTDIR)/$XDG_DATA_HOME/xorg
 quicklisp.lisp:
 	$(DOWNLOAD) https://beta.quicklisp.org/quicklisp.lisp
 $(DESTDIR)/.sbclrc: quicklisp.lisp install.lisp
 	sbcl --load install.lisp
+	cp .sbclrc $(DESTDIR)
 $(DESTDIR)/.config/stumpwm/contrib:
 	git clone https://github.com/stumpwm/stumpwm-contrib.git $(DESTDIR)/.config/stumpwm/contrib
 $(DESTDIR)/%: %

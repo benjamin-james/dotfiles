@@ -2,9 +2,9 @@
 (in-package :stumpwm)
 
 (defun load-file (file)
-  (load (concatenate 'string "~/.config/stumpwm/" file ".lisp")))
+  (load (concatenate 'string (getenv "XDG_CONFIG_HOME") "/stumpwm/" file ".lisp")))
 
-(set-module-dir "~/src/stumpwm/contrib")
+(set-module-dir (concatenate 'string (getenv "XDG_CONFIG_HOME") "/stumpwm/contrib"))
 (load-file "commands")
 (load-file "custom")
 (load-file "mode-line")
