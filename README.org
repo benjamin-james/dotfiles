@@ -1,0 +1,59 @@
+* dotfiles
+My personal configurations
+
+This is pretty much every configuration file for me.
+
+Here are the programs that use the config files here:
+(Note: if a config file loads more config files, I won't list them all)
+
+|------------+-------------------------------+-----------------------------|
+| Program    | Config file(s)                | For                         |
+|------------+-------------------------------+-----------------------------|
+| [[https://gnu.org/software/bash][bash]]       | [[file:.bashrc][.bashrc]], [[file:.bash_profile][.bash_profile]]        | shell                       |
+| [[https://github.com/chij/compton][compton]]    | [[file:.config/compton/compton.conf][compton.conf]]                  | X compositor (transparency) |
+| [[https://github.com/knopwob/dunst][dunst]]      | [[file:.config/dunst/dunstrc][dunstrc]]                       | desktop notification daemon |
+| [[https://git-scm.com][git]]        | [[file:.gitconfig][.gitconfig]]                    | version control             |
+| [[https://gnu.org/software/emacs][GNU Emacs]]  | [[file:.emacs.d/init.el][init.el]], [[file:.gnus][.gnus]]                | text editor                 |
+| [[https://gnu.org/software/screen][GNU Screen]] | [[file:.screenrc][.screenrc]]                     | terminal multiplexer        |
+| [[http://gtk.org][GTK]]        | [[file:.config/gtkrc-2.0][gtkrc-2.0]] [[file:.config/gtk-3.0/settings.ini][settings.ini]]        | GUI toolkit, themes         |
+| [[https://github.com/arybczak][ncmpcpp]]    | [[file:.ncmpcpp/config][config]]                        | MPD client                  |
+| [[http://sbcl.org][SBCL]]       | [[file:.sbclrc][.sbclrc]]                       | Common Lisp interpreter     |
+| [[https://stumpwm.github.io][StumpWM]]    | [[file:.stumpwmrc][.stumpwmrc]]                    | X Window Manager            |
+| [[http://software.schmorp.de/pkg/rxvt-unicode.html][URxvt]]      | [[file:.config/xorg/Xresources::URxvt][Xresources]]                    | terminal emulator           |
+| [[http://www.x.org/wiki/][X]]          | [[file:.xinitrc][.xinitrc]], [[file:.config/xorg/Xresources][Xresources]], [[file:.config/xorg/Xmodmap][Xmodmap]] | X Window System             |
+|------------+-------------------------------+-----------------------------|
+
+* Install
+Basically use the [[file:Makefile][Makefile]] (i.e. =make=)
+
+After the Makefile installs pretty much everything, you have to start up Emacs and wait a while for it to download all my packages.
+
+Then, in Emacs, type =M-x irony-install-server= and wait for it to compile to complete the installation.
+
+Note: If you are not Benjamin James, you might want to change some things in [[file:.gitconfig][.gitconfig]].
+
+* Dependencies
+Since I am listing these dependencies, you have to externally download them, or you could remove their parts in the files provided.
+|---------------+-------------------------------------+--------------------------------+-----------------------------------|
+| Package name  | Description                         | Dependency for                 | In file                           |
+|---------------+-------------------------------------+--------------------------------+-----------------------------------|
+| ALSA          | Volume control                      | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::amixer][commands.lisp]]                     |
+| blueman       | Bluetooth applet                    | X config                       | [[file:.xinitrc::blueman][.xinitrc]]                          |
+| compton       | X compositor (transparency)         | X config                       | [[file:.xinitrc::compton][.xinitrc]]                          |
+| conkeror      | Web browser                         | StumpWM config                 | [[file:.stumpwmrc::conkeror][.stumpwmrc]]                        |
+| cmake         | build system                        | building irony-mode (Emacs)    | [[file:.emacs.d/init.el::irony][init.el]]                           |
+| DejaVu fonts  | system wide fonts                   | URxvt, GTK3 theme, dunst fonts | [[file:.config/xorg/Xresources::DejaVu][Xresources]], [[file:.config/gtk-3.0/settings.ini::DejaVu][settings.ini]], [[file:.config/dunst/dunstrc::DejaVu][dunstrc]] |
+| devmon/udevil | auto-mounting devices               | X config                       | [[file:.xinitrc::devmon][.xinitrc]]                          |
+| dmenu         | autocompleting application launcher | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::dmenu][commands.lisp]]                     |
+| dunst         | desktop notification daemon         | X config                       | [[file:.xinitrc::dunst][.xinitrc]]                          |
+| feh           | setting background, image viewer    | X config                       | [[file:.xinitrc::feh][.xinitrc]]                          |
+| libclang      | backend for company-mode            | Emacs company.el               | [[file:.emacs.d/init.el::company][init.el]]                           |
+| sbcl          | Common Lisp implementation          | StumpWM, SLIME                 |                                   |
+| scrot         | screenshot command                  | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::scrot][commands.lisp]]                     |
+| URxvt         | terminal emulator                   | StumpWM config, X config       | [[file:.stumpwmrc::urxvt][.stumpwmrc]], [[file:.xinitrc::urxvt][.xinitrc]]              |
+| xbacklight    | brightness script                   | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::xbacklight][commands.lisp]]                     |
+|---------------+-------------------------------------+--------------------------------+-----------------------------------|
+
+
+  
+
