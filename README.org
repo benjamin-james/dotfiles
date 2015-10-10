@@ -46,11 +46,13 @@ which has been easier to type on for me.
 
 The implementation is in [[file:.config/xorg/Xmodmap][Xmodmap]].
 
-To disable this, comment out this line
+To disable this, comment out this line in [[file:.xinitrc][.xinitrc]]
 #+BEGIN_SRC sh
 [[ -f $usermodmap ]] && xrdb -merge $userresources
 #+END_SRC
-before starting X. If you want to unset this live (in an X session), type
+before starting X.
+
+If you want to unset this live (in an X session), type
 #+BEGIN_SRC sh
 setxkbmap -layout us
 #+END_SRC
