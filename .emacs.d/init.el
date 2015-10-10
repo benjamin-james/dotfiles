@@ -20,6 +20,8 @@
     (package-initialize)
     (require 'cl)
     (require 'cl-lib)
+    ;; Make sure all packages are downloaded
+    (setq use-package-always-ensure t)
     (unless package-archive-contents
       (package-refresh-contents))
     (unless (package-installed-p 'use-package)
@@ -87,9 +89,6 @@ If not `nil` and not `t`, query for each instance."
   (setq inhibit-splash-screen t)
   (setq inhibit-startup-message t)
 
-  ;; Make sure all packages are downloaded
-  (setq use-package-always-ensure t)
-
   ;; My personal settings
   (setq-default indent-tabs-mode t)
   (setq-default tab-width 8)
@@ -139,9 +138,6 @@ If not `nil` and not `t`, query for each instance."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(custom-safe-themes
-     (quote
-      ("877530ef4d4423b5b184daff52953d398bb3533ec5e7393c238ac732b19135dd" "108b3724e0d684027c713703f663358779cc6544075bc8fd16ae71470497304f" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "19352d62ea0395879be564fc36bc0b4780d9768a964d26dfae8aad218062858d" default)))
    '(font-use-system-font t)
    '(fringe-mode 0 nil (fringe))
    '(menu-bar-mode nil)
