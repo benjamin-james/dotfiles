@@ -32,28 +32,51 @@ Then, in Emacs, type =M-x irony-install-server= and wait for it to compile to co
 
 Note: If you are not Benjamin James, you might want to change some things in [[file:.gitconfig][.gitconfig]].
 
+* Keyboard
+I have remapped my keyboard in X with =xmodmap= to be similar with the [[https://en.wikipedia.org/wiki/Space-cadet_keyboard][Space-cadet keyboard]] with which Emacs was originally designed.
+So, it transforms the bottom row of the keyboard from
+|----+---------+-------+-----+----------+-----+-------+---------|
+| Fn | Control | Super | Alt | Spacebar | Alt | Print | Control |
+|----+---------+-------+-----+----------+-----+-------+---------|
+to
+|----+-------+-----+---------+----------+---------+-----+-------|
+| Fn | Super | Alt | Control | Spacebar | Control | Alt | Super |
+|----+-------+-----+---------+----------+---------+-----+-------|
+which has been easier to type on for me.
+
+The implementation is in [[file:.config/xorg/Xmodmap][Xmodmap]].
+
+To disable this, comment out this line
+#+BEGIN_SRC sh
+[[ -f $usermodmap ]] && xrdb -merge $userresources
+#+END_SRC
+before starting X. If you want to unset this live (in an X session), type
+#+BEGIN_SRC sh
+setxkbmap -layout us
+#+END_SRC
+into a terminal.
 * Dependencies
 Since I am listing these dependencies, you have to externally download them, or you could remove their parts in the files provided.
-|---------------+-------------------------------------+--------------------------------+-----------------------------------|
-| Package name  | Description                         | Dependency for                 | In file                           |
-|---------------+-------------------------------------+--------------------------------+-----------------------------------|
-| ALSA          | Volume control                      | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::amixer][commands.lisp]]                     |
-| blueman       | Bluetooth applet                    | X config                       | [[file:.xinitrc::blueman][.xinitrc]]                          |
-| compton       | X compositor (transparency)         | X config                       | [[file:.xinitrc::compton][.xinitrc]]                          |
-| conkeror      | Web browser                         | StumpWM config                 | [[file:.stumpwmrc::conkeror][.stumpwmrc]]                        |
-| cmake         | build system                        | building irony-mode (Emacs)    | [[file:.emacs.d/init.el::irony][init.el]]                           |
-| DejaVu fonts  | system wide fonts                   | URxvt, GTK3 theme, dunst fonts | [[file:.config/xorg/Xresources::DejaVu][Xresources]], [[file:.config/gtk-3.0/settings.ini::DejaVu][settings.ini]], [[file:.config/dunst/dunstrc::DejaVu][dunstrc]] |
-| devmon/udevil | auto-mounting devices               | X config                       | [[file:.xinitrc::devmon][.xinitrc]]                          |
-| dmenu         | autocompleting application launcher | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::dmenu][commands.lisp]]                     |
-| dunst         | desktop notification daemon         | X config                       | [[file:.xinitrc::dunst][.xinitrc]]                          |
-| feh           | setting background, image viewer    | X config                       | [[file:.xinitrc::feh][.xinitrc]]                          |
-| libclang      | backend for company-mode            | Emacs company.el               | [[file:.emacs.d/init.el::company][init.el]]                           |
-| sbcl          | Common Lisp implementation          | StumpWM, SLIME                 |                                   |
-| scrot         | screenshot command                  | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::scrot][commands.lisp]]                     |
-| URxvt         | terminal emulator                   | StumpWM config, X config       | [[file:.stumpwmrc::urxvt][.stumpwmrc]], [[file:.xinitrc::urxvt][.xinitrc]]              |
-| xbacklight    | brightness script                   | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::xbacklight][commands.lisp]]                     |
-|---------------+-------------------------------------+--------------------------------+-----------------------------------|
-
-
-  
-
+|----------------+-------------------------------------+--------------------------------+-----------------------------------|
+| Package name   | Description                         | Dependency for                 | In file                           |
+|----------------+-------------------------------------+--------------------------------+-----------------------------------|
+| ALSA           | Volume control                      | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::amixer][commands.lisp]]                     |
+| blueman        | Bluetooth applet                    | X config                       | [[file:.xinitrc::blueman][.xinitrc]]                          |
+| compton        | X compositor (transparency)         | X config                       | [[file:.xinitrc::compton][.xinitrc]]                          |
+| conkeror       | Web browser                         | StumpWM config                 | [[file:.stumpwmrc::conkeror][.stumpwmrc]]                        |
+| cmake          | build system                        | building irony-mode (Emacs)    | [[file:.emacs.d/init.el::irony][init.el]]                           |
+| DejaVu fonts   | system wide fonts                   | URxvt, GTK3 theme, dunst fonts | [[file:.config/xorg/Xresources::DejaVu][Xresources]], [[file:.config/gtk-3.0/settings.ini::DejaVu][settings.ini]], [[file:.config/dunst/dunstrc::DejaVu][dunstrc]] |
+| devmon/udevil  | auto-mounting devices               | X config                       | [[file:.xinitrc::devmon][.xinitrc]]                          |
+| dmenu          | autocompleting application launcher | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::dmenu][commands.lisp]]                     |
+| dunst          | desktop notification daemon         | X config                       | [[file:.xinitrc::dunst][.xinitrc]]                          |
+| feh            | setting background, image viewer    | X config                       | [[file:.xinitrc::feh][.xinitrc]]                          |
+| [[https://github.com/benjamin-james/humans][humans]]         | So you can killall humans           | X config                       | [[file:.xinitrc::humans][.xinitrc]]                          |
+| libclang       | backend for company-mode            | Emacs company.el               | [[file:.emacs.d/init.el::company][init.el]]                           |
+| NetworkManager | network manager & applet            | X config                       | [[file:.xinitrc::nm-applet][.xinitrc]]                          |
+| sbcl           | Common Lisp implementation          | StumpWM (X config), SLIME      | [[file:.xinitrc::sbcl][.xinitrc]]                          |
+| scrot          | screenshot command                  | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::scrot][commands.lisp]]                     |
+| URxvt          | terminal emulator                   | StumpWM config, X config       | [[file:.stumpwmrc::urxvt][.stumpwmrc]], [[file:.xinitrc::urxvt][.xinitrc]]              |
+| xbacklight     | brightness script                   | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::xbacklight][commands.lisp]]                     |
+| xmodmap        | setting keyboard layout             | X config (Keyboard mappings)   | [[file:.xinitrc::xmodmap][.xinitrc]]                          |
+| xsetroot       | setting mouse cursor                | X config                       | [[file:.xinitrc::xsetroot][.xinitrc]]                          |
+|----------------+-------------------------------------+--------------------------------+-----------------------------------|
