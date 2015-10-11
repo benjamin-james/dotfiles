@@ -277,7 +277,7 @@ If not `nil` and not `t`, query for each instance."
   (use-package zenburn-theme
     :if window-system
     :config
-    (load-theme 'zenburn))
+    (load-theme 'zenburn t))
 
   (defun reload-init ()
     "reload the init file"
