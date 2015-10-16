@@ -2,6 +2,7 @@
 declare -rx active=$(</sys/class/tty/tty0/active)
 
 [[ -r $HOME/.bashrc ]] && source "$HOME"/.bashrc
+[[ -d /usr/sbin ]] && PATH=/usr/sbin:$PATH
 [[ -d $HOME/bin ]] && PATH=$HOME/bin:$PATH
 
 export XDG_CACHE_HOME=$HOME/.cache \
