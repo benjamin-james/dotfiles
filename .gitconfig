@@ -1,15 +1,10 @@
 [user]
 	name = Benjamin James
-	email = benjames375@gmail.com
+	email = bjames@airmail.cc
 [color]
 	ui = true
 [github]
 	user = benjamin-james
-[sendemail]
-	smtpencryption = tls
-	smtpserver = smtp.gmail.com
-	smtpuser = benjames375@gmail.com
-	smtpserverport = 587
 [push]
 	default = matching
 [core]

@@ -1,0 +1,16 @@
+source "gpg2 -dq ~/.my-passwds.gpg |"
+set imap_user=$my_user
+set imap_pass=$my_passwd
+set editor="emacsclient -a ''"
+set pager="emacsclient -a ''"
+set folder=imaps://$my_server
+set spoolfile=+INBOX
+mailboxes +INBOX +sent +drafts
+set header_cache=~/.cache/mutt
+set message_cachedir=~/.cache/mutt
+unset imap_passive
+set imap_keepalive=300
+set mail_check=120
+set record=+sent
+set smtp_url="smtp://$my_user:$my_passwd@$my_server:587"
+set ssl_starttls=yes
