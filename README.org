@@ -16,7 +16,7 @@ Here are the programs that use the config files here:
 | [[https://gnu.org/software/emacs][GNU Emacs]]  | [[file:.emacs.d/init.el][init.el]]                       | text editor                 |
 | [[https://gnu.org/software/screen][GNU Screen]] | [[file:.screenrc][.screenrc]]                     | terminal multiplexer        |
 | [[http://gtk.org][GTK]]        | [[file:.config/gtkrc-2.0][gtkrc-2.0]] [[file:.config/gtk-3.0/settings.ini][settings.ini]]        | GUI toolkit, themes         |
-| [[http://mutt.org][mutt]]       | [[file:.muttrc][.muttrc]]                       | email client                |
+| [[http://www.mutt.org][mutt]]       | [[file:.muttrc][.muttrc]]                       | email client                |
 | [[https://github.com/arybczak][ncmpcpp]]    | [[file:.ncmpcpp/config][config]]                        | MPD client                  |
 | [[http://sbcl.org][SBCL]]       | [[file:.sbclrc][.sbclrc]]                       | Common Lisp interpreter     |
 | [[https://stumpwm.github.io][StumpWM]]    | [[file:.stumpwmrc][.stumpwmrc]]                    | X Window Manager            |

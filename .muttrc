@@ -1,4 +1,5 @@
 source "gpg2 -dq ~/.my-passwds.gpg |"
+source ~/.config/mutt/colors.linux
 set imap_user=$my_user
 set imap_pass=$my_passwd
 set editor="emacsclient -a ''"
