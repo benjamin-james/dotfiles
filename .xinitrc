@@ -28,7 +28,7 @@ dunst &
 urxvtd &
 
 # Make some 'humans' to killall humans
-humans &
+which humans || humans &
 
 # Start devmon
 (sleep 2 && devmon) &
