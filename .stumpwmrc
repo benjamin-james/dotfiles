@@ -43,6 +43,7 @@
 ;;; programs that are under the stumpwm root map
 (bind "C-d" "dmenu")
 (bind "C-s" "swank")
+(bind "DEL" "logout")
 
 ;; look and feel
 (set-fg-color "grey95")

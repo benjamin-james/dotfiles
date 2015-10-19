@@ -21,7 +21,12 @@
 
 (defcommand screenshot () ()
 	    "Take a screenshot"
-	    (run-shell-command "scrot -e `mv $f ~/Pictures/scrot/$f`"))
+	    (run-shell-command "scrot -e `mv $f ~/pictures/scrot/$f`"))
+
 (defcommand dmenu () ()
 	    "Run dmenu, the autocompleting launcher"
 	    (run-shell-command "dmenu_run -i -b -p \"run command:\""))
+
+(defcommand logout () ()
+	    "exit out of X"
+	    (run-shell-command "pkill xinit"))
