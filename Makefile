@@ -2,8 +2,9 @@ DOWNLOAD = curl -O
 DESTDIR = $(HOME)
 MKDIR = mkdir -p
 INSTALL = cp
-FILES = .bashrc .bash_profile .gitconfig .muttrc .sbclrc .screenrc .stumpwmrc .xinitrc \
-	.config/compton/compton.conf .config/dunst/dunstrc .config/git/ignore .config/gtk-3.0/settings.ini \
+FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc .stumpwmrc \
+	.xinitrc .gnupg/gpg-agent.conf .gnupg/gpg.conf .config/compton/compton.conf \
+	.config/dunst/dunstrc .config/git/ignore .config/gtk-3.0/settings.ini \
 	.config/mutt/colors.linux .config/stumpwm/contrib $(wildcard .config/stumpwm/*.lisp) \
 	.config/xorg/Xmodmap .config/xorg/Xresources .config/gtkrc-2.0 .emacs.d/init.el \
 	.ncmpcpp/config
