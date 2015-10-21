@@ -101,3 +101,5 @@ fi
 
 export VISUAL="emacsclient -a ''"
 export EDITOR=$VISUAL
+GPG_TTY=$(tty)
+export GPG_TTY

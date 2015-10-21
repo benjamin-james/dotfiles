@@ -14,6 +14,16 @@ export XDG_CACHE_HOME=$HOME/.cache \
 # sets XDG_VTNR to the active tty number if not set
 export XDG_VTNR=${XDG_VTNR:-${active#tty}}
 
+# Setting GnuPG agent up
+envfile="$HOME/.gnupg/gpg-agent.env"
+if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
+	eval "$(cat "$envfile")"
+else
+	eval "$(gpg-agent --daemon --enable-ssh-support --write-env-file "$envfile")"
+fi
+export GPG_AGENT_INFO
+export SSH_AUTH_INFO
+
 # 'exec startx' makes sure that if x crashes or exits
 # the user is logged out afterwards
 [[ -z $DISPLAY && XDG_VTNR -eq 1 ]] && exec startx
