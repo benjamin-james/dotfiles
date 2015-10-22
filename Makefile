@@ -11,9 +11,9 @@ FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc 
 
 all: $(addprefix $(DESTDIR)/, $(FILES))
 	source $(DESTDIR)/.bash_profile #updates environment vairables without relogging in
-	mkdir -p $(DESTDIR)/$(XDG_CONFIG_HOME)
-	mkdir -p $(DESTDIR)/$(XDG_CACHE_HOME)
-	mkdir -p $(DESTDIR)/$(XDG_DATA_HOME)/xorg
+	mkdir -p $(XDG_CONFIG_HOME)
+	mkdir -p $(XDG_CACHE_HOME)
+	mkdir -p $(XDG_DATA_HOME)/xorg
 quicklisp.lisp:
 	$(DOWNLOAD) https://beta.quicklisp.org/quicklisp.lisp
 $(DESTDIR)/.sbclrc: quicklisp.lisp install.lisp

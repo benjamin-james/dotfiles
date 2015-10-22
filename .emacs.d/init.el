@@ -118,6 +118,8 @@ If not `nil` and not `t`, query for each instance."
   (setq gdb-show-main t)
   (global-set-key (kbd "<f6>") 'gdb)
 
+  ;;mutt settings
+  (setq auto-mode-alist (append '(("/tmp/mutt.*" . mail-mode)) auto-mode-alist))
   ;; Storing all files under this directory instead of making copies inplace
   (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
 	backup-by-copying t
@@ -181,6 +183,7 @@ If not `nil` and not `t`, query for each instance."
   (use-package helm
     :bind (("C-c h" . helm-command-prefix)
 	   ("C-x C-f" . helm-find-files)
+	   ("C-x m" . helm-man-woman)
 	   ("M-x" . helm-M-x))
     :config
     (global-unset-key (kbd "C-x c"))
@@ -192,9 +195,6 @@ If not `nil` and not `t`, query for each instance."
 	  helm-scroll-amount 8)
     (helm-autoresize-mode t)
     (helm-mode 1))
-
-  (use-package helm-mt
-    :bind ("C-x t" . helm-mt))
 
   (use-package helm-projectile)
 
@@ -294,3 +294,23 @@ If not `nil` and not `t`, query for each instance."
   (provide 'init)
 )
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" default)))
+ '(font-use-system-font t)
+ '(fringe-mode 0 nil (fringe))
+ '(menu-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
