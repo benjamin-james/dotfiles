@@ -27,6 +27,10 @@
 	    "Run dmenu, the autocompleting launcher"
 	    (run-shell-command "dmenu_run -i -b -p \"run command:\""))
 
+(defcommand suspend () ()
+	    "Suspend to ram. This requires the NOPASSWD argument in /etc/sudoers for pm-suspend"
+	    (run-shell-command "sudo pm-suspend"))
+
 (defcommand logout () ()
 	    "exit out of X"
 	    (run-shell-command "pkill xinit"))

@@ -44,6 +44,7 @@
 (bind "C-d" "dmenu")
 (bind "C-s" "swank")
 (bind "DEL" "logout")
+(bind "C-DEL" "suspend")
 
 ;; look and feel
 (set-fg-color "grey95")
