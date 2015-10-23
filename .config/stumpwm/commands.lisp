@@ -21,7 +21,7 @@
 
 (defcommand screenshot () ()
 	    "Take a screenshot"
-	    (run-shell-command "scrot -e `mv $f ~/pictures/scrot/$f`"))
+	    (run-shell-command "scrot -e 'mv $f ~/pictures/scrot/'"))
 
 (defcommand dmenu () ()
 	    "Run dmenu, the autocompleting launcher"
