@@ -27,7 +27,44 @@ Xft*antialias:		true
 Xft*autohint:		true
 Xft*dpi:		92
 
-URxvt*foreground:	white
+URxvt*foreground:	#EEEEEC
+URxvt*background:	[100]#2E3436
+URxvt*colorUL:		#8AE234
+URxvt*underlineColor:	#92659A
+
+! black dark/light
+URxvt*color0:		#2E3436
+URxvt*color8:		#6E706B
+
+! red dark/light
+URxvt*color1:		#CC0000
+URxvt*color9:		#EF2929
+
+! green dark/light
+URxvt*color2:		#4E9A06
+URxvt*color10:		#8AE234
+
+! yellow dark/light
+URxvt*color3:		#edd400
+URxvt*color11:		#fce94f
+
+! blue dark/light
+URxvt*color4:		#3465A4
+URxvt*color12:		#729FCF
+
+! magenta dark/light
+URxvt*color5:		#92659A
+URxvt*color13:		#C19FBE
+
+! cyan dark/light
+URxvt*color6:		#07C7CA
+URxvt*color14:		#63E9E9
+
+! white dark/light
+URxvt*color7:		#D3D7CF
+URxvt*color15:		#EEEEEC
+
+URxvt*termName:		rxvt-16color
 URxvt*scrollTtyOutput: false
 URxvt*scrollTtyKeypress: true
 URxvt*scrollWithBuffer: true
@@ -41,7 +78,7 @@ URxvt*font: xft:DejaVu Sans Mono:autohint=true
 URxvt*borderless: true
 !URxvt.shading: 35
 URxvt*depth: 32
-URxvt*background: [50]#000000
+
 URxvt*urgentOnBell: true
 URxvt*scrollBar_right:	true
 URxvt*scrollstyle:	plain

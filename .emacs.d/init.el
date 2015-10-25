@@ -274,10 +274,12 @@ If not `nil` and not `t`, query for each instance."
     (define-key yas-minor-mode-map (kbd "\t") 'yas-expand)
     (yas-global-mode 1))
 
-  (use-package zenburn-theme
-    :if window-system
-    :config
-    (load-theme 'zenburn t))
+;  (use-package zenburn-theme
+;    :if window-system
+;    :config
+;    (load-theme 'zenburn t))
+  (if (display-graphic-p)
+      (load-theme 'tango-dark t))
 
   (defun reload-init ()
     "reload the init file"
