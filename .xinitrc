@@ -3,9 +3,7 @@ usermodmap=$XDG_CONFIG_HOME/xorg/Xmodmap
 sysresources=/etc/X11/xinit/Xresources
 sysmodmap=/etc/X11/xinit/Xmodmap
 wallpaper=$HOME/pictures/wallpaper.jpg
-
-# in case we have problems we can check the log
-exec >> $XDG_DATA_HOME/xorg/xsession-errors 2>&1
+xlog=$XDG_DATA_HOME/xorg/xsession-errors
 
 [[ -f $sysresources ]] && xrdb -merge $sysresources
 [[ -f $sysmodmap ]] && xmodmap $sysmodmap
@@ -41,5 +39,5 @@ humans &
 (sleep 2 && blueman-applet) &
 
 # Start StumpWM
-exec sbcl --load $XDG_CONFIG_HOME/stumpwm/start-stump.lisp
+exec sbcl --load $XDG_CONFIG_HOME/stumpwm/start-stump.lisp >> $xlog 2>&1
 
