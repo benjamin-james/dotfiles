@@ -82,8 +82,14 @@ If not `nil` and not `t`, query for each instance."
   (bind-key-file "<f2> e" "~/.emacs.d/init.el")
   (bind-key-file "<f2> s" "~/.stumpwmrc")
   (bind-key-file "<f2> C-s" "~/.config/stumpwm/")
-  (bind-key-file "<f2> p" "~/src/")
+  (bind-key-file "<f2> c" "~/src/")
   (bind-key-file "<f2> x" "~/.xinitrc")
+
+  (defun sudo-edit ()
+    "Edit the current buffer as sudo"
+    (interactive)
+    (find-file (concat "/sudo::" buffer-file-name)))
+  (global-set-key (kbd "C-x p") 'sudo-edit)
 
   ;; Graphics settings
   (setq inhibit-splash-screen t)
@@ -230,7 +236,7 @@ If not `nil` and not `t`, query for each instance."
 
   (use-package seethru
     :config (if (display-graphic-p)
-		(seethru 90)))
+		(seethru 100)))
 
   (use-package slime-company)
 
@@ -242,7 +248,7 @@ If not `nil` and not `t`, query for each instance."
 
   (use-package smart-compile
     :bind ("<f5>" . smart-compile)
-    :config (add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -O2 -g -o %n %f")))
+    :config (add-to-list 'smart-compile-alist '(c-mode . "gcc -W -Wall -Werror -O2 -ggdb -o %n %f")))
 
   (use-package smart-mode-line
     :if window-system
@@ -274,10 +280,6 @@ If not `nil` and not `t`, query for each instance."
     (define-key yas-minor-mode-map (kbd "\t") 'yas-expand)
     (yas-global-mode 1))
 
-;  (use-package zenburn-theme
-;    :if window-system
-;    :config
-;    (load-theme 'zenburn t))
   (if (display-graphic-p)
       (load-theme 'tango-dark t))
 
@@ -296,3 +298,23 @@ If not `nil` and not `t`, query for each instance."
   (provide 'init)
 )
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" default)))
+ '(font-use-system-font t)
+ '(fringe-mode 0 nil (fringe))
+ '(menu-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
