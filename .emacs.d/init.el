@@ -178,6 +178,11 @@ If not `nil` and not `t`, query for each instance."
     (add-to-list 'company-backends 'company-irony))
 
   (use-package flycheck
+    :init
+    (add-hook 'c-mode-hook
+	      (lambda()
+		(setq flycheck-gcc-warnings '("all" "extra"))
+		(setq flycheck-gcc-language-standard "gnu11")))
     :config (add-hook 'after-init-hook #'global-flycheck-mode))
 
   (use-package flycheck-color-mode-line
