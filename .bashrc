@@ -90,16 +90,10 @@ if [[ $(which most 2>/dev/null) ]]; then
     export PAGER="/usr/bin/most -s"
 fi
 
-#if [ "$TERM" = "linux" ]; then
-#    _SEDCMD='s/.*\*color\([0-9]\{1,\}\).*#\([0-9a-fA-F]\{6\}\).*/\1 \2/p'
-#    for i in $(sed -n "$_SEDCMD" $HOME/.Xdefaults | \
-#		      awk '$1 < 16 {printf "\\e]P%X%s", $1, $2}'); do
-#	echo -en "$i"
-#    done
-#    clear
-#fi
-
 export VISUAL="emacsclient -a ''"
 export EDITOR=$VISUAL
 GPG_TTY=$(tty)
 export GPG_TTY
+
+export spooky="1"
+[ -f "bin/spooky" ] && source bin/spooky

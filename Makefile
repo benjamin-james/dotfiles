@@ -7,7 +7,7 @@ FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc 
 	.config/dunst/dunstrc .config/git/ignore .config/gtk-3.0/settings.ini \
 	.config/mutt/colors.linux .config/stumpwm/contrib $(wildcard .config/stumpwm/*.lisp) \
 	.config/xorg/Xmodmap .config/xorg/Xresources .config/gtkrc-2.0 .emacs.d/init.el \
-	.ncmpcpp/config
+	.ncmpcpp/config bin/spooky
 
 all: $(addprefix $(DESTDIR)/, $(FILES))
 	source $(DESTDIR)/.bash_profile #updates environment vairables without relogging in
