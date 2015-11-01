@@ -34,3 +34,19 @@
 (defcommand logout () ()
 	    "exit out of X"
 	    (run-shell-command "pkill xinit"))
+
+(defcommand next-song () ()
+	    "play the next song in playlist"
+	    (run-shell-command "mpc next && notify-send \"Now Playing\" \"$(mpc current)\""))
+
+(defcommand prev-song () ()
+	    "play the previous song"
+	    (run-shell-command "mpc prev && notify-send \"Now Playing\" \"$(mpc current)\""))
+
+(defcommand stop-song () ()
+	    "stop the song"
+	    (run-shell-command "mpc stop"))
+
+(defcommand play-song () ()
+	    "plays/pauses the song"
+	    (run-shell-command "mpc toggle && if [[ $(mpc | grep playing) ]]; then notify-send \"Now Playing\" \"$(mpc current)\"; fi"))

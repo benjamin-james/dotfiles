@@ -32,6 +32,10 @@
 (global "XF86AudioRaiseVolume" "increase-volume")
 (global "XF86AudioLowerVolume" "decrease-volume")
 (global "XF86AudioMute" "mute")
+(global "XF86AudioNext" "next-song")
+(global "XF86AudioPrev" "prev-song")
+(global "XF86AudioStop" "stop-song")
+(global "XF86AudioPlay" "play-song")
 (global "Print" "screenshot")
 
 ;;; Using super (Windows, Command on Mac, etc) key for fancy window functions
