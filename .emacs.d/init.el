@@ -21,12 +21,22 @@
     (require 'cl)
     (require 'cl-lib)
     ;; Make sure all packages are downloaded
-    (setq use-package-always-ensure t)
     (unless package-archive-contents
       (package-refresh-contents))
     (unless (package-installed-p 'use-package)
       (package-install 'use-package))
-    (require 'use-package))
+    (require 'use-package)
+    (setq use-package-always-ensure t))
+
+  ;; Destroys those pesky ^M characters
+  (defun dos2unix (buffer)
+    "Destroy all ^M characters in a buffer"
+    (interactive "*b")
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward (string ?\C-m) nil t)
+	(replace-match (string ?\C-j) nil t))))
+
   ;; Gets the first executable
   (defun get-first-existing (items)
     "returns the first string in ITEMS to exist within $PATH"
