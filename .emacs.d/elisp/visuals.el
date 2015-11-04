@@ -1,0 +1,49 @@
+;;; visuals.el --- Summary
+;;;
+;;; Commentary:
+;;; Stuff that makes emacs look good
+;;;
+;;; Code:
+
+(setq emacs-opacity 100)
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+
+(linum-mode -1) ;;No linum for global usage
+(setq linum-format " %.4d ")
+
+(add-hook 'prog-mode-hook
+	  (lambda ()
+	    (interactive)
+	    (linum-mode 1)
+	    (set-face-attribute 'linum nil :background (face-attribute 'fringe :background))))
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+
+(req-package hlinum
+	     :config (hlinum-activate))
+
+(req-package smart-mode-line
+	     :if window-system
+	     :config
+	     (setq sml/theme 'respectful)
+	     (add-hook 'after-init-hook 'sml/setup))
+
+(req-package sr-speedbar
+	     :bind ("C-c C-f" . sr-speedbar-toggle)
+	     :config
+	     (setq speedbar-show-unknown-files t))
+
+(req-package seethru
+	     :init
+	     (if (display-graphic-p)
+		 (seethru emacs-opacity)))
+
+(if (display-graphic-p)
+    (load-theme 'tango-dark t))
+
+(provide 'visuals)
+;;; visuals.el ends here
