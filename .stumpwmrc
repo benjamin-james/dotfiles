@@ -15,16 +15,15 @@
 (load-file "defprogram")
 (load-file "vikeys")
 
-(defvar *terminal* "urxvtc")
-
 ;;; defprogram sets the keys to be
 ;;;  s-(key) for just shelling out (command)
 ;;;  s-(uppercase key) for focusing the window named (command)
 ;;;  C-t C-(upcase key) for "run-or-pull"-ing the window named (command)
-(defprogram conkeror "conkeror" "f" '(:class "Conkeror") :rat t)
+(defprogram conkeror "conkeror" "c" '(:class "Conkeror") :rat t)
 (defprogram emacs "emacs" "e" '(:class "Emacs"))
-(defprogram firefox "firefox" "x" '(:class "Firefox"))
-(defprogram urxvt *terminal* "c" '(:class "URxvt"))
+(defprogram firefox "firefox" "f" '(:class "Firefox"))
+(defprogram urxvt "urxvtc" "z" '(:class "URxvt"))
+(defprogram xterm "xterm" "x" '(:class "xterm"))
 
 ;;; Keyboard special keys
 (global "XF86MonBrightnessUp" "increase-brightness")
