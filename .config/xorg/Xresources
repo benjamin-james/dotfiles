@@ -79,7 +79,7 @@ URxvt*borderless: true
 !URxvt.shading: 35
 URxvt*depth: 32
 
-URxvt*urgentOnBell: true
+URxvt*urgentOnBell:	true
 URxvt*scrollBar_right:	true
 URxvt*scrollstyle:	plain
 
@@ -90,10 +90,10 @@ XTerm*metaSendsEscape:	true
 XTerm*scrollKey:	true
 XTerm*background:	rgb:2E/34/36
 XTerm*foreground:	rgb:EE/EE/EC
-
 XTerm*cursorColor:	grey
 XTerm*faceName:		xft:DejaVu Sans Mono:size=9:antialias=true
 XTerm*termName:		xterm-256color
 XTerm*utf8:		1
 Xterm*borderWidth:	0
-XTerm*toolBar: off
+XTerm*toolBar:		off
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
