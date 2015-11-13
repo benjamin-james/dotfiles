@@ -92,8 +92,7 @@ fi
 
 export VISUAL="emacsclient -a ''"
 export EDITOR=$VISUAL
-GPG_TTY=$(tty)
-export GPG_TTY
+export GPG_TTY=$(tty)
 
 export spooky="1"
 [ -f "bin/spooky" ] && source bin/spooky
