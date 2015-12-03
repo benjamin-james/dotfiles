@@ -22,8 +22,9 @@
 (defprogram conkeror "conkeror" "c" '(:class "Conkeror") :rat t)
 (defprogram emacs "emacs" "e" '(:class "Emacs"))
 (defprogram firefox "firefox" "f" '(:class "Firefox"))
-(defprogram urxvt "urxvtc" "z" '(:class "URxvt"))
+(defprogram urxvt "urxvt" "z" '(:class "URxvt"))
 (defprogram xterm "xterm" "x" '(:class "xterm"))
+(defprogram mpv "mpv \"$(xclip -o)\"" "m" '(:class "mpv"))
 
 ;;; Keyboard special keys
 (global "XF86MonBrightnessUp" "increase-brightness")
