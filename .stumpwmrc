@@ -14,11 +14,7 @@
 (load-file "swap-window")
 (load-file "defprogram")
 (load-file "vikeys")
-
-(setf (group-name (current-group)) "1")
-(gnewbg "2")
-(gnewbg-float "3")
-(gnewbg "4")
+(load-file "groups")
 
 ;;; defprogram sets the keys to be
 ;;;  s-(key) for just shelling out (command)
