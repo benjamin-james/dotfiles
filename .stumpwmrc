@@ -15,6 +15,11 @@
 (load-file "defprogram")
 (load-file "vikeys")
 
+(setf (group-name (current-group)) "1")
+(gnewbg "2")
+(gnewbg-float "3")
+(gnewbg "4")
+
 ;;; defprogram sets the keys to be
 ;;;  s-(key) for just shelling out (command)
 ;;;  s-(uppercase key) for focusing the window named (command)
@@ -43,6 +48,8 @@
 (global "s-p" "prev")
 (global "s-r" "rotate-windows")
 (global "s-s" "swap-window")
+(global "s-o" "gnext")
+(global "s-i" "gprev")
 
 ;;; programs that are under the stumpwm root map
 (bind "C-d" "dmenu")
