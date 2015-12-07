@@ -1,0 +1,13 @@
+SHELL=/bin/bash
+PATH=/usr/sbin:/usr/bin:/bin
+MAILDIR=$HOME/.mail/
+DEFAULT=$MAILDIR/inbox/
+SPAM=$MAILDIR/spam/
+UNWANTED=$MAILDIR/unwanted/
+LOGFILE=$XDG_DATA_HOME/procmail/log
+LOG=""
+VERBOSE="yes"
+
+:0 c
+*
+| $HOME/bin/mail-notify.sh >> $LOGFILE

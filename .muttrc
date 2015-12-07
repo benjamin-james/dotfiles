@@ -1,17 +1,18 @@
-source "gpg2 -dq ~/.my-passwds.gpg |"
 source ~/.config/mutt/colors.linux
-set imap_user=$my_user
-set imap_pass=$my_passwd
+set mbox_type=Maildir
+set spoolfile="~/.mail/inbox/"
+set folder="~/.mail/"
+set mask=".*"
+#set mask="!^\\.[^.]"
+set record="+.Sent"
+set postponed="+.Drafts"
+mailboxes ! + `\
+for file in ~/.mail/.*; do \
+    box=$(basename "$file"); \
+    if [ ! "$box" = '.' -a ! "$box" = '..' -a ! "$box" = '.customflags' \
+       	 -a ! "$box" = '.subscriptions' ]; then \
+       echo -n "\"+$box\""; \
+    fi; \
+done`
+
 set editor="emacsclient -a ''"
-set pager="emacsclient -a ''"
-set folder=imaps://$my_server
-set spoolfile=+INBOX
-mailboxes +INBOX +sent +drafts
-set header_cache=~/.cache/mutt
-set message_cachedir=~/.cache/mutt
-unset imap_passive
-set imap_keepalive=300
-set mail_check=120
-set record=+sent
-set smtp_url="smtp://$my_user:$my_passwd@$my_server:587"
-set ssl_starttls=yes
