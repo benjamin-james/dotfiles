@@ -27,8 +27,8 @@ header_text_scrolling = yes
 ignore_leading_the = yes
 
 #visualization
-visualizer_fifo_path = "/tmp/mpd.fifo"
-visualizer_output_name = "my_fifo"
+visualizer_fifo_path = "/home/ben/.local/share/mpd/mpd.fifo"
+visualizer_output_name = "FIFO"
 visualizer_sync_interval = "30"
 visualizer_in_stereo = "yes"
 visualizer_type = "spectrum"

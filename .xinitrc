@@ -29,6 +29,9 @@ urxvtd &
 # Make some 'humans' to killall humans
 humans &
 
+# Start mpd
+mpd &
+
 # Start devmon
 (sleep 2 && devmon) &
 
