@@ -4,10 +4,10 @@ MAILDIR=$HOME/.mail/
 DEFAULT=$MAILDIR/inbox/
 SPAM=$MAILDIR/spam/
 UNWANTED=$MAILDIR/unwanted/
-LOGFILE=$XDG_DATA_HOME/procmail/log
+LOGFILE=$HOME/.local/share/procmail/log
 LOG=""
-VERBOSE="yes"
+VERBOSE=${VERBOSE:-yeah}
 
-:0 c
+:0c
 *
-| $HOME/bin/mail-notify.sh >> $LOGFILE
+| $HOME/bin/mail-notify.sh
