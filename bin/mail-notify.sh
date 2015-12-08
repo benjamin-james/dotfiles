@@ -15,8 +15,7 @@ sub=${sub//&/\.}
 
 sub=${sub:0:75}
 from=${from:0:75}
-TM=2000
 
 export XAUTHORITY=$HOME/.Xauthority
 export DISPLAY=:0.0
-exec /usr/bin/notify-send -u normal -t $TM "New mail from $from" "$sub" 2>&1 >> $HOME/notify.log
+exec /usr/bin/notify-send -u normal "New mail from $from" "$sub"
