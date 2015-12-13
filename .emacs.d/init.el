@@ -17,8 +17,11 @@
     (require 'package)
     (add-to-list 'load-path
 		 "~/.emacs.d/elisp")
-    (add-to-list 'package-archives
-		 '("melpa" . "https://melpa.org/packages/"))
+    (setq package-archives
+	  '(("gnu" . "https://elpa.gnu.org/packages/")
+	    ;("melpa-stable" . "https://stable.melpa.org/packages/")
+	    ("melpa" . "https://melpa.org/packages/")
+	    ("org" . "http://orgmode.org/elpa/")))
     (package-initialize)
     (setq package-enable-at-startup nil)
     (require 'cl)

@@ -14,7 +14,7 @@
 	     :config
 	     (add-hook 'after-init-hook #'global-flycheck-mode))
 
-(req-package flycheck-color-mode-line-cookie
+(req-package flycheck-color-mode-line
 	     :require flycheck
 	     :config
 	     (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
