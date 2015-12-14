@@ -58,6 +58,49 @@ If you want to unset this live (in an X session), type
 setxkbmap -layout us
 #+END_SRC
 into a terminal.
+
+* Mail
+
+Mail is done through a fetchmail/procmail/msmtp process so reading is all done through mail.
+Fetchmail is called by cron every couple of minutes.
+
+** fetchmail
+
+Here's a sample =.fetchmailrc= skeleton:
+
+#+BEGIN_SRC
+set logfile @HOME@/.local/share/fetchmail.log
+set no bouncemail
+
+poll @EMAIL_SERVER@ with proto POP3 port 995 dns auth password 
+user "@EMAIL@" pass "@PASSWORD@" is @USERNAME@
+ssl 
+sslproto TLS1
+mda "/usr/bin/procmail -f %F -d %T"
+#+END_SRC
+
+** msmtp
+
+And a sample =.msmtprc= skeleton:
+
+#+BEGIN_SRC
+# Set default values for the following accounts
+defaults
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile .local/share/msmtp.log
+
+account primary
+host @EMAIL_SERVER@
+from @EMAIL@
+tls_starttls on
+port 587
+auth on
+user @EMAIL@
+password "@PASSWORD@"
+account default : primary
+#+END_SRC
+
 * Dependencies
 Since I am listing these dependencies, you have to externally download them, or you could remove their parts in the files provided.
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
@@ -75,6 +118,7 @@ Since I am listing these dependencies, you have to externally download them, or 
 | feh            | setting background, image viewer    | X config                       | [[file:.xinitrc::feh][.xinitrc]]                          |
 | [[https://github.com/benjamin-james/humans][humans]]         | So you can killall humans           | X config                       | [[file:.xinitrc::humans][.xinitrc]]                          |
 | libclang       | backend for company-mode            | Emacs company.el               | [[file:.emacs.d/init.el::company][init.el]]                           |
+| MPD            | video player                        | StumpWM config                 | [[file:.stumpwmrc::mpv][.stumpwmrc]]                        |
 | NetworkManager | network manager & applet            | X config                       | [[file:.xinitrc::nm-applet][.xinitrc]]                          |
 | sbcl           | Common Lisp implementation          | StumpWM (X config), SLIME      | [[file:.xinitrc::sbcl][.xinitrc]]                          |
 | scrot          | screenshot command                  | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::scrot][commands.lisp]]                     |
