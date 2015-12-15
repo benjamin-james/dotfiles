@@ -6,8 +6,22 @@
 ;;; Code:
 
 
+(setq python-indent-offset 8)
 (add-to-list 'slime-init-list 'slime-fancy)
 (add-to-list 'slime-init-list 'slime-asdf)
+
+(req-package jedi-core)
+
+(req-package company-jedi
+  :config
+  (add-to-list 'company-backends '(company-jedi company-files)))
+
+;;; Replace perl-mode with cperl-mode
+(mapc
+ (lambda (pair)
+   (if (eq (cdr pair) 'perl-mode)
+       (setcdr pair 'cperl-mode)))
+ (append auto-mode-alist interpreter-mode-alist))
 
 (req-package slime
 	     :config

@@ -42,6 +42,10 @@
 	     (if (display-graphic-p)
 		 (seethru emacs-opacity)))
 
+(req-package unicode-fonts
+  :init
+  (unicode-fonts-setup))
+
 (if (display-graphic-p)
     (load-theme 'tango-dark t))
 

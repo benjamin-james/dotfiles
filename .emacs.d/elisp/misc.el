@@ -51,15 +51,9 @@
 	     :init
 	     (bash-completion-setup))
 
-(req-package projectile
-	     :config
-	     (setq projectile-enable-caching t)
-	     (setq projectile-indexing-method 'alien)
-	     :init
-	     (projectile-global-mode))
-
-(req-package projectile-speedbar
-	     :require projectile)
+(req-package undo-tree
+             :init
+             (global-undo-tree-mode))
 
 (req-package multi-term
 	     :bind (("M-t" . multi-term)
