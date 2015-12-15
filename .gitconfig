@@ -3,8 +3,6 @@
 	email = bjames@airmail.cc
 [color]
 	ui = true
-[github]
-	user = benjamin-james
 [push]
 	default = matching
 [core]
