@@ -28,6 +28,15 @@ function fawk {
 function gc() {
     git commit -m "$*"
 }
+
+function make() {
+	if [ "$1" = "love" ]; then
+		echo "Segmentation fault (core dumped)" >&2
+	else
+		$(which make) $@
+	fi
+}
+
 alias enterprise="play -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +14"
 alias soundsofhome="find ~ -type f -exec cat '{}' \; | play -r 44100 -b 16 -c 1 -e signed-integer -t raw - lowpass 4k flanger 0 7 reverb 100"
 alias grep='grep --color=auto'
