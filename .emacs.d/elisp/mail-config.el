@@ -15,5 +15,13 @@
 ;;mutt settings
 (setq auto-mode-alist (append '(("/tmp/mutt.*" . mail-mode)) auto-mode-alist))
 
+(defun my-mail-mode-hook ()
+  "This is my hook for mail mode."
+  (auto-fill-mode 1)
+  (abbrev-mode 1)
+  (local-set-key "\C-Xk" 'server-edit))
+
+(add-hook 'mail-mode-hook 'my-mail-mode-hook)
+
 (provide 'mail-config)
 ;;; mail-config.el ends here
