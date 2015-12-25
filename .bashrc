@@ -25,10 +25,6 @@ function fawk {
     cmd="${first}\$${1}${last}"
     eval $cmd
 }
-function gc() {
-    git commit -m "$*"
-}
-
 function make() {
 	if [ "$1" = "love" ]; then
 		echo "Segmentation fault (core dumped)" >&2
@@ -36,7 +32,11 @@ function make() {
 		$(which make) $@
 	fi
 }
+function gc() {
+    git commit -m "$*"
+}
 
+alias ncmpcpp="ncmpcpp -c ~/.config/ncmpcpp/config"
 alias enterprise="play -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +14"
 alias soundsofhome="find ~ -type f -exec cat '{}' \; | play -r 44100 -b 16 -c 1 -e signed-integer -t raw - lowpass 4k flanger 0 7 reverb 100"
 alias grep='grep --color=auto'
@@ -101,7 +101,8 @@ fi
 
 export VISUAL="emacsclient -a ''"
 export EDITOR=$VISUAL
-export GPG_TTY=$(tty)
+GPG_TTY=$(tty)
+export GPG_TTY
 
 export spooky="1"
 [ -f "bin/spooky" ] && source bin/spooky
