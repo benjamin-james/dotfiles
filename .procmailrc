@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 PATH=/usr/sbin:/usr/bin:/bin
 MAILDIR=$HOME/.mail/
-DEFAULT=$MAILDIR/inbox/
+DEFAULT=$MAILDIR/default/
 SPAM=$MAILDIR/spam/
 UNWANTED=$MAILDIR/unwanted/
 LOGFILE=$HOME/.local/share/procmail/log
@@ -11,3 +11,34 @@ VERBOSE=${VERBOSE:-yeah}
 :0c
 *
 | $HOME/bin/mail-notify.sh
+
+:0
+* ^From:.*localhost
+$MAILDIR/system/
+
+:0
+* ^(From|Cc|To).*utulsa.edu
+$MAILDIR/school/
+
+:0
+* ^List-Id:.*emacs-devel.gnu.org
+$MAILDIR/emacs-devel/
+
+:0
+* ^List-Id:.*stumpwm-devel.nongnu.org
+$MAILDIR/stumpwm-devel/
+
+:0
+* ^List-Id:.*lists.gentoo.org
+$MAILDIR/gentoo-announce/
+
+:0
+* ^(From|Cc|To).*twitter.com
+$MAILDIR/twitter/
+
+
+##################################
+# Default
+:0
+* .*
+$MAILDIR/default/

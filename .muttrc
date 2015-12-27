@@ -1,24 +1,48 @@
-source ~/.config/mutt/colors.linux
-set mbox_type=Maildir
-set spoolfile="~/.mail/inbox/"
-set folder="~/.mail/"
-set mask=".*"
-#set mask="!^\\.[^.]"
-set record="+.Sent"
-set postponed="+.Drafts"
-mailboxes ! + `\
-for file in ~/.mail/.*; do \
-    box=$(basename "$file"); \
-    if [ ! "$box" = '.' -a ! "$box" = '..' -a ! "$box" = '.customflags' \
-       	 -a ! "$box" = '.subscriptions' ]; then \
-       echo -n "\"+$box\""; \
-    fi; \
-done`
 
-set editor="emacsclient -a ''"
-source ~/.gpg.rc
-set pgp_use_gpg_agent = yes
-set pgp_sign_as = 544FC27B
-set pgp_timeout = 3600
-set crypt_autosign = yes
-set crypt_replyencrypt = yes
+set realname = "Benjamin James"
+set spoolfile = ~/.mail/default
+set folder = ~/.mail/
+set mbox_type = "Maildir"
+set mbox = ~/.mail
+set mask = ".*"
+#set mask="!^\\.[^.]"
+set record = "~/.mail/sent"
+set postponed = "~/.mail/drafts"
+
+
+set visual = "mutt %s"
+set ispell = ispell-aspell
+set charset = "utf-8"
+set send_charset = "utf-8:iso-8859-1"
+set indent_str = "> "
+set quote_regexp      = "^( {0,4}-?[>|:%]| {0,4}[a-z0-9]+[>|]+)+"
+set reply_regexp      = "^((re|RE|SV|Re|r e|aw) ?:[ \t]*)*"
+set simple_search     = "~f %s | ~t %s | ~C %s | ~s %s"           # default pattern (Fr|To|Cc|Su)
+
+# Editor/pager
+set editor = "emacsclient -a ''"
+#set pager = "emacsclient -a ''"
+
+folder-hook . set sort=threads
+folder-hook . set sort_aux=date-sent
+folder-hook . "set from=bjames@airmail.cc"
+
+folder-hook "default"		set sort=date
+folder-hook "school"		"set from=benjamin-james@utulsa.edu"
+folder-hook "school"		set sort=date
+
+mailboxes =default/
+mailboxes =school/
+mailboxes =emacs-devel/
+mailboxes =gentoo-announce/
+mailboxes =stumpwm-devel/
+mailboxes =twitter/
+mailboxes =system/
+mailboxes =sent/
+
+source ~/.config/mutt/autoviews
+source ~/.config/mutt/colors
+source ~/.config/mutt/crypto
+source ~/.config/mutt/display-format
+source ~/.config/mutt/mailheaders
+source ~/.config/mutt/url-viewing
