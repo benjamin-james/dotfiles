@@ -25,10 +25,11 @@ set editor = "emacsclient -a ''"
 
 folder-hook . set sort=threads
 folder-hook . set sort_aux=date-sent
-folder-hook . "set from=bjames@airmail.cc"
+folder-hook . "set from=bjames@openmailbox.org"
 
 folder-hook "default"		set sort=date
 folder-hook "school"		"set from=benjamin-james@utulsa.edu"
+folder-hook "airmail"		"set from=bjames@airmail.cc"
 folder-hook "school"		set sort=date
 
 mailboxes =default/
@@ -38,6 +39,7 @@ mailboxes =bug-gnu-emacs/
 mailboxes =gentoo-announce/
 mailboxes =stumpwm-devel/
 mailboxes =twitter/
+mailboxes =airmail/
 mailboxes =system/
 mailboxes =sent/
 

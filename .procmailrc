@@ -26,12 +26,16 @@ $MAILDIR/emacs-devel/
 $MAILDIR/bug-gnu-emacs/
 
 :0
-* ^List-Id:.*lists.gentoo.org
+* ^List-Id:.*gentoo-announce.gentoo.org
 $MAILDIR/gentoo-announce/
 
 :0
 * ^List-Id:.*stumpwm-devel.nongnu.org
 $MAILDIR/stumpwm-devel/
+
+:0
+* ^(From|Cc|To).bjames@airmail.cc
+$MAILDIR/airmail/
 
 :0
 * ^(From|Cc|To).*twitter.com
