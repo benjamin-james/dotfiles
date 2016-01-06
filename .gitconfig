@@ -1,8 +1,10 @@
 [user]
 	name = Benjamin James
-	email = bjames@airmail.cc
+	email = bjames@openmailbox.org
 [color]
 	ui = true
+[github]
+	user = benjamin-james
 [push]
 	default = matching
 [core]
