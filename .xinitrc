@@ -29,6 +29,9 @@ urxvtd &
 # Make some 'humans' to killall humans
 humans &
 
+# Monitor git repositories
+git-dude $XDG_DATA_HOME/gitd &
+
 # Start mpd
 mpd &
 
@@ -37,9 +40,6 @@ mpd &
 
 # Start NetworkManager applet
 (sleep 2 && nm-applet --sm-disable) &
-
-# Start blueman applet
-(sleep 2 && blueman-applet) &
 
 # Start StumpWM
 exec sbcl --load $XDG_CONFIG_HOME/stumpwm/start-stump.lisp >> $xlog 2>&1
