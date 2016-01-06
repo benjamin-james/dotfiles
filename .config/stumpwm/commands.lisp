@@ -1,4 +1,9 @@
 (in-package :stumpwm)
+
+(defcommand mpv () ()
+	    "Run mpv with the clipboard argument"
+	    (run-shell-command "xclip -o | xargs mpv"))
+
 (defcommand increase-volume () ()
 	    "Increase the volume"
 	    (run-shell-command "amixer sset PCM 5+ unmute"))
@@ -37,11 +42,11 @@
 
 (defcommand next-song () ()
 	    "play the next song in playlist"
-	    (run-shell-command "mpc next && notify-send \"Now Playing\" \"$(mpc current)\""))
+	    (run-shell-command "mpc next"))
 
 (defcommand prev-song () ()
 	    "play the previous song"
-	    (run-shell-command "mpc prev && notify-send \"Now Playing\" \"$(mpc current)\""))
+	    (run-shell-command "mpc prev"))
 
 (defcommand stop-song () ()
 	    "stop the song"
@@ -49,4 +54,4 @@
 
 (defcommand play-song () ()
 	    "plays/pauses the song"
-	    (run-shell-command "mpc toggle && if [[ $(mpc | grep playing) ]]; then notify-send \"Now Playing\" \"$(mpc current)\"; fi"))
+	    (run-shell-command "mpc toggle"))

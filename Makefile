@@ -7,6 +7,7 @@ FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc 
 	.config/mpd/mpd.conf .config/dunst/dunstrc .config/git/ignore .config/mutt/colors.linux \
 	.config/stumpwm/contrib $(wildcard .config/stumpwm/*.lisp) .procmailrc \
 	.config/xorg/Xmodmap .config/xorg/Xresources .config/gtkrc-2.0 .emacs.d/init.el \
+	.config/mpdcron/mpdcron.conf $(wildcard .config/mpdcron/hooks/*) .config/mpdnotify.conf
 	.ncmpcpp/config bin/spooky $(wildcard .emacs.d/elisp/*.el) $(wildcard bin/*)
 
 all: $(addprefix $(DESTDIR)/, $(FILES))
