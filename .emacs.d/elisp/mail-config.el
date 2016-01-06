@@ -12,6 +12,8 @@
 (setq gnus-secondary-select-methods nil)
 (setq gnus-message-archive-group "nnmaildir+default:outbox")
 
+(add-hook 'message-setup-hook 'mml-secure-message-sign-pgpmime)
+
 ;;mutt settings
 (setq auto-mode-alist (append '(("/tmp/mutt.*" . mail-mode)) auto-mode-alist))
 
