@@ -30,7 +30,7 @@ urxvtd &
 humans &
 
 # Monitor git repositories
-git-dude $XDG_DATA_HOME/gitd &
+[[ -d $XDG_DATA_HOME/gitd ]] && git-dude $XDG_DATA_HOME/gitd &
 
 # Start mpd
 mpd &
