@@ -1,7 +1,7 @@
-;;; c-config.el --- Summary
+;;; tags.el --- Summary
 ;;;
 ;;; Commentary:
-;;; This holds C config stuff
+;;; This holds ggtags config stuff
 ;;;
 ;;; Code:
 

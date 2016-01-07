@@ -24,12 +24,12 @@
  (append auto-mode-alist interpreter-mode-alist))
 
 (req-package slime
-	     :config
-	     ;(setq inferior-lisp-program (get-first-existing '("sbcl" "clisp")))
-	     (setq inferior-lisp-program "sbcl")
-	     (setq slime-contribs '(slime-fancy))
-	     :init
-	     (slime-setup slime-init-list))
+  :config
+					;(setq inferior-lisp-program (get-first-existing '("sbcl" "clisp")))
+  (setq inferior-lisp-program "sbcl")
+  (setq slime-contribs '(slime-fancy))
+  :init
+  (slime-setup slime-init-list))
 
 (add-hook 'prog-mode-hook
 	  (lambda ()
@@ -37,22 +37,22 @@
 	    (setq nuke-trailing-whitespace-p t)))
 
 (req-package smart-compile
-	     :bind ("<f5>" . smart-compile)
-	     :config
-	     (add-to-list 'smart-compile-alist '(c-mode . "gcc -Wall -Wextra -O2 -ggdb -o %n %f")))
+  :bind ("<f5>" . smart-compile)
+  :config
+  (add-to-list 'smart-compile-alist '(c-mode . "gcc -Wall -Wextra -O2 -ggdb -o %n %f")))
 
 (req-package magit
-	     :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status))
 
 (req-package yasnippet
-	     :config
-	     (add-hook 'term-mode-hook
-		       (lambda ()
-			 (setq yas-dont-activate t)))
-	     (define-key yas-minor-mode-map (kbd "\t") 'yas-expand)
-	     ;(define-key yas-minor-mode-map (kbd "<TAB>") 'yas-expand)
-	     :init
-	     (yas-global-mode 1))
+  :config
+  (add-hook 'term-mode-hook
+	    (lambda ()
+	      (setq yas-dont-activate t)))
+  (define-key yas-minor-mode-map (kbd "\t") 'yas-expand)
+					;(define-key yas-minor-mode-map (kbd "<TAB>") 'yas-expand)
+  :init
+  (yas-global-mode 1))
 
 (add-hook 'gud-mode-hook
 	  '(lambda ()

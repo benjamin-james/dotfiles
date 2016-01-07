@@ -32,9 +32,9 @@
   (load user-init-file))
 
 (req-package server
-	     :if window-system
-	     :init
-	     (add-hook 'after-init-hook 'server-start t))
+  :if window-system
+  :init
+  (add-hook 'after-init-hook 'server-start t))
 
 ;; Storing all files under this directory instead of making copies inplace
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
@@ -48,23 +48,27 @@
 (setq mode-require-final-newline t)
 
 (req-package bash-completion
-	     :init
-	     (bash-completion-setup))
+  :init
+  (bash-completion-setup))
 
 (req-package undo-tree
-             :init
-             (global-undo-tree-mode))
+  :init
+  (global-undo-tree-mode))
 
 (req-package multi-term
-	     :bind (("M-t" . multi-term)
-		    ("M-n" . multi-term-next)
-		    ("M-p" . multi-term-prev)
-		    ("C-x M-t" . multi-term-dedicated-open)
-		    ("C-x M-h" . multi-term-dedicated-toggle)
-		    ("C-x M-s" . multi-term-dedicated-select)
-		    ("C-x M-c" . multi-term-dedicated-close))
-	     :config
-	     (setq multi-term-program "/bin/bash"))
+  :bind (("M-t" . multi-term)
+	 ("M-n" . multi-term-next)
+	 ("M-p" . multi-term-prev)
+	 ("C-x M-t" . multi-term-dedicated-open)
+	 ("C-x M-h" . multi-term-dedicated-toggle)
+	 ("C-x M-s" . multi-term-dedicated-select)
+	 ("C-x M-c" . multi-term-dedicated-close))
+  :config
+  (setq multi-term-program "/bin/bash"))
+
+;;; Set scrolling to not stop at the end of a page
+;;; for viewing PDFs or other documents
+(setq doc-view-continuous t)
 
 (provide 'misc)
 ;;; misc.el ends here

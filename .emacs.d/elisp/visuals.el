@@ -5,7 +5,7 @@
 ;;;
 ;;; Code:
 
-(setq emacs-opacity 100)
+(setq emacs-opacity 90)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 
@@ -24,23 +24,23 @@
 (prefer-coding-system 'utf-8)
 
 (req-package hlinum
-	     :config (hlinum-activate))
+  :config (hlinum-activate))
 
 (req-package smart-mode-line
-	     :if window-system
-	     :config
-	     (setq sml/theme 'respectful)
-	     (add-hook 'after-init-hook 'sml/setup))
+  :if window-system
+  :config
+  (setq sml/theme 'respectful)
+  (add-hook 'after-init-hook 'sml/setup))
 
 (req-package sr-speedbar
-	     :bind ("C-c C-f" . sr-speedbar-toggle)
-	     :config
-	     (setq speedbar-show-unknown-files t))
+  :bind (("C-c C-f" . sr-speedbar-toggle))
+  :config
+  (setq speedbar-show-unknown-files t))
 
 (req-package seethru
-	     :init
-	     (if (display-graphic-p)
-		 (seethru emacs-opacity)))
+  :init
+  (if (display-graphic-p)
+      (seethru emacs-opacity)))
 
 (if (display-graphic-p)
     (load-theme 'tango-dark t))

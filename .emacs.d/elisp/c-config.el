@@ -6,13 +6,14 @@
 ;;; Code:
 
 (req-package c-eldoc
-	     :config
-	     (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode))
+  :config
+  (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode))
 
 (c-add-style "ben-style"
 	     '("linux" (c-offsets-alist
 			(arglist-cont-noempty
 			 c-lineup-gcc-asm-reg
 			 c-lineup-arglist-tabs-only))))
+
 (provide 'c-config)
 ;;; c-config.el ends here
