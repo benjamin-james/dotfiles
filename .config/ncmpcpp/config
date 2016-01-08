@@ -1,4 +1,4 @@
-mpd_music_dir = "/home/ben/music/"  
+mpd_music_dir = "$HOME/music/"  
 mpd_connection_timeout = "5"  
 mpd_crossfade_time = "5"
 user_interface = "alternative"
@@ -29,7 +29,7 @@ selected_item_prefix = "$8"
 selected_item_suffix = "$9"
 
 #visualization
-visualizer_fifo_path = "/home/ben/.local/share/mpd/mpd.fifo"
+visualizer_fifo_path = "$XDG_DATA_HOME/mpd/mpd.fifo"
 visualizer_output_name = "FIFO"
 visualizer_sync_interval = "30"
 visualizer_in_stereo = "yes"
