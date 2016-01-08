@@ -61,7 +61,7 @@
 (set-focus-color "grey72")
 (set-unfocus-color "grey30")
 
-(setf *startup-message* nil)
+(setf *startup-message* "May the source be with you")
 
 (setf *maxsize-border-width* 3)
 (setf *normal-border-width* 3)
