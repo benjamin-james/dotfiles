@@ -35,11 +35,11 @@ humans &
 # Start mpd
 mpd &
 
+# Start mpdcron
+mpdcron &
+
 # Start devmon
 (sleep 2 && devmon) &
-
-# Start NetworkManager applet
-(sleep 2 && nm-applet --sm-disable) &
 
 # Start StumpWM
 exec sbcl --load $XDG_CONFIG_HOME/stumpwm/start-stump.lisp >> $xlog 2>&1
