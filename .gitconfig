@@ -9,3 +9,5 @@
 	default = matching
 [core]
 	excludesfile = ~/.config/git/ignore
+[dude]
+	icon = /home/ben/pictures/pepper.png

@@ -18,4 +18,4 @@ from=${from:0:75}
 
 export XAUTHORITY=$HOME/.Xauthority
 export DISPLAY=:0.0
-exec /usr/bin/notify-send -u normal "New mail from $from" "$sub"
+exec /usr/bin/notify-send -u normal "New mail from $from" "$sub" -i mail-unread
