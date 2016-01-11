@@ -1,10 +1,12 @@
 # gets the "active" tty
 declare -rx active=$(</sys/class/tty/tty0/active)
 
+[[ -d $HOME/go ]] && export GOPATH=$HOME/go
 [[ -r $HOME/.bashrc ]] && source "$HOME"/.bashrc
 [[ -d /sbin ]] && PATH=/sbin:$PATH
 [[ -d /usr/sbin ]] && PATH=/usr/sbin:$PATH
 [[ -d $HOME/bin ]] && PATH=$HOME/bin:$PATH
+[[ -d $GOPATH/bin ]] && PATH=$GOPATH/bin:$PATH
 [[ -r $HOME/.profile ]] && source "$HOME"/.profile
 
 export XDG_CACHE_HOME=$HOME/.cache \
