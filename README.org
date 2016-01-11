@@ -15,7 +15,6 @@ Here are the programs that use the config files here:
 | [[https://git-scm.com][git]]          | [[file:.gitconfig][.gitconfig]]                    | version control             |
 | [[https://gnu.org/software/emacs][GNU Emacs]]    | [[file:.emacs.d/init.el][init.el]]                       | text editor                 |
 | [[https://gnu.org/software/screen][GNU Screen]]   | [[file:.screenrc][.screenrc]]                     | terminal multiplexer        |
-| [[http://gtk.org][GTK]]          | [[file:.config/gtkrc-2.0][gtkrc-2.0]]                     | GUI toolkit, themes         |
 | [[http://www.mutt.org][mutt]]         | [[file:.muttrc][.muttrc]]                       | email client                |
 | [[https://github.com/arybczak][ncmpcpp]]      | [[file:.ncmpcpp/config][config]]                        | MPD client                  |
 | [[http://sbcl.org][SBCL]]         | [[file:.sbclrc][.sbclrc]]                       | Common Lisp interpreter     |
@@ -107,7 +106,6 @@ Since I am listing these dependencies, you have to externally download them, or 
 | Package name   | Description                         | Dependency for                 | In file                           |
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
 | ALSA           | Volume control                      | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::amixer][commands.lisp]]                     |
-| blueman        | Bluetooth applet                    | X config                       | [[file:.xinitrc::blueman][.xinitrc]]                          |
 | compton        | X compositor (transparency)         | X config                       | [[file:.xinitrc::compton][.xinitrc]]                          |
 | conkeror       | Web browser                         | StumpWM config                 | [[file:.stumpwmrc::conkeror][.stumpwmrc]]                        |
 | cmake          | build system                        | building irony-mode (Emacs)    | [[file:.emacs.d/init.el::irony][init.el]]                           |
@@ -116,9 +114,11 @@ Since I am listing these dependencies, you have to externally download them, or 
 | dmenu          | autocompleting application launcher | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::dmenu][commands.lisp]]                     |
 | dunst          | desktop notification daemon         | X config                       | [[file:.xinitrc::dunst][.xinitrc]]                          |
 | feh            | setting background, image viewer    | X config                       | [[file:.xinitrc::feh][.xinitrc]]                          |
+| git-dude       | git notifications                   | X config                       | [[file:.xinitrc::git-dude][.xinitrc]]                          |
 | [[https://github.com/benjamin-james/humans][humans]]         | So you can killall humans           | X config                       | [[file:.xinitrc::humans][.xinitrc]]                          |
 | libclang       | backend for company-mode            | Emacs company.el               | [[file:.emacs.d/init.el::company][init.el]]                           |
 | MPD            | video player                        | StumpWM config                 | [[file:.stumpwmrc::mpv][.stumpwmrc]]                        |
+| mpdcron        | mpd hook manager                    | X config                       | [[file:.xinitrc::mpdcron][.xinitrc]]                          |
 | NetworkManager | network manager & applet            | X config                       | [[file:.xinitrc::nm-applet][.xinitrc]]                          |
 | sbcl           | Common Lisp implementation          | StumpWM (X config), SLIME      | [[file:.xinitrc::sbcl][.xinitrc]]                          |
 | scrot          | screenshot command                  | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::scrot][commands.lisp]]                     |
@@ -127,3 +127,28 @@ Since I am listing these dependencies, you have to externally download them, or 
 | xmodmap        | setting keyboard layout             | X config (Keyboard mappings)   | [[file:.xinitrc::xmodmap][.xinitrc]]                          |
 | xsetroot       | setting mouse cursor                | X config                       | [[file:.xinitrc::xsetroot][.xinitrc]]                          |
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
+
+* TODO / Wishlist
+
+** GNU Stow
+with dependency info for each package
+
+** install script
+
+*** ./configure script?
+
+*** flags to enable different support
+like --enable-emacs-support
+
+i.e. wrappers in .bashrc.in to set EDITOR to emacsclient if emacs support is enabled
+
+*** m4 substitution for certain files that have passwords
+~/.msmtprc.in -> ~/.msmtprc
+~/.fetchmailrc.in -> ~/.fetchmailrc
+
+*** prompt like adduser
+
+** other configs
+*** portage config
+
+*** linux kernel config
