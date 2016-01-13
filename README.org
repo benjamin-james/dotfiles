@@ -152,3 +152,8 @@ i.e. wrappers in .bashrc.in to set EDITOR to emacsclient if emacs support is ena
 *** portage config
 
 *** linux kernel config
+
+** $PS1
+
+*** git status
+*** tty name
