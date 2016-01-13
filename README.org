@@ -153,6 +153,11 @@ i.e. wrappers in .bashrc.in to set EDITOR to emacsclient if emacs support is ena
 
 *** linux kernel config
 
+** transparency
+
+*** toggle-able transparency
+
+*** temporarily make window transparent when moving it
 ** $PS1
 
 *** git status
