@@ -12,6 +12,11 @@
 
 (req-package jedi-core)
 
+(req-package geiser
+  :bind ("C-x C-e" . geiser-eval-last-sexp)
+  :config
+  (add-to-list 'scheme-mode-hook 'geiser-mode))
+
 (req-package company-jedi
   :config
   (add-to-list 'company-backends '(company-jedi company-files)))
