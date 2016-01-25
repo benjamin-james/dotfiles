@@ -5,6 +5,8 @@
 ;;;
 ;;; Code:
 
+(defvar helm-alive-p nil)
+
 (req-package helm
   :bind (("C-c h" . helm-command-prefix)
 	 ("C-x C-f" . helm-find-files)
