@@ -128,37 +128,12 @@ Since I am listing these dependencies, you have to externally download them, or 
 | xsetroot       | setting mouse cursor                | X config                       | [[file:.xinitrc::xsetroot][.xinitrc]]                          |
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
 
-* TODO / Wishlist
-
-** GNU Stow
-with dependency info for each package
-
-** install script
-
-*** ./configure script?
-
-*** flags to enable different support
-like --enable-emacs-support
-
-i.e. wrappers in .bashrc.in to set EDITOR to emacsclient if emacs support is enabled
-
-*** m4 substitution for certain files that have passwords
-~/.msmtprc.in -> ~/.msmtprc
-~/.fetchmailrc.in -> ~/.fetchmailrc
-
-*** prompt like adduser
-
-** other configs
-*** portage config
-
-*** linux kernel config
-
-** transparency
-
-*** toggle-able transparency
-
-*** temporarily make window transparent when moving it
-** $PS1
-
-*** git status
-*** tty name
+* Crontab
+My crontab is
+#+BEGIN_SRC bash
+DISPLAY=:0.0
+XAUTHORITY=/home/ben/.Xauthority
+*/3 * * * * /usr/bin/fetchmail
+* * * * * /home/ben/bin/fortune-teller.sh
+* * * * * /home/ben/bin/wallpaper.sh
+#+END_SRC
