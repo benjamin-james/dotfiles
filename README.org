@@ -139,4 +139,4 @@ XAUTHORITY=/home/ben/.Xauthority
 #+END_SRC
 * Screenshot
 
-[[[[https://raw.githubusercontent.com/benjamin-james/dotfiles/master/scrot.png]]]]
+[[https://raw.githubusercontent.com/benjamin-james/dotfiles/master/scrot.png]]
