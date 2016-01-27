@@ -5,6 +5,13 @@
 ;;;
 ;;; Code:
 
+;; View the current buffer in EWW (Now I can read HTML!)
+(defun eww-view-file ()
+  (if (buffer-file-name)
+      (eww (concat "file://" (buffer-file-name)))))
+
+(global-set-key (kbd "C-x v f") 'eww-view-file)
+
 ;; Destroys those pesky ^M characters
 (defun dos2unix (buffer)
   "Destroy all ^M characters in a buffer"
