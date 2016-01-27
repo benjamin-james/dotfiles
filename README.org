@@ -119,7 +119,7 @@ Since I am listing these dependencies, you have to externally download them, or 
 | libclang       | backend for company-mode            | Emacs company.el               | [[file:.emacs.d/init.el::company][init.el]]                           |
 | MPD            | video player                        | StumpWM config                 | [[file:.stumpwmrc::mpv][.stumpwmrc]]                        |
 | mpdcron        | mpd hook manager                    | X config                       | [[file:.xinitrc::mpdcron][.xinitrc]]                          |
-| NetworkManager | network manager & applet            | X config                       | [[file:.xinitrc::nm-applet][.xinitrc]]                          |
+| NetworkManager | network manager                     | X config                       | [[file:.xinitrc::nm-applet][.xinitrc]]                          |
 | sbcl           | Common Lisp implementation          | StumpWM (X config), SLIME      | [[file:.xinitrc::sbcl][.xinitrc]]                          |
 | scrot          | screenshot command                  | StumpWM config                 | [[file:.config/stumpwm/commands.lisp::scrot][commands.lisp]]                     |
 | URxvt          | terminal emulator                   | StumpWM config, X config       | [[file:.stumpwmrc::urxvt][.stumpwmrc]], [[file:.xinitrc::urxvt][.xinitrc]]              |
@@ -137,3 +137,6 @@ XAUTHORITY=/home/ben/.Xauthority
 * * * * * /home/ben/bin/fortune-teller.sh
 * * * * * /home/ben/bin/wallpaper.sh
 #+END_SRC
+* Screenshot
+
+[[[[https://raw.githubusercontent.com/benjamin-james/dotfiles/master/scrot.png]]]]
