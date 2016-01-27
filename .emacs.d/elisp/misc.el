@@ -5,8 +5,8 @@
 ;;;
 ;;; Code:
 
-;; View the current buffer in EWW (Now I can read HTML!)
 (defun eww-view-file ()
+  "View the current buffer in EWW, so you can now read HTML."
   (if (buffer-file-name)
       (eww (concat "file://" (buffer-file-name)))))
 
