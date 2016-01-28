@@ -192,4 +192,5 @@ export GTAGSLIBPATH="$HOME/.gtags"
 export MPDCRON_DIR="/home/ben/.config/mpdcron"
 
 export spooky="1"
+[ -f "$HOME/.profile" ] && source $HOME/.profile
 [ -f "bin/spooky" ] && source bin/spooky
