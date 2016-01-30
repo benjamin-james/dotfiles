@@ -1,6 +1,8 @@
 * dotfiles
 My personal configurations
 
+[[https://raw.githubusercontent.com/benjamin-james/dotfiles/master/scrot.png]]
+
 This is pretty much every configuration file for me.
 
 Here are the programs that use the config files here:
@@ -137,6 +139,3 @@ XAUTHORITY=/home/ben/.Xauthority
 * * * * * /home/ben/bin/fortune-teller.sh
 * * * * * /home/ben/bin/wallpaper.sh
 #+END_SRC
-* Screenshot
-
-[[https://raw.githubusercontent.com/benjamin-james/dotfiles/master/scrot.png]]
