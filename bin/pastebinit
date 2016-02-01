@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# paste.pl
+# pastebinit
 # PasteBin client.
 # Note: Requires LWP (a.k.a. dev-perl/libwww-perl on Gentoo)
 use strict;
@@ -10,7 +10,7 @@ use Data::Dumper;
 use LWP;
 use Term::ANSIColor;
 my $api_key = "3f1dde3be4fa78145905f4edf7270c67"; # Make sure to use your own API key
-my $server_url = "http://pastebin.com/api";
+my $server_url = "https://pastebin.com/api";
 my $lwp = LWP::UserAgent->new;
 
 # Prints the usage message.
@@ -29,16 +29,6 @@ sub usage {
 	print "    expire_date     Expiration date (N = Never | 10M = 10 Minutes | 1H = 1 Hour | 1D = 1 Day | 1M = 1 Month)\n";
 
 	print "\nFor more information about the format string check out PasteBin's documentation: http://pastebin.com/api#5\n";
-}
-
-# Pretty-print parameters.
-sub pretty_print_params {
-	my ($params) = @_;
-
-	# Loop through the hash.
-	#for () {
-	#	print "$name: $value\n";
-	#}
 }
 
 # Logs in to PasteBin.
@@ -88,7 +78,6 @@ sub paste {
 	}
 
 	print "Pasting...\n";
-	pretty_print_params($params);
 
 	# Populate the URL params array.
 	foreach my $key (keys %{ $params }) {
@@ -116,8 +105,10 @@ sub main {
 		# Got some arguments.
 		if ($ARGV[0] eq "login") {
 			login();
-		} elsif ($ARGV[0] eq "help") {
+			exit(0);
+		} elsif ($ARGV[0] eq "help" or "--help" or "-h") {
 			usage();
+			exit(0);
 		} else {
 			for (my $i = 0; $i < @ARGV; $i++) {
 				my @arg = split("=", $ARGV[$i], 2);
@@ -130,6 +121,7 @@ sub main {
 	my $file_contents = <STDIN>;
 	if ($file_contents eq "\n") {
 		usage();
+		exit(0);
 	}
 
 	# Paste it.
