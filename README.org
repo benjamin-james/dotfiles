@@ -60,6 +60,15 @@ setxkbmap -layout us
 #+END_SRC
 into a terminal.
 
+* Crontab
+My crontab is
+#+BEGIN_SRC bash
+DISPLAY=:0.0
+XAUTHORITY=/home/ben/.Xauthority
+*/3 * * * * /usr/bin/fetchmail
+* * * * * /home/ben/bin/fortune-teller.sh
+* * * * * /home/ben/bin/wallpaper.sh
+#+END_SRC
 * Mail
 
 Mail is done through a fetchmail/procmail/msmtp process so reading is all done through mail.
@@ -101,7 +110,6 @@ user @EMAIL@
 password "@PASSWORD@"
 account default : primary
 #+END_SRC
-
 * Dependencies
 Since I am listing these dependencies, you have to externally download them, or you could remove their parts in the files provided.
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
@@ -130,12 +138,3 @@ Since I am listing these dependencies, you have to externally download them, or 
 | xsetroot       | setting mouse cursor                | X config                       | [[file:.xinitrc::xsetroot][.xinitrc]]                          |
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
 
-* Crontab
-My crontab is
-#+BEGIN_SRC bash
-DISPLAY=:0.0
-XAUTHORITY=/home/ben/.Xauthority
-*/3 * * * * /usr/bin/fetchmail
-* * * * * /home/ben/bin/fortune-teller.sh
-* * * * * /home/ben/bin/wallpaper.sh
-#+END_SRC
