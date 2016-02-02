@@ -144,3 +144,5 @@ Since I am listing these dependencies, you have to externally download them, or 
 1. tabbing
 2. GNU screen support
 3. font resizing
+** documentation of everything
+
