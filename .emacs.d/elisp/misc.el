@@ -59,6 +59,8 @@
   :init
   (bash-completion-setup))
 
+(req-package twittering-mode)
+
 (req-package undo-tree
   :init
   (global-undo-tree-mode))
