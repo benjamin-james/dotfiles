@@ -1,5 +1,5 @@
 * dotfiles
-My personal configurations
+Emacs, StumpWM, bashrc, misc scripts, mail, and basically the functionality of a DE
 
 [[https://raw.githubusercontent.com/benjamin-james/dotfiles/master/scrot.png]]
 
@@ -137,4 +137,10 @@ Since I am listing these dependencies, you have to externally download them, or 
 | xmodmap        | setting keyboard layout             | X config (Keyboard mappings)   | [[file:.xinitrc::xmodmap][.xinitrc]]                          |
 | xsetroot       | setting mouse cursor                | X config                       | [[file:.xinitrc::xsetroot][.xinitrc]]                          |
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
-
+* Wishlist
+** expand emacs config ALOT
+1. make emacs look prettier
+** urxvt scripts
+1. tabbing
+2. GNU screen support
+3. font resizing
