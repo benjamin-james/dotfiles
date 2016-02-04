@@ -23,6 +23,14 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
+(req-package org-bullets
+  :ensure t
+  :init
+  (defvar org-bullets-bullet-list
+	'("◉" "◎" "⚫" "○" "►" "◇"))
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
 (req-package hlinum
   :config (hlinum-activate))
 
