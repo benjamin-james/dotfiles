@@ -8,7 +8,7 @@ FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc 
 	.config/stumpwm/contrib $(wildcard .config/stumpwm/*.lisp) .procmailrc .guile \
 	.config/xorg/Xmodmap .config/xorg/Xresources .config/gtkrc-2.0 .emacs.d/init.el \
 	.config/mpdcron/mpdcron.conf $(wildcard .config/mpdcron/hooks/*) .config/mpdnotify.conf
-	.ncmpcpp/config bin/spooky $(wildcard .emacs.d/elisp/*.el) $(wildcard bin/*)
+	.ncmpcpp/config $(wildcard .emacs.d/elisp/*.el) $(wildcard bin/*)
 
 all: $(addprefix $(DESTDIR)/, $(FILES))
 	source $(DESTDIR)/.bash_profile #updates environment vairables without relogging in
