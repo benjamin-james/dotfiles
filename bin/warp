@@ -4,7 +4,7 @@
   "Calculates the warp factor
  according to the 24th century style
 where v (in terms of c) = W.F. ^ (10/3 + f(W.F.))
-where f(x) = 0 if x <= 9, and f(x) = -log10(10-x)
+where f(x) = 0 if x <= 9, and f(x) = -1/2 * log10(10-x)
 for 9 < x < 10."
   (expt num
 	(+ (/ 10 3)
