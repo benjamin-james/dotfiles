@@ -12,11 +12,12 @@ for 9 < x < 10."
 	       0
 	       (* -0.5
 		  (log10 (- 10 num)))))))
-(let f ((n (read)))
+
+(let loop ((n (read)))
   (if (eof-object? n)
       (exit)
       (begin
 	(display (warp-factor n))
 	(newline)
-	(f (read)))))
+	(loop (read)))))
 
