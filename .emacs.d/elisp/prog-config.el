@@ -13,7 +13,7 @@
 (req-package jedi-core)
 
 (req-package geiser
-  :bind ("C-x C-e" . geiser-eval-last-sexp)
+;  :bind ("C-x C-e" . geiser-eval-last-sexp)
   :config
   (add-to-list 'scheme-mode-hook 'geiser-mode))
 
