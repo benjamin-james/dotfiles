@@ -23,16 +23,20 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
+(req-package ace-window
+  :bind (("M-p" . ace-window))
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?i ?j ?k ?l)))
+
+(req-package hlinum
+  :config (hlinum-activate))
+
 (req-package org-bullets
-  :ensure t
   :init
   (defvar org-bullets-bullet-list
 	'("◉" "◎" "⚫" "○" "►" "◇"))
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-(req-package hlinum
-  :config (hlinum-activate))
 
 (req-package smart-mode-line
   :if window-system
