@@ -1,68 +1,77 @@
-! Black
-!*color0:  #2E3436
-!*color8:  #555753
-! Red
-!*color1:  #A40000
-!*color9:  #EF2929
-! Green
-!*color2:   #4E9A06
-!*color10:  #8AE234
-! Yellow
-!*color3:   #C4A000
-!*color11:  #FCE94F
-! Blue
-!*color4:   #3465A4
-!*color12:  #729FCF
-! Magneta
-!*color5:   #75507B
-!*color13:  #AD7FA8
-! Cyan
-!*color6:   #CE5C00
-!*color14:  #FCAF3E
-! White
-!*color7:   #BABDB9
-!*color15:  #EEEEEC
+#define white		#FCFAFE
+#define yellow		#E6DB74
+#define orange		#FD971F
+#define red		#F92672
+#define	magenta		#FD5FF0
+#define violet		#AE81FF
+#define blue		#66D9EF
+#define cyan		#A1EFE4
+#define green		#A6E22E
+#define gray		#474747
+
+#define darkyellow	#968B26
+#define lightyellow	#F3EA98
+#define darkorange	#A45E0A
+#define lightorange	#FEB257
+#define darkred         #A20C41
+#define lightred	#FC5C94
+#define darkmagenta     #A41F99
+#define lightmagenta    #FE87F4
+#define darkviolet      #562AA6
+#define lightviolet     #C2A1FF
+#define darkblue        #21889B
+#define lightblue	#8DE6F7
+#define darkcyan	#349B8D
+#define lightcyan       #BBF7EF
+#define darkgreen       #67930F
+#define lightgreen      #C1F161
+#define darkgray	#333333
+#define lightgray       #6B6B6B
+
+#define bg		#272822
+#define fg		#F8F8F2
 
 Xft*antialias:		true
 Xft*autohint:		true
 Xft*dpi:		92
 
-URxvt*foreground:	#EEEEEC
-URxvt*background:	[100]#2E3436
-URxvt*colorUL:		#8AE234
-URxvt*underlineColor:	#92659A
+URxvt*foreground:	fg
+URxvt*background:	bg
+URxvt*cursorColor:	fg
+URxvt*colorUL:		gray
+URxvt*underlineColor:	magenta
 
 ! black dark/light
-*color0:		#2E3436
-*color8:		#6E706B
+*color0:		gray
+*color8:		lightgray
 
 ! red dark/light
-*color1:		#CC0000
-*color9:		#EF2929
+*color1:		red
+*color9:		lightred
 
 ! green dark/light
-*color2:		#4E9A06
-*color10:		#8AE234
+*color2:		green
+*color10:		lightgreen
 
 ! yellow dark/light
-*color3:		#edd400
-*color11:		#fce94f
+*color3:		yellow
+*color11:		lightyellow
 
 ! blue dark/light
-*color4:		#3465A4
-*color12:		#729FCF
+*color4:		blue
+*color12:		lightblue
 
 ! magenta dark/light
-*color5:		#92659A
-*color13:		#C19FBE
+*color5:		magenta
+*color13:		lightmagenta
 
 ! cyan dark/light
-*color6:		#07C7CA
-*color14:		#63E9E9
+*color6:		cyan
+*color14:		lightcyan
 
 ! white dark/light
-*color7:		#D3D7CF
-*color15:		#EEEEEC
+*color7:		lightgray
+*color15:		white
 
 URxvt*termName:		rxvt-16color
 URxvt*scrollTtyOutput: false
@@ -73,8 +82,8 @@ URxvt*saveLines: 3000
 
 URxvt*secondaryWheel: true
 URxvt*cursorUnderline: false
-URxvt*font: xft:DejaVu Sans Mono:autohint=true
-!URxvt.transparent: true
+URxvt*font: xft:DejaVu Sans Mono:size=10:autohint=true
+!URxvt.transparent: false
 URxvt*borderless: true
 !URxvt.shading: 35
 URxvt*depth: 32
@@ -88,9 +97,9 @@ XTerm*charClass:	33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35
 XTerm*fullscreen:	never
 XTerm*metaSendsEscape:	true
 XTerm*scrollKey:	true
-XTerm*background:	rgb:2E/34/36
-XTerm*foreground:	rgb:EE/EE/EC
-XTerm*cursorColor:	grey
+XTerm*background:	bg
+XTerm*foreground:	fg
+XTerm*cursorColor:	fg
 XTerm*faceName:		xft:DejaVu Sans Mono:size=9:antialias=true
 XTerm*termName:		xterm-256color
 XTerm*utf8:		1
