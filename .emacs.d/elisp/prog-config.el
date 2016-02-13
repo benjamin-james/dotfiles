@@ -13,13 +13,17 @@
 (req-package jedi-core)
 
 (req-package geiser
-;  :bind ("C-x C-e" . geiser-eval-last-sexp)
+  :interpreter "guile"
   :config
   (add-to-list 'scheme-mode-hook 'geiser-mode))
 
 (req-package company-jedi
   :config
   (add-to-list 'company-backends '(company-jedi company-files)))
+
+(req-package paredit
+  :config
+  (add-to-list 'lisp-mode-hook 'paredit-mode))
 
 ;;; Replace perl-mode with cperl-mode
 (mapc
@@ -41,11 +45,6 @@
 	    (setq show-trailing-whitespace t)
 	    (setq nuke-trailing-whitespace-p t)))
 
-(req-package smart-compile
-  :bind ("<f5>" . smart-compile)
-  :config
-  (add-to-list 'smart-compile-alist '(c-mode . "gcc -Wall -Wextra -O2 -ggdb -o %n %f")))
-
 (req-package magit
   :bind ("C-x g" . magit-status))
 
@@ -61,11 +60,11 @@
 
 (add-hook 'gud-mode-hook
 	  '(lambda ()
-	     (global-set-key (kbd "<f7>") 'gud-next)
-	     (global-set-key (kbd "<f8>") 'gud-step)))
-(setq gdb-many-windows t)
-(setq gdb-show-main t)
-(global-set-key (kbd "<f6>") 'gdb)
+	     (global-set-key (kbd "<f6>-n") 'gud-next)
+	     (global-set-key (kbd "<f6>-s") 'gud-step)))
+(setq gdb-many-windows t
+      gdb-show-main t)
+(global-set-key (kbd "<f6>-g") 'gdb)
 
 (provide 'prog-config)
 ;;; prog-config.el ends here
