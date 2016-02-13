@@ -38,6 +38,10 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+(req-package pretty-mode
+  :config
+  (global-pretty-mode t))
+
 (req-package smart-mode-line
   :if window-system
   :config
