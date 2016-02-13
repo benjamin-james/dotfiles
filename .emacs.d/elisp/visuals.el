@@ -25,8 +25,9 @@
 
 (req-package ace-window
   :bind (("M-p" . ace-window))
-  :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?i ?j ?k ?l)))
+  :init
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?i ?j ?k ?l)
+    aw-dispatch-always t))
 
 (req-package hlinum
   :config (hlinum-activate))
@@ -38,9 +39,9 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-(req-package pretty-mode
+(req-package pretty-lambdada
   :config
-  (global-pretty-mode t))
+  (pretty-lambda-for-modes))
 
 (req-package smart-mode-line
   :if window-system
@@ -58,8 +59,10 @@
   (if (display-graphic-p)
       (seethru emacs-opacity)))
 
-(if (display-graphic-p)
-    (load-theme 'tango-dark t))
+(req-package monokai-theme
+  :config
+  (if (display-graphic-p)
+      (load-theme 'monokai t)))
 
 (provide 'visuals)
 ;;; visuals.el ends here
