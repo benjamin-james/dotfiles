@@ -70,7 +70,7 @@ URxvt*underlineColor:	magenta
 *color14:		lightcyan
 
 ! white dark/light
-*color7:		lightgray
+*color7:		white
 *color15:		white
 
 URxvt*termName:		rxvt-16color
