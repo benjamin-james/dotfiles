@@ -24,10 +24,11 @@
 (prefer-coding-system 'utf-8)
 
 (req-package ace-window
-  :bind (("M-p" . ace-window))
+  :config
+  (global-set-key (kbd "s-M-w") 'ace-window)
   :init
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?i ?j ?k ?l)
-    aw-dispatch-always t))
+	aw-dispatch-always t))
 
 (req-package hlinum
   :config (hlinum-activate))
