@@ -17,6 +17,9 @@ alias lsd='ls -alF | grep /$'
 #find which files take the most space
 alias diskspace='du -S | sort -n -r | less'
 
+# Open link contained in file "link" with emacs's eww
+alias eww='emacsclient -e "(eww \"`<link`\")"'
+
 #instead of "foo | awk '{ print $2 }'"
 #you can do "foo | fawk 2"
 function fawk {
