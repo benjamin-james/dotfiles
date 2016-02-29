@@ -27,7 +27,7 @@ clear control
 clear mod1
 clear mod4
 
-keycode  66 = Alt_L Meta_L
+keycode  66 = Multi_key
 keycode  37 = Super_L
 keycode 133 = Alt_L Meta_L
 keycode  64 = Control_L
