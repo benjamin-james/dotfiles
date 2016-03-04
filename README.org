@@ -138,8 +138,6 @@ Since I am listing these dependencies, you have to externally download them, or 
 | xsetroot       | setting mouse cursor                | X config                       | [[file:.xinitrc::xsetroot][.xinitrc]]                          |
 |----------------+-------------------------------------+--------------------------------+-----------------------------------|
 * Wishlist
-** expand emacs config ALOT
-1. make emacs look prettier
 ** urxvt scripts
 1. tabbing
 2. GNU screen support
