@@ -1,0 +1,63 @@
+#!/usr/bin/env perl
+
+#use warnings;
+use strict;
+use Graph::Directed;
+
+open(my $in, '<', $ARGV[0]) or die $!;
+my $times = 10;
+if ($ARGV[1]) {
+	$times = int($ARGV[1]);
+}
+my $prev = "";
+my %un, my %bi;
+my $graph = Graph::Directed->new;
+
+while (<$in>) {
+	chomp;
+	foreach my $word (split(' ')) {
+		if (exists($un{$word})) {
+			$un{$word}++;
+		} else {
+			$un{$word} = 1;
+			$graph->add_vertex($word);
+		}
+		if (not($prev eq "")) {
+			my $index = "$prev $word";
+			if (exists($bi{$index})) {
+				$bi{$index}++;
+			} else {
+				$bi{$index} = 1;
+			}
+		}
+		$prev = $word
+	}
+}
+
+while ((my $key, my $value) = each(%bi)) {
+	(my $first, my $second) = split ' ', $key;
+	my $prob = $value / $un{$first};
+	$graph->add_weighted_edge($first, $second, $prob);
+}
+
+sub get_next_word {
+	my $current = shift;
+	my $rnd = rand();
+	my @neighbors = $graph->neighbors($current);
+	my $n = "";
+	foreach $n (@neighbors) {
+		my $weight = $graph->get_edge_weight($current, $n);
+		if ($weight >= $rnd) {
+			return $n;
+		}
+		$rnd -= $weight;
+	}
+	return $n;
+}
+my $word = $graph->random_vertex;
+for (my $i = 0; $i < $times; $i++) {
+	print "$word ";
+	$word = get_next_word($word);
+}
+
+print "\n";
