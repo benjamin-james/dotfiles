@@ -28,11 +28,20 @@ Here are the programs that use the config files here:
 * Install
 Basically use the [[file:Makefile][Makefile]] (i.e. =make=)
 
-After the Makefile installs pretty much everything, you have to start up Emacs and wait a while for it to download all my packages.
+After the Makefile installs pretty much everything, you have to start up Emacs and wait a while for it to download all my packages. (See "emacs" section)
 
-Then, in Emacs, type =M-x irony-install-server= and wait for it to compile to complete the installation.
 
 Note: If you are not Benjamin James, you might want to change some things in [[file:.gitconfig][.gitconfig]].
+
+** emacs
+If you just want an Emacs config,
+instead of typing =make=, type =make emacs= to just install the Emacs files.
+Note that if you already had a =.emacs= in your home directory, it will load that first instead of loading this config.
+
+Once you start up Emacs, wait a while for it to download all my packages.
+
+Then, in Emacs, type =M-x irony-install-server= and wait for it to compile to complete the installation. 
+Note that =irony-mode= requires =llvm= and =cmake= to be installed on the system.
 
 * Keyboard
 I have remapped my keyboard in X with =xmodmap= to be similar with the [[https://en.wikipedia.org/wiki/Space-cadet_keyboard][Space-cadet keyboard]] with which Emacs was originally designed.
