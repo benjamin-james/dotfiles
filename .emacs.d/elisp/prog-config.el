@@ -6,20 +6,13 @@
 ;;; Code:
 
 
-(setq python-indent-offset tab-width)
 (add-to-list 'slime-init-list 'slime-fancy)
 (add-to-list 'slime-init-list 'slime-asdf)
-
-(req-package jedi-core)
 
 (req-package geiser
   :interpreter "guile"
   :config
   (add-to-list 'scheme-mode-hook 'geiser-mode))
-
-(req-package company-jedi
-  :config
-  (add-to-list 'company-backends '(company-jedi company-files)))
 
 (req-package paredit
   :config
@@ -59,7 +52,7 @@
 	    (lambda ()
 	      (setq yas-dont-activate t)))
   (define-key yas-minor-mode-map (kbd "\t") 'yas-expand)
-  (define-key yas-minor-mode-map (kbd "<TAB>") 'yas-expand)
+  ;(define-key yas-minor-mode-map (kbd "<TAB>") 'yas-expand)
   :init
   (yas-global-mode 1))
 
