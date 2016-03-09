@@ -6,7 +6,7 @@
 ;;; Code:
 
 
-(setq python-indent-offset 8)
+(setq python-indent-offset tab-width)
 (add-to-list 'slime-init-list 'slime-fancy)
 (add-to-list 'slime-init-list 'slime-asdf)
 
@@ -31,6 +31,11 @@
    (if (eq (cdr pair) 'perl-mode)
        (setcdr pair 'cperl-mode)))
  (append auto-mode-alist interpreter-mode-alist))
+
+(add-hook 'cperl-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "C-h m") 'cperl-perldoc)))
+(defvar cperl-indent-level tab-width)
 
 (req-package slime
   :config
