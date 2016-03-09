@@ -22,5 +22,5 @@
      (define-key python-mode-map (kbd "<f5>") 'my-python-replize)
      (define-key python-mode-map (kbd "C-h m") 'python-eldoc-at-point)))
 
-(provide 'python-config)
+(provide 'my-python-config)
 ;;; my-python-config.el ends here
