@@ -11,8 +11,8 @@ FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc 
 	.xinitrc .gnupg/gpg-agent.conf .gnupg/gpg.conf .config/compton/compton.conf \
 	.config/mpd/mpd.conf .config/dunst/dunstrc .config/git/ignore .config/mutt/colors.linux \
 	.config/stumpwm/contrib .procmailrc .guile $(STUMPWM_FILES) $(wildcard bin/*) \
-	.config/xorg/Xmodmap .config/xorg/Xresources .config/gtkrc-2.0 $(EMACS_FILES)
-	.config/mpdcron/mpdcron.conf $(wildcard .config/mpdcron/hooks/*) .config/mpdnotify.conf
+	.config/xorg/Xmodmap .config/xorg/Xresources .config/gtkrc-2.0 $(EMACS_FILES) \
+	.config/mpdcron/mpdcron.conf $(wildcard .config/mpdcron/hooks/*) .config/mpdnotify.conf \
 	.ncmpcpp/config
 
 all: $(addprefix $(DESTDIR)/, $(FILES))
