@@ -35,12 +35,17 @@ $(DESTDIR)/%: %
 	test -z $(@D) || mkdir -p $(@D)
 	$(INSTALL) $< $(@D)
 
-emacs: $(addprefix $(DESTDIR)/, $(EMACS_FILES))
-	mkdir -p $(@D)
+emacs:
+	mkdir -p $(DESTDIR)/.emacs.d/elisp
+	$(shell test -f $(DESTDIR)/.emacs && mv $(DESTDIR)/.emacs $(DESTDIR)/.emacs.copy)
+	$(shell test -f $(DESTDIR)/.emacs.d/init.el && mv $(DESTDIR)/.emacs.d/init.el $(DESTDIR)/.emacs.d/init.el.copy)
+	$(MAKE) emacs-full
+
+emacs-full: $(addprefix $(DESTDIR)/, $(EMACS_FILES))
 	$(INSTALL) $< $(@D)
 
 stumpwm: $(addprefix $(DESTDIR)/, $(STUMPWM_FILES))
 	mkdir -p $(@D)
 	$(INSTALL) $< $(@D)
 
-.PHONY: all emacs stumpwm
+.PHONY: all emacs stumpwm emacs-full
