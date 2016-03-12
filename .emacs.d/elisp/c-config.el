@@ -15,5 +15,7 @@
 			 c-lineup-gcc-asm-reg
 			 c-lineup-arglist-tabs-only))))
 
+(add-hook 'c-mode-common-hook 'hs-minor-mode)
+
 (provide 'c-config)
 ;;; c-config.el ends here

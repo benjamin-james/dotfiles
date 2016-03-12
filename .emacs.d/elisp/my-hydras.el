@@ -66,7 +66,7 @@ _SPC_ cancel    _o_nly this     _d_elete
           (setq this-command 'winner-undo)))
    ("Z" winner-redo)
    ("SPC" nil))
-(global-set-key (kbd "C-x 9") 'hydra-window/body)
+(global-set-key (kbd "s-w") 'hydra-window/body)
 
 (defhydra hydra-zoom (global-map "<f2>")
   "zoom"
