@@ -189,11 +189,9 @@ fi
 
 export VISUAL="emacsclient -a ''"
 export EDITOR=$VISUAL
-GPG_TTY=$(tty)
-export GPG_TTY
+export GPG_TTY=$(tty)
 export GTAGSLIBPATH="$HOME/.gtags"
 export MPDCRON_DIR="/home/ben/.config/mpdcron"
 
 export spooky="1"
-[ -f "$HOME/.profile" ] && source $HOME/.profile
 [ -f "bin/spooky" ] && source bin/spooky
