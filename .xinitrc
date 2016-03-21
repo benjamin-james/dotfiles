@@ -35,10 +35,11 @@ humans &
 mpd &
 
 # Start mpdcron
-mpdcron &
+[[ -z $(pgrep -xU $UID mpdcron) ]] && mpdcron -n > $XDG_DATA_HOME/mpdcron.log &
 
 # Start devmon
 (sleep 2 && devmon) &
 
 # Start StumpWM
 exec sbcl --load $XDG_CONFIG_HOME/stumpwm/start-stump.lisp >> $xlog 2>&1
+#exec stumpwm >> $xlog 2>&1
