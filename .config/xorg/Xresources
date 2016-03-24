@@ -73,7 +73,7 @@ URxvt*underlineColor:	magenta
 *color7:		white
 *color15:		white
 
-URxvt*termName:		rxvt-16color
+URxvt*termName:		rxvt-unicode-256color
 URxvt*scrollTtyOutput: false
 URxvt*scrollTtyKeypress: true
 URxvt*scrollWithBuffer: true
