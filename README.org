@@ -153,3 +153,157 @@ Since I am listing these dependencies, you have to externally download them, or 
 3. font resizing
 ** documentation of everything
 
+-*- Org -*-
+* Bindings
+** helm - C-c h
+ |-------------------------------+-------------|
+ | helm-apropos                  | C-c h a     |
+ | helm-resume                   | C-c h b     |
+ | helm-info-emacs               | C-c h e     |
+ | helm-find                     | C-c h f     |
+ | helm-info-gnus                | C-c h g     |
+ | helm-info-at-point            | C-c h i     |
+ | helm-locate                   | C-c h l     |
+ | helm-man-woman                | C-c h m     |
+ | helm-occur                    | C-c h o     |
+ | helm-regexp                   | C-c h r     |
+ | helm-top                      | C-c h t     |
+ | helm-lisp-completion-at-point | C-c h <tab> |
+ | helm-all-mark-rings           | C-h SPC     |
+ | helm-mini                     | C-x b       |
+ | helm-find-files               | C-x C-f     |
+ | helm-M-x                      | M-x         |
+ |-------------------------------+-------------|
+** gtags - (M-. M-,)
+ |----------------------------------+---------|
+ | helm-gtags-tags-in-this-function | C-c g a |
+ | helm-gtags-select                | C-j     |
+ | helm-gtags-dwim                  | M-.     |
+ | helm-gtags-pop-stack             | M-,     |
+ | helm-gtags-previous-history      | C-c <   |
+ | helm-gtags-next-history          | C-c >   |
+ |----------------------------------+---------|
+** folding - C-c @
+ |------------------+-------------|
+ | hs-toggle-hiding | C-c @ C-c   |
+ | hs-hide-block    | C-c @ C-h   |
+ | hs-hide-level    | C-c @ C-l   |
+ | hs-show-block    | C-c @ C-s   |
+ | hs-hide-all      | C-c @ C-M-h |
+ | hs-show-all      | C-c @ C-M-s |
+ |------------------+-------------|
+** narrowing - C-x n
+ |------------------+--------------------|
+ | narrow-to-defun  | C-x n d            |
+ | narrow-to-region | C-x n r or C-x n n |
+ | widen            | C-x n w            |
+ |------------------+--------------------|
+** ace-window - M-s-w
+ |----------------------------+-------------|
+ | delete window              | x           |
+ | swap (move) window         | m           |
+ | split window vertically    | v           |
+ | split window horizontally  | b           |
+ | select the previous window | n           |
+ | maximize window (select)   | i           |
+ | maximize current window    | o           |
+ | swap windows               | C-u M-p     |
+ | delete selected window     | C-u C-u M-p |
+ |----------------------------+-------------|
+** Projectile - C-c p
+ |--------------------------+-----------|
+ | List projectile bindings | C-c p C-h |
+ | Jump to file             | C-c p f   |
+ | Jump to dir              | C-c p d   |
+ | List buffers             | C-c p b   |
+ | Jump to recent           | C-c p e   |
+ | Grep in proj             | C-c p g s |
+ | Multi-occur              | C-c p o   |
+ | text refactor            | C-c p r   |
+ | Switch proj              | C-c p p   |
+ | Compile @ root           | C-c p c   |
+ | Switch between .h & .c   | C-c p a   |
+ |--------------------------+-----------|
+** motion
+ |------------------------+----------+---------|
+ | entity                 | backward | forward |
+ |------------------------+----------+---------|
+ | character              | C-b      | C-f     |
+ | word                   | M-b      | M-f     |
+ | line                   | C-p      | C-n     |
+ | go to line begin/end   | C-a      | C-e     |
+ | sentence               | M-a      | M-e     |
+ | paragraph              | M-{      | M-}     |
+ | page                   | C-x [    | C-x ]   |
+ | sexp                   | C-M-b    | C-M-f   |
+ | function               | C-M-a    | C-M-e   |
+ | go to buffer begin/end | M-<      | M->     |
+ | screen                 | M-v      | C-v     |
+ | scroll                 | C-x <    | C-x >   |
+ |------------------------+----------+---------|
+** formatting
+ |---------------------------------------+---------|
+ | indent current line                   | TAB     |
+ | indent region                         | C-M-\   |
+ | indent sexp                           | C-M-q   |
+ | indent region /arg/ columns           | C-x TAB |
+ | insert newline after point            | C-o     |
+ | move rest of line vertically down     | C-M-o   |
+ | delete blank lines around point       | C-x C-o |
+ | join line with previous (next w/ arg) | M-^     |
+ | delete all whitespace around point    | M-\     |
+ | put exactly one space at point        | M-SPC   |
+ | fill paragraph                        | M-q     |
+ | set fill column to /arg/              | C-x f   |
+ | set prefix each line starts with      | C-x .   |
+ | set face                              | M-o     |
+ |---------------------------------------+---------|
+** rectangles
+ |-------------------------------------+---------|
+ | copy rectangle to register          | C-x r r |
+ | kill rectangle                      | C-x r k |
+ | yank rectangle                      | C-x r y |
+ | open rectangle, shifting text right | C-x r o |
+ | blank out rectangle                 | C-x r c |
+ | preface each line with a string     | C-x r t |
+ |-------------------------------------+---------|
+** registers
+ |--------------------------------------+-----------|
+ | save region in register              | C-x r s   |
+ | insert register contents into buffer | C-x r i   |
+ | save value of point in register      | C-x r SPC |
+ | jump to point saved in register      | C-x r j   |
+ |--------------------------------------+-----------|
+** keyboard macros
+ |-------------------------------------+-------------------------|
+ | start defining a keyboard macro     | C-x (                   |
+ | end keyboard macro definition       | C-x )                   |
+ | execute last defined keyboard macro | C-x e                   |
+ | append to last keyboard macro       | C-u C-x (               |
+ | name last keyboard macro            | M-x name-last-kbd-macro |
+ | insert Lisp definition in buffer    | M-x insert-kbd-macro    |
+ |-------------------------------------+-------------------------|
+** abbrevs
+ |------------------------------------------+-----------|
+ | add global abbrev                        | C-x a g   |
+ | add mode-local abbrev                    | C-x a l   |
+ | add global expansion for this abbrev     | C-x a i g |
+ | add mode-local expansion for this abbrev | C-x a i l |
+ | explicitly expand abbrev                 | C-x a e   |
+ | expand previous word dynamically         | M-/       |
+ |------------------------------------------+-----------|
+** marking
+ |---------------------------+--------------|
+ | set mark here             | C-@ or C-SPC |
+ | exchange point and mark   | C-x C-x      |
+ | set mark /arg/ words away | M-@          |
+ | mark paragraph            | M-h          |
+ | mark page                 | C-x C-p      |
+ | mark sexp                 | C-M-@        |
+ | mark function             | C-M-h        |
+ | mark entire buffer        | C-x h        |
+ |---------------------------+--------------|
+
+
+
+
