@@ -173,7 +173,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | helm-mini                     | C-x b       |
  | helm-find-files               | C-x C-f     |
  | helm-M-x                      | M-x         |
- |-------------------------------+-------------|
 ** gtags - (M-. M-,)
  |----------------------------------+---------|
  | helm-gtags-tags-in-this-function | C-c g a |
@@ -182,7 +181,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | helm-gtags-pop-stack             | M-,     |
  | helm-gtags-previous-history      | C-c <   |
  | helm-gtags-next-history          | C-c >   |
- |----------------------------------+---------|
 ** folding - C-c @
  |------------------+-------------|
  | hs-toggle-hiding | C-c @ C-c   |
@@ -191,13 +189,11 @@ Since I am listing these dependencies, you have to externally download them, or 
  | hs-show-block    | C-c @ C-s   |
  | hs-hide-all      | C-c @ C-M-h |
  | hs-show-all      | C-c @ C-M-s |
- |------------------+-------------|
 ** narrowing - C-x n
  |------------------+--------------------|
  | narrow-to-defun  | C-x n d            |
  | narrow-to-region | C-x n r or C-x n n |
  | widen            | C-x n w            |
- |------------------+--------------------|
 ** ace-window - M-s-w
  |----------------------------+-------------|
  | delete window              | x           |
@@ -209,7 +205,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | maximize current window    | o           |
  | swap windows               | C-u M-p     |
  | delete selected window     | C-u C-u M-p |
- |----------------------------+-------------|
 ** Projectile - C-c p
  |--------------------------+-----------|
  | List projectile bindings | C-c p C-h |
@@ -223,7 +218,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | Switch proj              | C-c p p   |
  | Compile @ root           | C-c p c   |
  | Switch between .h & .c   | C-c p a   |
- |--------------------------+-----------|
 ** motion
  |------------------------+----------+---------|
  | entity                 | backward | forward |
@@ -240,7 +234,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | go to buffer begin/end | M-<      | M->     |
  | screen                 | M-v      | C-v     |
  | scroll                 | C-x <    | C-x >   |
- |------------------------+----------+---------|
 ** formatting
  |---------------------------------------+---------|
  | indent current line                   | TAB     |
@@ -257,7 +250,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | set fill column to /arg/              | C-x f   |
  | set prefix each line starts with      | C-x .   |
  | set face                              | M-o     |
- |---------------------------------------+---------|
 ** rectangles
  |-------------------------------------+---------|
  | copy rectangle to register          | C-x r r |
@@ -266,14 +258,12 @@ Since I am listing these dependencies, you have to externally download them, or 
  | open rectangle, shifting text right | C-x r o |
  | blank out rectangle                 | C-x r c |
  | preface each line with a string     | C-x r t |
- |-------------------------------------+---------|
 ** registers
  |--------------------------------------+-----------|
  | save region in register              | C-x r s   |
  | insert register contents into buffer | C-x r i   |
  | save value of point in register      | C-x r SPC |
  | jump to point saved in register      | C-x r j   |
- |--------------------------------------+-----------|
 ** keyboard macros
  |-------------------------------------+-------------------------|
  | start defining a keyboard macro     | C-x (                   |
@@ -282,7 +272,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | append to last keyboard macro       | C-u C-x (               |
  | name last keyboard macro            | M-x name-last-kbd-macro |
  | insert Lisp definition in buffer    | M-x insert-kbd-macro    |
- |-------------------------------------+-------------------------|
 ** abbrevs
  |------------------------------------------+-----------|
  | add global abbrev                        | C-x a g   |
@@ -291,7 +280,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | add mode-local expansion for this abbrev | C-x a i l |
  | explicitly expand abbrev                 | C-x a e   |
  | expand previous word dynamically         | M-/       |
- |------------------------------------------+-----------|
 ** marking
  |---------------------------+--------------|
  | set mark here             | C-@ or C-SPC |
@@ -302,7 +290,6 @@ Since I am listing these dependencies, you have to externally download them, or 
  | mark sexp                 | C-M-@        |
  | mark function             | C-M-h        |
  | mark entire buffer        | C-x h        |
- |---------------------------+--------------|
 
 
 
