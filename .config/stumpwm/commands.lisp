@@ -1,20 +1,16 @@
 (in-package :stumpwm)
 
-(defcommand mpv () ()
-	    "Run mpv with the clipboard argument"
-	    (run-shell-command "xclip -o | xargs mpv"))
-
 (defcommand increase-volume () ()
 	    "Increase the volume"
-	    (run-shell-command "amixer sset PCM 5+ unmute"))
+	    (run-shell-command "amixer sset Master unmute && amixer sset PCM 5+ unmute"))
 
 (defcommand decrease-volume () ()
 	    "Decrease the volume"
-	    (run-shell-command "amixer sset PCM 5- unmute"))
+	    (run-shell-command "amixer sset Master unmute && amixer sset PCM 5- unmute"))
 
 (defcommand mute () ()
-	    "Mute the volume"
-	    (run-shell-command "amixer sset PCM mute"))
+	    "Mute/unmute the volume"
+	    (run-shell-command "amixer sset Master toggle"))
 
 (defcommand increase-brightness () ()
 	    "Increase the brightness"
@@ -55,3 +51,7 @@
 (defcommand play-song () ()
 	    "plays/pauses the song"
 	    (run-shell-command "mpc toggle"))
+
+(defcommand run-compositor () ()
+	    "Run compton"
+	    (run-shell-command (concatenate 'string "compton --config " (getenv "XDG_CONFIG_HOME") "/compton/compton.conf")))
