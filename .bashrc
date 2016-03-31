@@ -45,6 +45,7 @@ __git_ps1 () {
 		printf " (%s) " "${b##refs/heads/}";
 	fi
 }
+alias mute="amixer sset Master toggle"
 alias ncmpcpp="ncmpcpp -c ~/.config/ncmpcpp/config"
 alias enterprise="play -n -c1 synth whitenoise lowpass -1 120 lowpass -1 120 lowpass -1 120 gain +14"
 alias soundsofhome="find ~ -type f -exec cat '{}' \; | play -r 44100 -b 16 -c 1 -e signed-integer -t raw - lowpass 4k flanger 0 7 reverb 100"
