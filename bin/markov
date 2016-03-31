@@ -1,19 +1,17 @@
 #!/usr/bin/env perl
 
-#use warnings;
 use strict;
 use Graph::Directed;
 
-open(my $in, '<', $ARGV[0]) or die $!;
 my $times = 10;
-if ($ARGV[1]) {
-	$times = int($ARGV[1]);
+if ($ARGV[0]) {
+	$times = int($ARGV[0]);
 }
 my $prev = "";
 my %un, my %bi;
 my $graph = Graph::Directed->new;
 
-while (<$in>) {
+while (<STDIN>) {
 	chomp;
 	foreach my $word (split(' ')) {
 		if (exists($un{$word})) {
