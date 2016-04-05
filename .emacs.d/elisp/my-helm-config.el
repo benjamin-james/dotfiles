@@ -14,6 +14,7 @@
   (global-set-key (kbd "C-c h f") 'helm-find)
   (global-set-key (kbd "C-c h g") 'helm-info-gnus)
   (global-set-key (kbd "C-c h i") 'helm-info-at-point)
+  (global-set-key (kbd "C-c h l") 'helm-locate)
   (global-set-key (kbd "C-c h m") 'helm-man-woman)
   (global-set-key (kbd "C-c h o") 'helm-occur)
   (global-set-key (kbd "C-c h r") 'helm-regexp)

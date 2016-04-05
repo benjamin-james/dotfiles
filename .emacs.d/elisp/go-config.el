@@ -17,7 +17,6 @@
   :require company go-mode
   :config
   (add-hook 'go-mode-hook (lambda ()
-
 			    (set (make-local-variable 'company-backends) '(company-go))
 			    (company-mode))))
 (req-package go-snippets
