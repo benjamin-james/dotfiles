@@ -1,4 +1,4 @@
-;;; helm-config.el --- Summary
+;;; my-helm-config.el --- Summary
 ;;;
 ;;; Commentary:
 ;;; helm stuff
@@ -47,4 +47,4 @@
   (setq projectile-completion-system 'helm))
 
 (provide 'helm-config)
-;;; helm-config.el ends here
+;;; my-helm-config.el ends here

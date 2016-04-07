@@ -72,4 +72,5 @@ _SPC_ cancel    _o_nly this     _d_elete
   "zoom"
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out")))
+(provide 'my-hydras)
 ;;; my-hydras.el ends here
