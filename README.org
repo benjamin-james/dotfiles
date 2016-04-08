@@ -328,5 +328,16 @@ Since I am listing these dependencies, you have to externally download them, or 
 | C-t DEL   | logout      |
 | C-t C-DEL | suspend     |
 | C-t C     | run compton |
+** Screen
+|---------+---------------------------|
+| C-j C-d | Detatch current session   |
+| C-j C-c | Create new session        |
+| C-j C-a | Switch to previous window |
+| C-j 0   |                           |
+| ...     |                           |
+| C-j 9   | Switch to window # 0 - 9  |
+| C-j "   | List all windows          |
+| C-j '   | Prompt to switch window   |
+| C-j ?   | List all keybindings      |
 
 
