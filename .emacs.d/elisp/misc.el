@@ -23,6 +23,13 @@
     (while (search-forward (string ?\C-m) nil t)
       (replace-match (string ?\C-j) nil t))))
 
+(req-package avy
+  :bind (("C-:" . avy-goto-char)
+         ("C-'" . avy-goto-char-2)
+         ("M-g f" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1)
+         ("M-g e" . avy-goto-word-0)))
+
 (bind-key-file "<f2> e" "~/.emacs.d/init.el")
 (bind-key-file "<f2> s" "~/.stumpwmrc")
 (bind-key-file "<f2> C-s" "~/.config/stumpwm/")

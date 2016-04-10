@@ -301,7 +301,15 @@ Since I am listing these dependencies, you have to externally download them, or 
 | double quotes | s-"      |         |
 | backquote     | s-`      |         |
 | single quote  | s-'      |         |
-
+*** avy
+|--------+---------------+---------|
+| entity | info inserted | command |
+|--------+---------------+---------|
+| char   | 1 char        | C-:     |
+| char   | 2 char        | C-'     |
+| line   | char(s)       | M-g f   |
+| word   | 1 word        | M-g w   |
+| word   | nothing       | M-g e   |
 ** StumpWM
 *** defprogram
  |--------------------+----------------------|
