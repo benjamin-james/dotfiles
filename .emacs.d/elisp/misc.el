@@ -30,6 +30,10 @@
          ("M-g w" . avy-goto-word-1)
          ("M-g e" . avy-goto-word-0)))
 
+(req-package goto-chg
+  :bind (("s-." . goto-last-change)
+         ("s-," . goto-last-change-reverse)))
+
 (bind-key-file "<f2> e" "~/.emacs.d/init.el")
 (bind-key-file "<f2> s" "~/.stumpwmrc")
 (bind-key-file "<f2> C-s" "~/.config/stumpwm/")
