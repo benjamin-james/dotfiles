@@ -329,6 +329,12 @@ Since I am listing these dependencies, you have to externally download them, or 
 *** move-text
 | move text up   | M-<up>   |
 | move text down | M-<down> |
+*** regexp
+| regexp replace          | C-c r |
+| query regexp replace    | C-c q |
+| multiple cursor mark    | C-c m |
+| regexp isearch forward  | C-M-s |
+| regexp isearch backward | C-M-r |
 
 ** StumpWM
 *** defprogram

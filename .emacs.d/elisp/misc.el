@@ -30,9 +30,21 @@
          ("M-g w" . avy-goto-word-1)
          ("M-g e" . avy-goto-word-0)))
 
+(req-package visual-regexp-steroids
+  :bind (("C-c r" . vr/replace)
+         ("C-c q" . vr/query-replace)
+         ("C-c m" . vr/mc-mark)
+         :map esc-map
+         ("C-r" . vr/isearch-backward) ; M-C-r
+         ("C-s" . vr/isearch-forward))) ; M-C-s
+
 (req-package goto-chg
   :bind (("s-." . goto-last-change)
          ("s-," . goto-last-change-reverse)))
+
+(req-package move-text
+  :init
+  (move-text-default-bindings))
 
 (bind-key-file "<f2> e" "~/.emacs.d/init.el")
 (bind-key-file "<f2> s" "~/.stumpwmrc")
