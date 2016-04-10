@@ -310,6 +310,24 @@ Since I am listing these dependencies, you have to externally download them, or 
 | line   | char(s)       | M-g f   |
 | word   | 1 word        | M-g w   |
 | word   | nothing       | M-g e   |
+*** helm-swoop
+|--------------------------+---------|
+| swoop                    | M-i     |
+| swoop back to last point | M-I     |
+| multi swoop              | C-c M-i |
+| multi swoop all          | C-x M-i |
+**** isearch
+| swoop from isearch | M-i |
+**** Inside swoop
+| multi swoop all from swoop     | M-i |
+| multi swoop current from swoop | M-m |
+| previous line                  | C-r |
+| next line                      | C-s |
+*** goto-chg
+| goto last change         | s-. |
+| goto last change reverse | s-, |
+
+
 ** StumpWM
 *** defprogram
  |--------------------+----------------------|
