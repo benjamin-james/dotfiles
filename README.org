@@ -40,7 +40,7 @@ Note that if you already had a =.emacs= in your home directory, it will load tha
 
 Once you start up Emacs, wait a while for it to download all my packages.
 
-Then, in Emacs, type =M-x irony-install-server= and wait for it to compile to complete the installation. 
+Then, in Emacs, type =M-x irony-install-server= and wait for it to compile to complete the installation.
 Note that =irony-mode= requires =llvm= and =cmake= to be installed on the system.
 
 * Keyboard
@@ -91,9 +91,9 @@ Here's a sample =.fetchmailrc= skeleton:
 set logfile @HOME@/.local/share/fetchmail.log
 set no bouncemail
 
-poll @EMAIL_SERVER@ with proto POP3 port 995 dns auth password 
+poll @EMAIL_SERVER@ with proto POP3 port 995 dns auth password
 user "@EMAIL@" pass "@PASSWORD@" is @USERNAME@
-ssl 
+ssl
 sslproto TLS1
 mda "/usr/bin/procmail -f %F -d %T"
 #+END_SRC
@@ -291,6 +291,17 @@ Since I am listing these dependencies, you have to externally download them, or 
   | mark sexp                 | C-M-@        |
   | mark function             | C-M-h        |
   | mark entire buffer        | C-x h        |
+*** corral
+|---------------+----------+---------|
+| entity        | backward | forward |
+|---------------+----------+---------|
+| parentheses   | s-9      | s-0     |
+| brackets      | s-[      | s-]     |
+| braces        | s-{      | s-}     |
+| double quotes | s-"      |         |
+| backquote     | s-`      |         |
+| single quote  | s-'      |         |
+
 ** StumpWM
 *** defprogram
  |--------------------+----------------------|
@@ -339,5 +350,3 @@ Since I am listing these dependencies, you have to externally download them, or 
 | C-j "   | List all windows          |
 | C-j '   | Prompt to switch window   |
 | C-j ?   | List all keybindings      |
-
-

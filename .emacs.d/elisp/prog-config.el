@@ -8,7 +8,18 @@
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (setq show-trailing-whitespace t)
-	    (setq nuke-trailing-whitespace-p t)))
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+(req-package corral
+  :bind (("s-(" . corral-parentheses-backward)
+	 ("s-)" . corral-parentheses-forward)
+	 ("s-[" . corral-brackets-forward)
+	 ("s-]" . corral-brackets-backward)
+	 ("s-{" . corral-braces-forward)
+	 ("s-}" . corral-braces-backward)
+	 ("s-\"" . corral-double-quotes-backward)
+	 ("s-`" . corral-backquote-backward)
+	 ("s-'" . corral-single-quotes-backward)))
 
 (req-package magit
   :bind ("C-x g" . magit-status))

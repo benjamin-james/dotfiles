@@ -34,30 +34,6 @@
 	 (find-file ,file))
        (global-set-key (kbd ,key) ',filename))))
 
-;; nuke-trailing-whitespace
-(setq nuke-trailing-whitespace-p t)
-(defun nuke-trailing-whitespace ()
-  "Nuke all trailing whitespace in the buffer.
-Whitespace in this case is just spaces or tabs.
-This is a useful function to put on write-file-hooks.
-If the variable `nuke-trailing-whitespace-p` is `nil`, this function is
-disabled.  If `t`, unreservedly strip trailing whitespace.
-If not `nil` and not `t`, query for each instance."
-  (interactive)
-  (and nuke-trailing-whitespace-p
-       (save-match-data
-	 (save-excursion
-	   (save-restriction
-	     (widen)
-	     (goto-char (point-min))
-	     (cond ((eq nuke-trailing-whitespace-p t)
-		    (while (re-search-forward "[        ]+$" (point-max) t)
-		      (delete-region (match-beginning 0) (match-end 0))))
-		   (t
-		    (query-replace-regexp "[    ]+$" "")))))))
-  ;; always return nil, in case this is on write-file-hooks.
-  nil)
-
 (setq slime-init-list '())
 (provide '0-init-utils)
 ;;; 0-init-utils.el ends here
