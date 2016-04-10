@@ -14,6 +14,16 @@
       (if (not (or (eq output nil) (equal "" output)))
 	  (return (remove ?\n output))))))
 
+(defun c-c++-header ()
+  "Sets either c-mode or c++-mode, whichever is appropriate for
+header"
+  (interactive)
+  (let ((c++-file (concat (substring (buffer-file-name) 0 -1) "cpp")))
+    (if (file-exists-p c++-file)
+        (c++-mode)
+      (c-mode))))
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c-c++-header))
 
 ;;c indent style
 (defun c-lineup-arglist-tabs-only (ignored)
