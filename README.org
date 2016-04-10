@@ -326,7 +326,9 @@ Since I am listing these dependencies, you have to externally download them, or 
 *** goto-chg
 | goto last change         | s-. |
 | goto last change reverse | s-, |
-
+*** move-text
+| move text up   | M-<up>   |
+| move text down | M-<down> |
 
 ** StumpWM
 *** defprogram
