@@ -7,26 +7,27 @@
 
 (defvar helm-alive-p nil)
 (req-package helm
+  :bind (("C-c h a" . helm-apropos)
+	 ("C-c h b" . helm-resume)
+	 ("C-c h e" . helm-info-emacs)
+	 ("C-c h f" . helm-find)
+	 ("C-c h g" . helm-info-gnus)
+	 ("C-c h i" . helm-info-at-point)
+	 ("C-c h l" . helm-locate)
+	 ("C-c h m" . helm-man-woman)
+	 ("C-c h o" . helm-occur)
+	 ("C-c h r" . helm-regexp)
+	 ("C-c h t" . helm-top)
+	 ("C-c h <tab>" . helm-lisp-completion-at-point)
+	 ("C-h SPC" . helm-all-mark-rings)
+	 ("C-x b" . helm-mini)
+	 ("C-x C-f" . helm-find-files)
+	 ("M-x" . helm-M-x)
+	 :map helm-map
+	 ("<tab>" . helm-execute-persistent-action)
+	 ("C-i" . helm-execute-persistent-action)
+	 ("C-z" . helm-select-action))
   :config
-  (global-set-key (kbd "C-c h a") 'helm-apropos)
-  (global-set-key (kbd "C-c h b") 'helm-resume)
-  (global-set-key (kbd "C-c h e") 'helm-info-emacs)
-  (global-set-key (kbd "C-c h f") 'helm-find)
-  (global-set-key (kbd "C-c h g") 'helm-info-gnus)
-  (global-set-key (kbd "C-c h i") 'helm-info-at-point)
-  (global-set-key (kbd "C-c h l") 'helm-locate)
-  (global-set-key (kbd "C-c h m") 'helm-man-woman)
-  (global-set-key (kbd "C-c h o") 'helm-occur)
-  (global-set-key (kbd "C-c h r") 'helm-regexp)
-  (global-set-key (kbd "C-c h t") 'helm-top)
-  (global-set-key (kbd "C-c h <tab>") 'helm-lisp-completion-at-point)
-  (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
-  (global-set-key (kbd "C-x b") 'helm-mini)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-z") 'helm-select-action)
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
   (setq helm-split-window-in-side-p t
 	helm-lisp-fuzzy-completion t
@@ -45,6 +46,31 @@
   :require helm projectile
   :config
   (setq projectile-completion-system 'helm))
+
+(req-package helm-swoop
+  :require helm
+  :bind (("M-i" . helm-swoop)
+	 ("M-I" . helm-swoop-back-to-last-point)
+	 ("C-c M-i" . helm-multi-swoop)
+	 ("C-x M-i" . helm-multi-swoop-all)
+	 :map isearch-mode-map
+	 ("M-i" . helm-swoop-from-isearch)
+	 :map helm-swoop-map
+	 ("M-i" . helm-multi-swoop-all-from-helm-swoop)
+	 ("M-m" . helm-multi-swoop-current-mode-from-helm-swoop)
+	 ("C-r" . helm-previous-line)
+	 ("C-s" . helm-next-line)
+	 :map helm-multi-swoop-map
+	 ("C-r" . helm-previous-line)
+	 ("C-s" . helm-next-line))
+  :config
+  (setq helm-multi-swoop-edit-save t
+	helm-swoop-split-with-multiple-windows nil
+	helm-swoop-split-direction 'split-window-vertically
+	helm-swoop-speed-or-color t
+	helm-swoop-move-to-line-cycle t
+	helm-swoop-use-line-number-face t
+	helm-swoop-use-fuzzy-match t))
 
 (provide 'helm-config)
 ;;; my-helm-config.el ends here
