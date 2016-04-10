@@ -19,7 +19,7 @@
 
 (eval-after-load "python"
   '(progn
-     (define-key python-mode-map (kbd "<f5>") 'my-python-replize)
+     (define-key python-mode-map (kbd "<f6>") 'my-python-replize)
      (define-key python-mode-map (kbd "C-h m") 'python-eldoc-at-point)))
 
 (provide 'my-python-config)

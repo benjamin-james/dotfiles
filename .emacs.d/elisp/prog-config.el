@@ -5,27 +5,6 @@
 ;;;
 ;;; Code:
 
-
-(add-to-list 'slime-init-list 'slime-fancy)
-(add-to-list 'slime-init-list 'slime-asdf)
-
-(req-package geiser
-  :interpreter "guile"
-  :config
-  (add-to-list 'scheme-mode-hook 'geiser-mode))
-
-(req-package paredit
-  :config
-  (add-to-list 'lisp-mode-hook 'paredit-mode))
-
-(req-package slime
-  :config
-					;(setq inferior-lisp-program (get-first-existing '("sbcl" "clisp")))
-  (setq inferior-lisp-program "sbcl")
-  (setq slime-contribs '(slime-fancy))
-  :init
-  (slime-setup slime-init-list))
-
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (setq show-trailing-whitespace t)
