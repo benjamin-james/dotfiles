@@ -101,9 +101,11 @@
 ;;; for viewing PDFs or other documents
 (setq doc-view-continuous t)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((gnuplot . t)))
+(req-package gnuplot
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((gnuplot . t))))
 
 (provide 'misc)
 ;;; misc.el ends here
