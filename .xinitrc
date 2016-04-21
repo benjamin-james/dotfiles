@@ -19,6 +19,9 @@ compton --config $XDG_CONFIG_HOME/compton/compton.conf &
 # Start notification daemon
 dunst &
 
+# Start rtags daemon
+which rdm && rdm &
+
 # Load background image
 [[ -f $HOME/bin/wallpaper.sh ]] && wallpaper.sh &
 
