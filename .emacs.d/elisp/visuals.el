@@ -65,5 +65,8 @@
   (if (display-graphic-p)
       (load-theme 'monokai t)))
 
+(req-package helm-themes
+  :bind ("C-c h h" . helm-themes))
+
 (provide 'visuals)
 ;;; visuals.el ends here

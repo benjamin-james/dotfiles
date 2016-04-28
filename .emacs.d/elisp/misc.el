@@ -12,7 +12,7 @@
   (if (buffer-file-name)
       (eww (concat "file://" (buffer-file-name)))))
 
-(global-set-key (kbd "C-x v f") 'eww-view-file)
+(global-set-key (kbd "H-v f") 'eww-view-file)
 
 ;; Destroys those pesky ^M characters
 (defun dos2unix (buffer)
@@ -100,6 +100,10 @@
 ;;; Set scrolling to not stop at the end of a page
 ;;; for viewing PDFs or other documents
 (setq doc-view-continuous t)
+
+(req-package fixmee
+  :config
+  (global-fixmee-mode 1))
 
 (req-package gnuplot
   :config

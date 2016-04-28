@@ -19,6 +19,11 @@
   (add-hook 'objc-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode))
 
+(req-package company-irony-c-headers
+  :require company
+  :config
+  (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+
 (req-package irony-eldoc
   :require irony
   :config
