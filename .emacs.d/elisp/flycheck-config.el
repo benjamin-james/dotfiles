@@ -24,5 +24,17 @@
   :require flycheck irony
   :config (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
+(defun my-flycheck-rtags-setup ()
+  "sets up rtags"
+  (flycheck-select-checker 'rtags)
+  (setq-local flycheck-highlighting-mode nil
+	      flycheck-check-syntax-automatically nil))
+(req-package flycheck-rtags
+  :require flycheck rtags
+  :config (add-hook c-mode-common-hook #'my-flycheck-rtags-setup))
+
+(req-package helm-flycheck
+  :require helm flycheck
+  :bind :map flycheck-mode-map ("C-c ! h" . helm-flycheck))
 (provide 'flycheck-config)
 ;;; flycheck-config.el ends here

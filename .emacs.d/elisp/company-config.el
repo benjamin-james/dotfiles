@@ -11,11 +11,6 @@
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
-(req-package company-c-headers
-  :require company
-  :config
-  (add-to-list 'company-backends 'company-c-headers))
-
 (req-package company-irony
   :require company irony
   :config

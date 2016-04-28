@@ -28,5 +28,10 @@
   (add-hook 'java-mode-hook 'helm-gtags-mode)
   (add-hook 'asm-mode-hook 'helm-gtags-mode))
 
+(req-package rtags
+  :config
+  (setq rtags-use-helm t)
+  (rtags-enable-standard-keybindings))
+
 (provide 'tags)
 ;;; tags.el ends here
