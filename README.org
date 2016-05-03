@@ -156,6 +156,21 @@ Since I am listing these dependencies, you have to externally download them, or 
 -*- Org -*-
 * Bindings
 ** Emacs
+*** hydras
+ |-------------+-----------|
+ | window      | s-w       |
+ | zoom        | <f2>      |
+ | yank/pop    | C-y / M-y |
+ | move        | C-n       |
+ | page        | C-x [     |
+ | goto-line   | M-g g     |
+ | transpose   | H-C-t     |
+ | info        | ?         |
+ | next-error  | C-x `     |
+ | rectangle   | H-r       |
+ | projectile  | H-p       |
+ | smartparens | H-s       |
+
 *** helm - C-c h
   |-------------------------------+-------------|
   | helm-apropos                  | C-c h a     |
