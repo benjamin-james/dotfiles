@@ -9,7 +9,8 @@
 (defvar hyp-s-x-map)
 (define-prefix-command 'hyp-s-x-map)
 
-(req-package smartparens
+(req-package smartparens-config
+  :ensure smartparens
   :require hydra
   :bind (
 	 :map smartparens-mode-map
@@ -61,8 +62,9 @@
 	      (";" sp-comment))
 
   :config
-  (require 'smartparens-config)
-  (add-hook 'minibuffer-setup-hook 'turn-on-smartparens-strict-mode))
+  (show-smartparens-global-mode t))
 
+
+(add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
 (provide 'my-smartparens-config)
 ;;; my-smartparens-config.el ends here
