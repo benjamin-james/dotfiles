@@ -57,6 +57,12 @@
 
 (req-package seethru
   :init
+  (global-set-key (kbd "C-s-o") (lambda ()
+                                  (interactive)
+                                  (seethru 100)))
+  (global-set-key (kbd "M-s-o") (lambda ()
+                                  (interactive)
+                                  (seethru emacs-opacity)))
   (if (display-graphic-p)
       (seethru emacs-opacity)))
 
