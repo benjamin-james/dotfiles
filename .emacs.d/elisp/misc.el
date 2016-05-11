@@ -101,9 +101,9 @@
 ;;; for viewing PDFs or other documents
 (setq doc-view-continuous t)
 
-(req-package fixmee
-  :config
-  (global-fixmee-mode 1))
+;(req-package fixmee
+;  :config
+;  (global-fixmee-mode 1))
 
 (req-package gnuplot
   :config
