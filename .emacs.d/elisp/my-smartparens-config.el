@@ -62,9 +62,8 @@
 	      (";" sp-comment))
 
   :config
-  (show-smartparens-global-mode t))
+  (show-smartparens-global-mode t)
+  (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode))
 
-
-(add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
 (provide 'my-smartparens-config)
 ;;; my-smartparens-config.el ends here
