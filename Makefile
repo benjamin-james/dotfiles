@@ -4,7 +4,10 @@ MKDIR = mkdir -p
 INSTALL = cp
 
 EMACS_FILES = $(wildcard .emacs.d/elisp/*.el) .emacs.d/init.el
-
+BIN_FILES = $(wildcard bin/*)
+BASH_FILES = .bashrc .bash_profile .bash_logout
+GIT_FILES = .gitconfig .config/git/ignore
+SHELL_FILES = $(BIN_FILES) $(BASH_FILES) .screenrc $(GIT_FILES)
 STUMPWM_FILES = .stumpwmrc $(DESTDIR)/.sbclrc $(wildcard .config/stumpwm/*.lisp) $(DESTDIR)/.config/stumpwm/contrib
 
 FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc \
@@ -34,6 +37,14 @@ $(DESTDIR)/.config/stumpwm/contrib:
 $(DESTDIR)/%: %
 	test -z $(@D) || mkdir -p $(@D)
 	$(INSTALL) $< $(@D)
+
+shell: $(addprefix $(DESTDIR)/, $(SHELL_FILES))
+
+bash: $(addprefix $(DESTDIR)/, $(BASH_FILES))
+
+git: $(addprefix $(DESTDIR)/, $(GIT_FILES))
+
+bin: $(addprefix $(DESTDIR)/, $(BIN_FILES))
 
 emacs:
 	mkdir -p $(DESTDIR)/.emacs.d/elisp
