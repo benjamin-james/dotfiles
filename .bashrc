@@ -222,4 +222,4 @@ function upto() {
 		return 1
 	fi
 }
-
+alias prettyjson='python -m json.tool'
