@@ -16,7 +16,7 @@ FILES = .bashrc .bash_logout .bash_profile .gitconfig .muttrc .sbclrc .screenrc 
 	.config/stumpwm/contrib .procmailrc .guile $(STUMPWM_FILES) $(wildcard bin/*) \
 	.config/xorg/Xmodmap .config/xorg/Xresources .config/gtkrc-2.0 $(EMACS_FILES) \
 	.config/mpdcron/mpdcron.conf $(wildcard .config/mpdcron/hooks/*) .config/mpdnotify.conf \
-	.ncmpcpp/config
+	.config/ncmpcpp/config .config/htop/htoprc
 
 all: $(addprefix $(DESTDIR)/, $(FILES))
 	source $(DESTDIR)/.bash_profile #updates environment vairables without relogging in
