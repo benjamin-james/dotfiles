@@ -86,21 +86,21 @@ _SPC_ cancel    _o_nly this     _d_elete
 (global-set-key (kbd "C-y") #'hydra-yank-pop/yank)
 
 
-(global-set-key
- (kbd "C-n")
- (defhydra hydra-move
-   (:body-pre (next-line))
-   "move"
-   ("n" next-line)
-   ("p" previous-line)
-   ("f" forward-char)
-   ("b" backward-char)
-   ("a" beginning-of-line)
-   ("e" move-end-of-line)
-   ("v" scroll-up-command)
-   ("V" scroll-down-command)
-   ("l" recenter-top-bottom)
-   ("<SPC>" nil :color blue)))
+;(global-set-key
+; (kbd "C-n")
+; (defhydra hydra-move
+;   (:body-pre (next-line))
+;   "move"
+;   ("n" next-line)
+;   ("p" previous-line)
+;   ("f" forward-char)
+;   ("b" backward-char)
+;   ("a" beginning-of-line)
+;   ("e" move-end-of-line)
+;   ("v" scroll-up-command)
+;   ("V" scroll-down-command)
+;   ("l" recenter-top-bottom)
+;   ("<SPC>" nil :color blue)))
 
 (defhydra hydra-page (ctl-x-map "" :pre (widen))
   "page"
