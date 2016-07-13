@@ -4,6 +4,7 @@
 (gnewbg "2")
 (gnewbg-float "3")
 (gnewbg "4")
+(gnewbg "5")
 
 (defcommand gmove-and-follow (to-group) ((:group "To Group: "))
   "Move the current window to the specified group and go to that group"
