@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+if [ -z "${SSH_AUTH_SOCK}" ] ; then
+  eval `ssh-agent -s`
+fi
+
+if [ -z "${GPG_AGENT_INFO}" ] ; then
+  eval `gpg-agent --daemon`
+fi
+
+export VISUAL="emacsclient -a ''"
+export EDITOR="${VISUAL}"
+
+export GPG_TTY=$(tty)
+export GTAGSLIBPATH="${HOME}/.gtags"
+
+export HISTFILESIZE=20000
+export HISTSIZE=10000
+export HISTIGNORE="&:ls:[bf]g:exit"
+
+## pretty manpages
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+export JUPYTER_LURIA_PORT=@JUPYTER_LURIA_PORT@

@@ -11,4 +11,9 @@ term screen-256color
 # Turns off ugly visual bell
 vbell off
 
-
+hardstatus alwayslastline
+bind f eval "hardstatus ignore"
+bind F eval "hardstatus alwayslastline"
+defutf8 on
+defencoding utf8
+hardstatus string "%{= KW} %H [%`] %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%C%a %Y-%M-%d"

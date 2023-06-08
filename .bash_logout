@@ -1,11 +1,9 @@
-# /etc/skel/.bash_logout
+#!/usr/bin/env bash
 
-# This file is sourced when a login shell terminates.
-
-# Kill the gpg-agent
-if [ -n "${GPG_AGENT_INFO}" ]; then
-	kill $(echo ${GPG_AGENT_INFO} | cut -d':' -f 2) > /dev/null 2>&1
+if [ "${SSH_AUTH_SOCK}" ] ; then
+  eval `ssh-agent -k`
 fi
 
-# Clear the screen for security's sake.
+type -P gpgconf >/dev/null && gpgconf --kill gpg-agent
+
 clear

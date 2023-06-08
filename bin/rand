@@ -1,5 +1,0 @@
-#!/usr/bin/perl -w
-# Picks a random line from a stream
-
-rand($.) < 1 && ($pick = $_) while <>;
-print $pick;

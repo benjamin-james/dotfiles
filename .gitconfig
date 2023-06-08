@@ -1,13 +1,18 @@
 [user]
-	name = Benjamin James
-	email = bjames@openmailbox.org
-[color]
-	ui = true
-[github]
-	user = benjamin-james
+    name = Your Name
+    email = your-email@example.com
+
+[credential]
+    helper = cache --timeout=3600
+
 [push]
-	default = matching
+    default = simple
+
+[pull]
+    rebase = true
+
+[github]
+    user = benjamin-james
+
 [core]
-	excludesfile = ~/.config/git/ignore
-[dude]
-	icon = /home/ben/pictures/pepper.png
+    excludesfile = ~/.config/git/ignore
