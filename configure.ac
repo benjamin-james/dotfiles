@@ -122,8 +122,16 @@ AC_ARG_WITH([conda-exe],
     [AS_HELP_STRING([--with-conda-exe=@<:@=NAME@:>@], [Set the Conda EXE])],
     [conda_exe=$withval],
     [conda_exe=$CONDA_EXE])
+
+if test x"$conda" = x"true"; then
+   AS_IF([test -f "$conda_exe"], [], [AC_MSG_WARN([File "$conda_exe" does not exist but conda is enabled. Please install conda first.])])
+fi
 AC_SUBST(conda_exe)
 
+conda_bindir=`dirname "$conda_exe"`
+AC_SUBST(conda_bindir)
+conda_prefix=`dirname "$conda_bindir"`
+AC_SUBST(conda_prefix)
 
 AC_ARG_WITH([BROAD],
     [AS_HELP_STRING([--with-broad=@<:@=NAME@:>@], [Set the Broad username])],
