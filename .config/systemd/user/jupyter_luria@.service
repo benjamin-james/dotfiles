@@ -1,0 +1,12 @@
+[Unit]
+Description=jupyter_luria.sh "%I"
+After=network.target
+
+[Service]
+ExecStart=/home/neb/jupyter_luria.sh %i
+Restart=on-failure
+RestartSec=5s
+Environment="JUPYTER_LURIA_PREFIX=91"
+Environment="ARGS=-v"
+[Install]
+WantedBy=default.target
