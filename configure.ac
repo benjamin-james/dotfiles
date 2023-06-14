@@ -133,23 +133,23 @@ AC_SUBST(conda_bindir)
 conda_prefix=`dirname "$conda_bindir"`
 AC_SUBST(conda_prefix)
 
-AC_ARG_WITH([BROAD],
+AC_ARG_WITH([broad],
     [AS_HELP_STRING([--with-broad=@<:@=NAME@:>@], [Set the Broad username])],
-    [BROAD=$withval],
-    [BROAD=])
-AC_SUBST(BROAD)
+    [broad=$withval],
+    [broad=$BROAD])
+AC_SUBST(broad)
 
-AC_ARG_WITH([CSAIL],
+AC_ARG_WITH([csail],
     [AS_HELP_STRING([--with-csail=@<:@=NAME@:>@], [Set the CSAIL username])],
-    [CSAIL=$withval],
-    [CSAIL=])
-AC_SUBST(CSAIL)
+    [csail=$withval],
+    [csail=$CSAIL])
+AC_SUBST(csail)
 
-AC_ARG_WITH([MIT],
+AC_ARG_WITH([mit],
     [AS_HELP_STRING([--with-mit=@<:@=NAME@:>@], [Set the MIT username])],
-    [MIT=$withval],
-    [MIT=])
-AC_SUBST(MIT)
+    [mit=$withval],
+    [mit=$MIT])
+AC_SUBST(mit)
 
 AC_CONFIG_FILES([Makefile .config/systemd/user/jupyter_luria@.service src/conda_init.sh .ssh/config .bash_profile])
 AC_OUTPUT
