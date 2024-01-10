@@ -4,7 +4,7 @@ CLEANFILES =
 
 if EMACS
 emacsdir = $(dotfilesdir)/.emacs.d
-dist_emacs_DATA = .emacs.d/init.el
+dist_emacs_DATA = $(wildcard .emacs.d/*init.el)
 elispdir = $(emacsdir)/elisp
 dist_elisp_DATA = $(wildcard .emacs.d/elisp/*.el)
 endif
