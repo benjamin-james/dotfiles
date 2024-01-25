@@ -1,6 +1,6 @@
 [user]
-    name = Your Name
-    email = your-email@example.com
+    name = Benjamin James
+    email = benjames@mit.edu
 
 [credential]
     helper = cache --timeout=3600

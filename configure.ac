@@ -133,6 +133,15 @@ AC_SUBST(conda_bindir)
 conda_prefix=`dirname "$conda_bindir"`
 AC_SUBST(conda_prefix)
 
+xbin_scripts=`find ./bin/ -type f -name '*.sh' -exec printf '%q ' {} +`
+AC_SUBST(xbin_scripts)
+dist_emacs_data=`find .emacs.d/ -type f -name '*init.el' -exec printf '%q ' {} +`
+AC_SUBST(dist_emacs_data)
+dist_elisp_data=`find .emacs.d/elisp/ -type f -name '*.el' -exec printf '%q ' {} +`
+AC_SUBST(dist_elisp_data)
+dist_snippet_data=`find .emacs.d/snippets -type f -exec printf '%q ' {} +`
+AC_SUBST(dist_snippet_data)
+
 AC_ARG_WITH([broad],
     [AS_HELP_STRING([--with-broad=@<:@=NAME@:>@], [Set the Broad username])],
     [broad=$withval],
