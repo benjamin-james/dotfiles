@@ -7,7 +7,7 @@ emacsdir = @dotfilesdir@/.emacs.d
 dist_emacs_DATA = @dist_emacs_data@
 elispdir = $(emacsdir)/elisp
 dist_elisp_DATA = @dist_elisp_data@
-snippetdir = $(emacsdir)/snippets
+snippetdir = $(emacsdir)/snippets/sh-mode
 dist_snippet_DATA = @dist_snippet_data@
 endif
 

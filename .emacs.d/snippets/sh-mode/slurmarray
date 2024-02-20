@@ -6,7 +6,7 @@
 #SBATCH --nice=10000
 #SBATCH --job-name=${1:benj}
 #SBATCH --partition=${2:kellis}
-#SBATCH --chdir=${3:`(let ((file (or (buffer-file-name) default-directory)))
+#SBATCH --workdir=${3:`(let ((file (or (buffer-file-name) default-directory)))
                    (setq file (file-name-directory file))
                    (if (file-remote-p file)
                        (tramp-file-name-localname (tramp-dissect-file-name file))
