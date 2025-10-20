@@ -2,12 +2,11 @@
 [ -r "${_DOTBASE}/lib/helpers.sh" ] && . "${_DOTBASE}/lib/helpers.sh"
 _is_interactive || return 0
 
-if [ -n "$TMUX" ] && [ -z "$SLURM_JOB_ID" ] && [ -z "$JOB_ID" ]; then
+if [ -n "$TMUX" ]; then
   TMUX_TTY=$(tmux display-message -p '#{pane_tty}')
   TMUX_PTS=${TMUX_TTY##*/}  
   TMUX_HOST=$(hostname -s)
   TMUX_STY="$(tmux display-message -p '#S').${TMUX_PTS}.${TMUX_HOST}"
-  export TMUX_STY
 fi
 
 _session_label=$(hostname -s 2>/dev/null || hostname)
