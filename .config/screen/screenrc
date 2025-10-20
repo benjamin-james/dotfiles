@@ -1,0 +1,19 @@
+
+# Don't display the startup message
+startup_message off
+
+# Set the escape sequence (default ^Aa)
+escape ^Jj
+
+# Sets the terminal to use 256 colors (8 by default)
+term screen-256color
+
+# Turns off ugly visual bell
+vbell off
+
+hardstatus alwayslastline
+bind f eval "hardstatus ignore"
+bind F eval "hardstatus alwayslastline"
+defutf8 on
+defencoding utf8
+hardstatus string "%{= KW} %H [%`] %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%C%a %Y-%M-%d"

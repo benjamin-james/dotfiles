@@ -1,0 +1,9 @@
+[user]
+	name = Benjamin James
+	email = benjames@mit.edu
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[credential]
+	helper = cache
