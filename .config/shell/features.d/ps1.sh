@@ -12,8 +12,8 @@ fi
 _session_label=$(hostname -s 2>/dev/null || hostname)
 if [ -n "$STY" ]; then
     _session_label="$STY"
-elif [ -n "$TMUX_STY" ]; then
-    _session_label="$TMUX_STY"
+# elif [ -n "$TMUX_STY" ]; then
+#     _session_label="$TMUX_STY"
 fi
 
 if command -v tput >/dev/null 2>&1 && [ "$(tput colors 2>/dev/null)" -ge 8 ]; then
