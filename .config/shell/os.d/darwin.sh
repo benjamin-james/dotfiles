@@ -2,6 +2,8 @@
 [ -r "${_DOTBASE}/lib/helpers.sh" ] && . "${_DOTBASE}/lib/helpers.sh"
 MACPORTS_PREFIX=${MACPORTS_PREFIX:-/opt/local}
 
+export TERM=xterm-256color
+
 if ! command -v port >/dev/null 2>&1; then
   port() {
     local mp_port="$MACPORTS_PREFIX/bin/port"
