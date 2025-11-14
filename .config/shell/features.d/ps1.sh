@@ -23,8 +23,8 @@ fi
 if _have tput && [ "$(tput colors 2>/dev/null)" -ge 8 ]; then
   # Using tput inline; \[...\] protects nonprinting chars for bash
   PS1="\[\e]0;\u@${_session_label}: \w\a\]"\
-"$(tput bold)$(tput setaf 2)\u@${_session_label}$(tput sgr0):"\
-"$(tput bold)$(tput setaf 4)\w$(tput sgr0)\$ "
+"$(tput setaf 2)\u@${_session_label}$(tput sgr0):"\
+"$(tput setaf 4)\w$(tput sgr0)\$ "
 else
   PS1="\u@${_session_label}:\w\$ "
 fi
