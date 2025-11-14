@@ -1,9 +1,8 @@
 #!/bin/sh
-<<<<<<< HEAD
 
 _prepend_path "$HOME/opt/pkg-2025Q3/bin"
 _prepend_path "$HOME/opt/pkg-2025Q3/sbin"
-=======
+
 [ -r "${_DOTBASE}/lib/helpers.sh" ] && . "${_DOTBASE}/lib/helpers.sh"
 
 bootstrap_pkgsrc() {
@@ -60,4 +59,3 @@ fi
 _prepend_path "${MY_PKGSRC}/bin"
 _prepend_path "${MY_PKGSRC}/sbin"
 
->>>>>>> 715ba83 (pkgsrc bootstrap & path script)
