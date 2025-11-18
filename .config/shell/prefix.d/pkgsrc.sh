@@ -1,20 +1,17 @@
 #!/bin/sh
-
-_prepend_path "$HOME/opt/pkg-2025Q3/bin"
-_prepend_path "$HOME/opt/pkg-2025Q3/sbin"
-
 [ -r "${_DOTBASE}/lib/helpers.sh" ] && . "${_DOTBASE}/lib/helpers.sh"
 
 bootstrap_pkgsrc() {
     REVISION="${1:?need REVISION like 2025Q3}"
-    LOCALBASE="$HOME/opt/pkg-$REVISION"
-    PKGSRCDIR="$HOME/opt/src/pkgsrc-$REVISION"
-    WRKOBJDIR="$HOME/opt/var/obj-$REVISION"
-    DISTDIR="$HOME/opt/var/distfiles"
-    PACKAGES="$HOME/opt/var/packages/$REVISION"
+    OPT=$(readlink -f $HOME/opt/)
+    LOCALBASE="$OPT/pkg-$REVISION"
+    PKGSRCDIR="$OPT/src/pkgsrc-$REVISION"
+    WRKOBJDIR="$OPT/var/obj-$REVISION"
+    DISTDIR="$OPT/var/distfiles"
+    PACKAGES="$OPT/var/packages/$REVISION"
     PKG_DBDIR="$LOCALBASE/.pkgdb"
     PKG_SYSCONFBASE="$LOCALBASE/etc"
-    VARBASE="$HOME/opt/var"
+    VARBASE="$OPT/var"
     mkdir -p "$LOCALBASE" "$WRKOBJDIR" "$DISTDIR" "$PACKAGES" "$PKG_DBDIR" \
           "$PKG_SYSCONFBASE" "$VARBASE" || return 1
     MKFRAG=$(mktemp "${TMPDIR:-/tmp}/mkfrag.XXXXXX") || return 1
@@ -52,7 +49,7 @@ EOF
 if [ -z "${MY_PKGSRC:-}" ]; then
     for pfx in "$HOME/opt/pkg-2025Q2/" "$HOME/opt/pkg-2025Q3" "$HOME/opt/pkg-2025Q4"; do
 	if [ -d "${pfx}/bin" ] && [ -d "${pfx}/sbin" ]; then
-	    MY_PKGSRC="${pfx}"
+	    MY_PKGSRC=$(readlink -f "${pfx}")
 	fi
     done
 fi
