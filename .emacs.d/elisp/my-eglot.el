@@ -24,7 +24,7 @@
 	 (python-mode . eglot-ensure)
 )
   :config (setq eglot-stay-out-of '(company))
-          (add-to-list 'eglot-server-programs '((c-mode c++-mode) "clangd-16"))
+          (add-to-list 'eglot-server-programs '((c-mode c++-mode) "clangd"))
 	  (setq-default eglot-workspace-configuration
                 '((:pylsp . (:configurationSources ["flake8"]
                              :plugins (
