@@ -9,6 +9,9 @@
 	    (lambda ()
 	      (add-hook 'before-save-hook #'clang-format-buffer nil t))))
 
-(define-key c++-mode-map (kbd "C-c C-f") #'clang-format-buffer)
+(defun my-c++-mode-hook ()
+  (define-key c++-mode-map (kbd "C-c C-f") #'clang-format-buffer))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
   
 (setq c-basic-offset 8)
