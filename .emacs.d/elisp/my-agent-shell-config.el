@@ -44,7 +44,7 @@
   (with-current-buffer buffer
     (let ((name (my/agent-shell--container-name-from-dir default-directory)))
       (list "incus" "exec" name "-T" "--" "sudo" "-iu" "agent"))))
-(my/agent-shell-incus-runner (current-buffer))
+
 (defun my/agent-shell-resolver (path)
   "Map between host paths under ~/opt/agent/${name}/ and container /data/..."
   (let* ((path (expand-file-name path))
