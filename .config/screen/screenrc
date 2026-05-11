@@ -3,17 +3,31 @@
 startup_message off
 
 # Set the escape sequence (default ^Aa)
-escape ^Jj
+escape ^Gg
 
 # Sets the terminal to use 256 colors (8 by default)
 term screen-256color
+defbce on
+
+# UTF
+defutf8 on 
+defencoding utf8
+
+# Scrollback
+defscrollback 10000
 
 # Turns off ugly visual bell
 vbell off
 
+# less/pager prevent sharing the pane
+altscreen on
+
+
+# QoL
+autodetach on
+zombie kr
+
 hardstatus alwayslastline
-bind f eval "hardstatus ignore"
-bind F eval "hardstatus alwayslastline"
-defutf8 on
-defencoding utf8
+bind h eval "hardstatus ignore"
+bind H eval "hardstatus alwayslastline"
 hardstatus string "%{= KW} %H [%`] %{= Kw}|%{-} %-Lw%{= bW}%n%f %t%{-}%+Lw %=%C%a %Y-%M-%d"
