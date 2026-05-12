@@ -2,11 +2,11 @@
 
 
 
-  ;; (use-package eglot)
-  ;; :straight (eglot :type git
-  ;;                  :host nil
-  ;;                  :repo "git://git.sv.gnu.org/emacs.git"
-  ;;                  :files ("lisp/progmodes/eglot.el")))
+;; (use-package eglot)
+;; :straight (eglot :type git
+;;                  :host nil
+;;                  :repo "git://git.sv.gnu.org/emacs.git"
+;;                  :files ("lisp/progmodes/eglot.el")))
 
 
 (use-package envrc
@@ -19,10 +19,12 @@
   :config
   (setq devdocs-browser-function 'eww))
 
-;(use-package poly-markdown)
-;(use-package markdown-mode)
+(use-package yaml-mode)
 
-;(use-package org-journal)
+					;(use-package poly-markdown)
+					;(use-package markdown-mode)
+
+					;(use-package org-journal)
 
 ;; (defun company-R-objects--prefix ()
 ;;   (unless (ess-inside-string-or-comment-p)
