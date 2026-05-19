@@ -12,7 +12,6 @@
 	  (alist-get 'c++-mode apheleia-mode-alist) '(clang-format)
 	  (alist-get 'c-ts-mode apheleia-mode-alist) '(clang-format)
 	  (alist-get 'c++-ts-mode apheleia-mode-alist) '(clang-format)))
-  :init
   (apheleia-global-mode +1))
 
 (use-package flymake
