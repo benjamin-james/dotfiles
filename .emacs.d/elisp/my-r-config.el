@@ -1,3 +1,10 @@
+
+(defun my/ess-send-buffer-to-repl ()
+  "Send entire buffer to R REPL"
+  (interactive)
+  (ess-eval-buffer nil))
+
+
 (use-package ess
   :ensure t
   :init
@@ -26,6 +33,8 @@
 		#'ess-eval-line)
     (define-key ess-r-mode-map (kbd "C-c C-r")
 		#'ess-eval-region)
+    (define-key ess-r-mode-map (kbd "C-c C-k")
+		#'my/ess-send-buffer-to-repl)
     (define-key ess-r-mode-map (kbd "C-c C-d C-d")
 		#'ess-display-help-on-object)))
 
