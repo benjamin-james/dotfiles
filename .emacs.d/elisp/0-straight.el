@@ -29,4 +29,4 @@
 (straight-use-package 'use-package)
 (require 'use-package)
 (straight-use-package 'project)
-(provide '0-straight.el)
+(provide '0-straight)
