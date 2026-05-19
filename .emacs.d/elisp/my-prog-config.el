@@ -1,12 +1,20 @@
 
 (use-package apheleia
-  :commands (apheleia-mode apheleia-global-mode)
+  :demand t
   :config
   ;; prefer `goimports' instead of default `gofmt'
   (when (executable-find "goimports")
-    (setf (alist-get 'go-mode apheleia-mode-alist) '(goimports)))
+    (setf (alist-get 'go-mode apheleia-mode-alist) '(goimports)
+	  (alist-get 'go-ts-mode apheleia-mode-alist) '(goimports)))
   (when (executable-find "ruff")
-    (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff)))
+    (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff)
+	  (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff)))
+  (when (executable-find "rustfmt")
+    (setf (alist-get 'rustic-mode apheleia-mode-alist) '(rustfmt)
+	  (alist-get 'rust-ts-mode apheleia-mode-alist) '(rustfmt)))
+  (when (executable-find "shfmt")
+    (setf (alist-get 'bash-ts-mode apheleia-mode-alist) '(shfmt)
+	  (alist-get 'sh-mode apheleia-mode-alist) '(shfmt)))
   (when (executable-find "clang-format")
     (setf (alist-get 'c-mode apheleia-mode-alist) '(clang-format)
 	  (alist-get 'c++-mode apheleia-mode-alist) '(clang-format)

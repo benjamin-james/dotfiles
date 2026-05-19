@@ -17,20 +17,12 @@
 (use-package eglot
   :commands (eglot eglot-ensure)
   :demand t
-  :hook ((c-mode . eglot-ensure)
-	 (c-ts-mode . eglot-ensure)
-	 (c++-mode . eglot-ensure)
-	 (c++-ts-mode . eglot-ensure)
-	 (python-mode . eglot-ensure)
-	 (python-ts-mode . eglot-ensure)
-	 (go-mode . eglot-ensure)
-	 (go-ts-mode . eglot-ensure)
-	 (rust-mode . eglot-ensure)
-	 (rust-ts-mode . eglot-ensure))
-
+  :init
+  (add-hook 'prog-mode-hook #'eglot-ensure)
   :config
   (setq eglot-stay-out-of '(company))
   (add-to-list 'eglot-server-programs '((python-mode python-ts-mode) . ("pylsp")))
+  (add-to-list 'eglot-server-programs '((cperl-mode perl-mode perl-ts-mode) . ("pls")))
   (setq-default eglot-workspace-configuration
 		'((:pylsp . (:plugins
 			     (:pycodestyle (:enabled :json-false)
