@@ -4,9 +4,8 @@
 
 (use-package hl-todo
   :ensure t
-  :hook ((prog-mode . hl-todo-mode)
-	 (markdown-mode . hl-todo-mode)
-	 (text-mode . hl-todo-mode))
+  :init
+  (global-hl-todo-mode 1)
   :custom-face
   (hl-todo ((t (:inherit hl-todo :italic t)))))
 
