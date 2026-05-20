@@ -37,5 +37,9 @@
   (set-face-background 'corfu-border (face-attribute 'mode-line-inactive :background)))
 
 
+;;; mac os x settings 
+(setq ns-alternate-modifier 'meta)
+(setq ns-right-alternate-modifier 'none)
+
 (setq inhibit-splash-screen t)
 (provide 'my-visual-config)

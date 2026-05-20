@@ -6,11 +6,12 @@
               ("<tab>" . nil))  ; Unbind the default tab if desired
   :init (global-corfu-mode))
 
+
 (setq tab-always-indent 'complete)
 (use-package orderless
   :demand t
   :config
-  (setq completion-styles '(orderless partial-completion)
+  (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles . (partial-completion))))))
 
