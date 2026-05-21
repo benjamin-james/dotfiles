@@ -18,10 +18,11 @@ SubFolders Verbatim
 Channel mit
 Far :mit-remote:
 Near :mit-local:
-Patterns *
+Patterns INBOX "Sent Items" Drafts "Deleted Items" Archive "Junk Email"
+Sync All
 Create Near
 Remove None
-Expunge None
+Expunge Near
 SyncState *
 
 
@@ -47,8 +48,9 @@ Subfolders Verbatim
 Channel csail
 Far :csail-remote:
 Near :csail-local:
-Patterns *
+Patterns INBOX Drafts Sent Trash Spam Archive
+Sync All
 Create Near
-Expunge None
 Remove None
+Expunge Near
 SyncState *
