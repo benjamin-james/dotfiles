@@ -4,7 +4,6 @@ if hostname -s | grep -qE '^[bc][0-9]+$'; then
 fi
 if hostname -s | grep -Fwq "luria"; then
     export MY_HOST="luria"
-    alias tmux="$HOME/bin/tmux"
 fi
 
 if [ "$MY_HOST" = "luria" ]; then
