@@ -1,0 +1,22 @@
+#!/bin/sh
+# Usage: dotgit <cmd> [args]
+D="git --git-dir=$HOME/.dotgit --work-tree=$HOME"
+
+case "$1" in
+  ls)     shift; $D ls-files "$@" ;;
+  add)    shift; $D add "$@" ;;
+  rm)     shift; $D rm "$@" ;;
+  diff)   shift; $D diff "$@" ;;
+  status) shift; $D status "$@" ;;
+  push)   shift; $D push "$@" ;;
+  pull)   shift; $D pull "$@" ;;
+  log)    shift; $D log --oneline "$@" ;;
+  track)  shift; $D add "$@" && echo "Tracked: $*" ;;
+  untrack)shift; $D rm --cached "$@" ;;
+  bootstrap)
+    git clone --bare https://github.com/benjamin-james/dotfiles "$HOME/.dotgit"
+    $D config --local status.showUntrackedFiles no
+    $D checkout bare 2>/dev/null || echo "Resolve conflicts, then: dotgit checkout"
+    ;;
+  *)      $D "$@" ;;
+esac
