@@ -1,0 +1,90 @@
+#!/usr/bin/env perl
+use warnings;
+use strict;
+use Net::OpenSSH;
+
+my $home_dir = $ENV{HOME} or die "HOME environment variable not set\n";
+
+my %hypervisors = (
+	"kellislab1.csail.mit.edu" => "kl1",
+	"kellislab2.csail.mit.edu" => "kl2",
+        "kellislab3.csail.mit.edu" => "kl3",
+	"kellislab4.csail.mit.edu" => "kl4",
+      );
+
+my $vm_config  = "$home_dir/.config/ssh/vm.conf";
+
+open my $fh, '>', $vm_config or die "Cannot create SSH config at $vm_config: $!\n";
+print $fh "# Auto-generated VM config - ", scalar(localtime), "\n\n";
+
+for my $hv (sort keys %hypervisors) {
+	my $ssh = Net::OpenSSH->new($hv, timeout => 60) or do {
+		warn "Failed to connect to $hv\n";
+		next;
+	};
+	# Fetch DHCP leases for default network
+	my @lease_lines = $ssh->capture(
+		{stdin_data => ''},
+		'LIBVIRT_DEFAULT_URI=qemu:///system virsh net-dhcp-leases default');
+
+	if ($ssh->error) {
+		warn "virsh net-dhcp-leases failed on $hv\n";
+		next;
+	}
+	my $header_line;
+	for my $line (@lease_lines) {
+		if ($line =~ /^\s*Expiry/i &&
+		    $line =~ /\bIP address\b/ &&
+		    $line =~ /\bHostname\b/) {
+			$header_line = $line;
+			last;
+		}
+	}
+	unless ($header_line) {
+		warn "[$hv] Could not locate header with IP address & Hostname. Skipping.\n";
+		next;
+	}
+	my $ip_pos   = index($header_line, 'IP address');
+	my $host_pos = index($header_line, 'Hostname');
+	my $client_pos = index($header_line, 'Client ID');
+
+	if ($ip_pos < 0 || $host_pos <= $ip_pos) {
+		warn "[$hv] Malformed header: IP/Hostname positions invalid. Skipping.\n";
+		next;
+	}
+	# Calculate column widths
+	my $ip_len   = $host_pos - $ip_pos;
+	my $host_len = ($client_pos > $host_pos) 
+	  ? $client_pos - $host_pos 
+	  : (length($header_line) - $host_pos); # Fallback to end of line
+	my %lease_map;
+	for my $line (@lease_lines) {
+		next if $line =~ /^\s*$/ ||
+		  $line =~ /^-+/ ||
+		  index($line, 'IP address') == $ip_pos;
+		# Extract fixed-width columns based on header positions
+		my $ip_raw   = substr($line, $ip_pos, $ip_len);
+		my $host_raw = substr($line, $host_pos, $host_len);
+
+		# Trim whitespace
+		$ip_raw   =~ s/^\s+|\s+$//g;
+		$host_raw =~ s/^\s+|\s+$//g;
+
+		# Skip invalid/placeholder entries
+		next unless $host_raw && $host_raw ne '-' && $ip_raw;
+
+		# Strip CIDR notation (e.g., /24)
+		$ip_raw =~ s{[/]\d+$}{};
+		$lease_map{$host_raw} = $ip_raw;
+
+	}
+	for my $vm (sort keys %lease_map) {
+		my $alias = "$vm.$hypervisors{$hv}";
+		printf $fh "Host %s.%s %s\n",   $vm, $hv, $alias;
+		printf $fh "    HostName %s\n", $lease_map{$vm};
+		printf $fh "    ProxyJump %s\n",  $hv;
+		print  $fh "    User agent\n\n";
+	} 
+}
+close $fh;
+print "SSH config successfully updated at $vm_config\n";
