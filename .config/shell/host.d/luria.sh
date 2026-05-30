@@ -1,4 +1,4 @@
-
+#!/bin/sh
 if hostname -s | grep -qE '^[bc][0-9]+$'; then
     export MY_HOST="luria"
 fi
