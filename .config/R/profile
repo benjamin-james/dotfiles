@@ -1,0 +1,66 @@
+# -*- R -*-
+
+local({
+  options(
+    stringsAsFactors = FALSE,
+    scipen = 5,
+    digits = 7,
+    keep.source = TRUE,
+    download.file.method = "libcurl",
+    pkgType = "source",
+    warnPartialMatchDollar = TRUE,
+    warnPartialMatchAttr = TRUE,
+    warnPartialMatchArgs = TRUE
+  )
+  if (interactive()) {
+    options(
+      error = utils::recover,
+      browserNLdisabled = TRUE
+    )
+  }
+
+  ## renv
+  if (requireNamespace("renv", quietly = TRUE)) {
+    try(renv::autoload(), silent = TRUE)
+  }
+})
+
+.bj <- new.env(parent = emptyenv())
+.bj$attach <- function(pkgs, quietly = FALSE) {
+  missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+  if (length(missing)) {
+    stop(
+      "Missing packages: ", paste(missing, collapse = ", "),
+      "\nInstall them before continuing.",
+      call. = FALSE
+    )
+  }
+  for (pkg in pkgs) {
+    if (quietly) {
+      suppressPackageStartupMessages(
+        library(pkg, character.only = TRUE)
+      )
+    } else {
+      library(pkg, character.only = TRUE)
+    }
+  }
+  invisible(pkgs)
+}
+.bj$tidy <- function(q = TRUE) {
+  .bj$attach("tidyverse", quietly = q)
+}
+.bj$se <- function(q = TRUE) {
+  .bj$attach(
+    c("SummarizedExperiment", "SingleCellExperiment"),
+    quietly = q
+  )
+}
+.bj$ht <- function(q = TRUE) {
+  .bj$attach(
+    c("ComplexHeatmap", "circlize"),
+    quietly = q
+  )
+}
+.bj$deg <- function(q = TRUE) {
+  .bj$attach(c("DESeq2", "edgeR"), quietly = q)
+}
