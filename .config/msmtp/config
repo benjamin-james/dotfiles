@@ -1,0 +1,24 @@
+defaults
+auth on
+tls on
+logfile ~/.msmtp.log
+
+account mit
+host outgoing.mit.edu
+port 465
+from benjames@mit.edu
+user benjames
+auth login
+tls on
+tls_starttls off
+passwordeval mail-secret get smtp outgoing.mit.edu benjames
+
+account csail
+host outgoing.csail.mit.edu
+port 587
+from benjames@csail.mit.edu
+user benjames
+auth cram-md5
+tls on
+tls_starttls on
+passwordeval mail-secret get smtp outgoing.csail.mit.edu benjames 

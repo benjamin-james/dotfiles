@@ -1,4 +1,3 @@
-#Used alot from github's ignore 
 *.o
 *.ko
 *.so
@@ -14,6 +13,11 @@
 *.so
 *.so.*
 *.dylib
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+Icon?
 
 *.exe
 *.out
@@ -36,8 +40,36 @@ Makefile.in
 /aclocal.m4
 /compile
 /configure
+config.log
+config.status
 /depcomp
 /install-sh
 /missing
 /m4
 /stamp-h1
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+
+##
+.envrc
+.env
+.env.local
+
+*.key
+*.pem
+*.crt
+*.p12
+*.cer
+*.der
+*.csr
+*.secrets
+*.credentials
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+*.token
+*.auth
+*.env

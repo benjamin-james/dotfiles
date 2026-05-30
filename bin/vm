@@ -1,0 +1,388 @@
+#!/usr/bin/env python3
+
+import argparse
+import hashlib
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+
+DEF_VMPOOL = "default"
+DEF_URL = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2"
+DEF_OS_VARIANT = "debian13"
+DEF_NETWORK = "default"
+DEF_VCPUS = 2
+DEF_VMEM = 2048
+
+QCOW2_MAGIC = b"QFI\xfb"
+
+
+class Fatal(Exception):
+    pass
+
+
+def die(msg):
+    raise Fatal(msg)
+
+
+def positive_int(val):
+    if not val.isdigit() or (len(val) > 1 and val[0] == "0") or int(val) < 1:
+        raise argparse.ArgumentTypeError(f"requires a positive integer, got '{val}'")
+    return int(val)
+
+
+def run_cmd(*args):
+    r = subprocess.run(args, capture_output=True, text=True)
+    if r.returncode != 0:
+        die(f"Command failed: {' '.join(args)}\n{r.stdout}{r.stderr}")
+    return r.stdout
+
+
+def run_cmd_ok(*args):
+    try:
+        run_cmd(*args)
+        return True
+    except Fatal:
+        return False
+
+
+class Virsh:
+    def __init__(self, uri):
+        self.uri = uri
+
+    def __call__(self, *args):
+        return run_cmd("virsh", "-c", self.uri, *args)
+
+    def ok(self, *args):
+        return run_cmd_ok("virsh", "-c", self.uri, *args)
+
+
+def verify_commands(*cmds):
+    missing = [c for c in cmds if not shutil.which(c)]
+    if missing:
+        die(f"Missing commands: {' '.join(missing)}. Install them and try again.")
+
+
+def parse_libvirt_uri():
+    uri = os.environ.get("LIBVIRT_DEFAULT_URI", "").strip()
+    if not uri:
+        die(
+            """LIBVIRT_DEFAULT_URI is not set. Try:
+    export LIBVIRT_DEFAULT_URI=qemu:///system
+or
+    export LIBVIRT_DEFAULT_URI=qemu+ssh://user@host/system"""
+        )
+    is_ssh = "+ssh://" in uri or "+libssh://" in uri
+    return is_ssh, uri
+
+
+def parse_checksum(content, filename):
+    for line in content.splitlines():
+        parts = line.split(None, 1)
+        if len(parts) != 2:
+            continue
+        hash_val, name = parts
+        name = name.lstrip("./").lstrip("*")
+        if name == filename:
+            return hash_val
+    return None
+
+
+def sha512sum(path):
+    h = hashlib.sha512()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def verify_qcow2(path):
+    with open(path, "rb") as f:
+        if f.read(4) != QCOW2_MAGIC:
+            die("Downloaded file does not appear to be a valid qcow2 image")
+
+
+def cmd_create(args):
+    source = os.path.basename(args.url)
+    checksum_url = args.checksum_url or os.path.dirname(args.url) + "/SHA512SUMS"
+    checksum_explicit = args.checksum_url is not None
+
+    is_ssh, uri = parse_libvirt_uri()
+    verify_commands("virsh", "virt-install", "wget")
+    v = Virsh(uri)
+
+    if not os.path.isfile(args.cloud_config):
+        die(f"Cloud-init config '{args.cloud_config}' not found.")
+
+    def base_volume_exists():
+        return v.ok("vol-info", "--pool", args.pool, "--vol", source)
+
+    if not v.ok("pool-info", args.pool):
+        die(f"Storage pool '{args.pool}' not found.")
+    if not v.ok("net-info", args.network):
+        die(f"Network '{args.network}' not found.")
+    if v.ok("dominfo", "--domain", args.name):
+        die(f"VM '{args.name}' already exists.")
+
+    def verify_checksum(dest):
+        try:
+            content = run_cmd(
+                "wget", "-q", "--timeout=30", "--tries=3", "-O", "-", checksum_url
+            )
+        except Fatal:
+            if checksum_explicit:
+                die(f"Failed to download checksum file from '{checksum_url}'")
+            print("Warning: Could not download checksum file, skipping verification")
+            return False
+
+        expected = parse_checksum(content, source)
+        if expected is None:
+            if checksum_explicit:
+                die(f"No checksum entry for '{source}' found in checksum file")
+            print(
+                f"Warning: No checksum entry for '{source}' found, skipping verification"
+            )
+            return False
+
+        actual = sha512sum(dest)
+        if actual != expected:
+            die(f"Checksum mismatch for '{source}': expected {expected}, got {actual}")
+
+        print("Checksum verified.")
+        return True
+
+    def upload_as_volume(file_path):
+        img_size_mb = int(os.path.getsize(file_path) / 1048576) + 1
+
+        print(f"Creating volume '{source}' ({img_size_mb}M) in pool '{args.pool}'...")
+        try:
+            v(
+                "vol-create-as",
+                args.pool,
+                source,
+                f"{img_size_mb}M",
+                "--format",
+                "qcow2",
+            )
+        except Fatal as e:
+            if base_volume_exists():
+                die(
+                    f"Volume '{source}' created by another process concurrently. Please retry."
+                )
+            die(f"Failed to create volume '{source}': {e}")
+
+        try:
+            print("Uploading image to volume...")
+            v("vol-upload", "--pool", args.pool, "--vol", source, file_path)
+        except Fatal:
+            try:
+                v("vol-delete", "--pool", args.pool, "--vol", source)
+            except Fatal as e2:
+                print(f"Warning: failed to clean up volume '{source}': {e2}")
+            raise
+
+    def import_base_volume():
+        if args.force and base_volume_exists():
+            print(f"Deleting existing base image '{source}'...")
+            v("vol-delete", "--pool", args.pool, "--vol", source)
+
+        if base_volume_exists():
+            return
+
+        tmpdir = tempfile.mkdtemp()
+        dest = os.path.join(tmpdir, source)
+
+        print(f"{'Remote' if is_ssh else 'Local'} URI detected: {uri}")
+
+        try:
+            print(f"Downloading cloud image to: {dest}")
+            run_cmd("wget", "--timeout=30", "--tries=3", "-O", dest, args.url)
+            verify_qcow2(dest)
+            verify_checksum(dest)
+            upload_as_volume(dest)
+        except Fatal:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+            raise
+
+        shutil.rmtree(tmpdir, ignore_errors=True)
+
+    vmvol = f"vm-{args.name}.qcow2"
+    if v.ok("vol-info", "--pool", args.pool, "--vol", vmvol):
+        die(f"Volume '{vmvol}' already exists.")
+
+    import_base_volume()
+
+    print(f"Cloning '{source}' -> '{vmvol}' in pool '{args.pool}'...")
+    try:
+        v("vol-clone", "--pool", args.pool, "--vol", source, "--newname", vmvol)
+
+        if args.size:
+            print(f"Resizing volume '{vmvol}' to {args.size}G...")
+            v("vol-resize", "--pool", args.pool, "--vol", vmvol, f"{args.size}G")
+
+        print(f"Creating VM '{args.name}'...")
+        run_cmd(
+            "virt-install",
+            "--connect",
+            uri,
+            "--name",
+            args.name,
+            "--memory",
+            str(args.memory),
+            "--vcpus",
+            str(args.vcpus),
+            "--disk",
+            f"vol={args.pool}/{vmvol},bus=virtio,format=qcow2",
+            "--os-variant",
+            args.os_variant,
+            "--network",
+            f"network={args.network},model=virtio",
+            "--virt-type",
+            "kvm",
+            "--import",
+            "--cloud-init",
+            f"user-data={args.cloud_config}",
+            "--wait",
+            "0",
+            "--noautoconsole",
+            "--console",
+            "pty,target_type=virtio",
+            "--video",
+            "none",
+            f"--qemu-commandline=-smbios type=1,serial=ds=nocloud;h={args.name}",
+        )
+    except Fatal:
+        print(f"Failed, cleaning up cloned volume '{vmvol}'...")
+        try:
+            v("vol-delete", "--pool", args.pool, "--vol", vmvol)
+        except Fatal as e2:
+            print(f"Warning: failed to clean up volume '{vmvol}': {e2}")
+        raise
+
+
+def cmd_destroy(args):
+    is_ssh, uri = parse_libvirt_uri()
+    verify_commands("virsh")
+    v = Virsh(uri)
+
+    if not v.ok("dominfo", "--domain", args.name):
+        die(f"VM '{args.name}' does not exist.")
+
+    state = v("domstate", "--domain", args.name).strip()
+    if state != "shut off":
+        print(f"Stopping VM '{args.name}' (state: {state})...")
+        v("destroy", "--domain", args.name)
+
+    print(f"Undefining VM '{args.name}'...")
+    v(
+        "undefine",
+        "--domain",
+        args.name,
+        "--remove-all-storage",
+        "--managed-save",
+        "--snapshots-metadata",
+    )
+
+    if args.remove_base:
+        source = os.path.basename(args.url or DEF_URL)
+        pool = DEF_VMPOOL
+        if v.ok("vol-info", "--pool", pool, "--vol", source):
+            print(f"Deleting base image '{source}' from pool '{pool}'...")
+            v("vol-delete", "--pool", pool, "--vol", source)
+        else:
+            print(f"Base image '{source}' not found in pool '{pool}', skipping.")
+
+    print(f"VM '{args.name}' destroyed.")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog=os.path.basename(sys.argv[0]),
+        description="Deploy and destroy libvirt VMs",
+    )
+    sub = parser.add_subparsers(dest="command")
+
+    p = sub.add_parser(
+        "create", description="Deploy a cloud image to a libvirt-managed hypervisor."
+    )
+    p.add_argument("-n", dest="name", required=True, help="Name of VM")
+    p.add_argument(
+        "-y", dest="cloud_config", required=True, help="Cloud-init config YAML"
+    )
+    p.add_argument(
+        "-c",
+        dest="vcpus",
+        type=positive_int,
+        default=DEF_VCPUS,
+        help=f"# CPUs (default: {DEF_VCPUS})",
+    )
+    p.add_argument(
+        "-m",
+        dest="memory",
+        type=positive_int,
+        default=DEF_VMEM,
+        help=f"Memory in MB (default: {DEF_VMEM})",
+    )
+    p.add_argument(
+        "-s",
+        dest="size",
+        type=positive_int,
+        default=None,
+        help="Resize disk to SIZE GB",
+    )
+    p.add_argument(
+        "-p",
+        dest="pool",
+        default=DEF_VMPOOL,
+        help=f"Storage pool (default: {DEF_VMPOOL})",
+    )
+    p.add_argument(
+        "-k",
+        dest="network",
+        default=DEF_NETWORK,
+        help=f"Network (default: {DEF_NETWORK})",
+    )
+    p.add_argument(
+        "-u",
+        dest="url",
+        default=DEF_URL,
+        help="Base image URL (default: Debian trixie)",
+    )
+    p.add_argument(
+        "-o",
+        dest="os_variant",
+        default=DEF_OS_VARIANT,
+        help=f"OS variant (default: {DEF_OS_VARIANT})",
+    )
+    p.add_argument(
+        "-d", dest="checksum_url", default=None, help="SHA512 checksum file URL"
+    )
+    p.add_argument(
+        "-f", dest="force", action="store_true", help="Force re-download of base image"
+    )
+
+    p = sub.add_parser(
+        "destroy", description="Remove a VM and its associated storage volume."
+    )
+    p.add_argument("-n", dest="name", required=True, help="Name of VM")
+    p.add_argument("-u", dest="url", default=None, help="Base image URL (for -b)")
+    p.add_argument(
+        "-b", dest="remove_base", action="store_true", help="Also delete the base image"
+    )
+
+    args = parser.parse_args()
+
+    if not args.command:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
+    try:
+        {"create": cmd_create, "destroy": cmd_destroy}[args.command](args)
+    except Fatal as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

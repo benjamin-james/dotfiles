@@ -1,21 +1,12 @@
-;;; my-perl-config.el --- Summary
-;;;
-;;; Commentary:
-;;; Perl config
-;;;
-;;; Code:
 
-;;; Replace perl-mode with cperl-mode
-(mapc
- (lambda (pair)
-   (if (eq (cdr pair) 'perl-mode)
-       (setcdr pair 'cperl-mode)))
- (append auto-mode-alist interpreter-mode-alist))
 
-(add-hook 'cperl-mode-hook
-	  (lambda ()
-	    (local-set-key (kbd "C-h m") 'cperl-perldoc)))
-(defvar cperl-indent-level tab-width)
+(add-to-list 'auto-mode-alist '("\\.\\(pl\\|pm\\)$" . cperl-mode))
 
-(provide 'my-perl-config)
-;;; my-perl-config.el ends here
+(fset 'perl-mode 'cperl-mode)
+(setq cperl-indent-parens-as-block t
+      cperl-indent-level 8
+      cperl-close-paren-offset (- cperl-indent-level)
+      cperl-continued-statement-offset cperl-indent-level)
+
+
+
