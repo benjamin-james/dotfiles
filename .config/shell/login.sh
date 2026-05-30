@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "${_DOT_LOGIN_SOURCED:-0}" -eq 1 ]; then
-  return 0 2>/dev/null || exit 0
+  return
 fi
 _DOT_LOGIN_SOURCED=1
 _DOTBASE=${_DOTBASE:-"$HOME/.config/shell"}

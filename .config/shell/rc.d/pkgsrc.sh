@@ -3,7 +3,7 @@ _is_interactive || return 0
 
 bootstrap_pkgsrc() {
     REVISION="${1:?need REVISION like 2025Q3}"
-    OPT=$(readlink -f $HOME/opt/)
+    OPT=$(readlink -f "$HOME/opt/")
     LOCALBASE="$OPT/pkg-$REVISION"
     PKGSRCDIR="$OPT/src/pkgsrc-$REVISION"
     WRKOBJDIR="$OPT/var/obj-$REVISION"
@@ -37,7 +37,7 @@ EOF
 --make-jobs=$(
 (getconf _NPROCESSORS_ONLN 2>/dev/null) || echo 1
 )"
-    (cd "$PKGSRCDIR/bootstrap" && sh ./bootstrap $BOOTSTRAP_ARGS ) || {
+    (cd "$PKGSRCDIR/bootstrap" && sh ./bootstrap "$BOOTSTRAP_ARGS" ) || {
         echo "bootstrap failed" >&2
         rm -f "$MKFRAG"
         return 1

@@ -5,8 +5,8 @@ MACPORTS_PREFIX=${MACPORTS_PREFIX:-/opt/local}
 
 if ! command -v port >/dev/null 2>&1; then
   port() {
-    local mp_port="$MACPORTS_PREFIX/bin/port"
-    local mp_path="$MACPORTS_PREFIX/bin:$MACPORTS_PREFIX/sbin:$PATH"
+    mp_port="$MACPORTS_PREFIX/bin/port"
+    mp_path="$MACPORTS_PREFIX/bin:$MACPORTS_PREFIX/sbin:$PATH"
 
     [ -x "$mp_port" ] || { printf >&2 'MacPorts not found at %s\n' "$MACPORTS_PREFIX"; return 127; }
 
@@ -26,5 +26,7 @@ if ! command -v port >/dev/null 2>&1; then
         PATH="$mp_path" "$mp_port" "$@"
         ;;
     esac
+    unset my_port
+    unset mp_path
   }
 fi
