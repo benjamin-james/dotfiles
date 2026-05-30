@@ -17,6 +17,7 @@
 
 (use-package eglot-jl
   :ensure t
+  :demand t
   :config
   (eglot-jl-init))
 
