@@ -1,0 +1,52 @@
+
+# ---------- Interface ----------
+set pagination off
+set confirm on
+set verbose off
+
+# ---------- Command history ----------
+set history filename ~/.local/share/gdb_history
+set history save on
+set history size 10000
+set history remove-duplicates 100
+set history expansion off
+
+# ---------- pretty printing ----------
+set print pretty on
+set print object on
+set print asm-demangle on
+set print symbol-filename on
+
+set print elements 200
+set print characters 200
+set print repeats 10
+set print frame-arguments scalars
+set print raw-values off
+
+# ---------- Breakpoints ----------
+set breakpoint pending on
+
+# ---------- Assembly ----------
+set disassembly-flavor intel
+
+# ---------- Convenience commands ----------
+define bta
+  thread apply all backtrace
+end
+document bta
+  Show a backtrace for every thread.
+end
+
+define btfa
+  thread apply all backtrace full
+end
+document btfa
+  Show full backtraces, including locals, for every thread.
+end
+
+define vec
+  info vector
+end
+document vec
+  Show SIMD/vector registers, when supported by the target.
+end

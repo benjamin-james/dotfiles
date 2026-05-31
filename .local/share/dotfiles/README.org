@@ -24,6 +24,14 @@ and for rc, whether =~/.bashrc=, =~/.kshrc=, =~/.zshrc=:
 
 *** emacs
 run `emacs` and straight.el will auto-download
+
+**** magit trick for gcfg
+#+begin_src sh
+echo "gitdir: $HOME/.dotgit" > ~/.git
+#+end_src
+
+
+
 *** lisp
 #+begin_src bash
   wget -nc -P /tmp http://beta.quicklisp.org/quicklisp.lisp

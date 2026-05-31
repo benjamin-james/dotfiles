@@ -16,7 +16,13 @@ case "$1" in
   bootstrap)
     git clone --bare https://github.com/benjamin-james/dotfiles "$HOME/.dotgit"
     $D config --local status.showUntrackedFiles no
-    $D checkout bare 2>/dev/null || echo "Resolve conflicts, then: dotgit checkout"
+    $D checkout bare 2>/dev/null || echo "Resolve conflicts, then: dotgit checkout" && {
+	    printf "No addition of code to profile/login was added. To add, put\n"
+	    printf '[ -r "$HOME/.config/shell/login.sh" ] && . "$HOME/.config/shell/login.sh"\n'
+	    printf "into .profile (or .bash_profile if that exists) and add\n"
+	    printf '[ -r "$HOME/.config/shell/interactive.sh" ] && . "$HOME/.config/shell/interactive.sh"\n'
+	    printf "into .bashrc/.zshrc/.kshrc for per-session interactive usage\n"
+    }
     ;;
   *)      $D "$@" ;;
 esac
