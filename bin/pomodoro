@@ -1,0 +1,75 @@
+#!/bin/sh
+
+notify() {
+	OS=$(uname -s 2>/dev/null || echo unknown)
+	case "$OS" in
+	Darwin) tsp -n osascript -e "display notification \"$1\" with title \"Pomodoro\"" ;;
+	Linux) tsp -n notify-send -a Pomodoro "$1" -u critical ;;
+	esac
+}
+
+detect_sleep() {
+	if sleep 0.001s 2>/dev/null; then
+		printf sleep
+		return
+	fi
+	if command -v gsleep >/dev/null 2>&1 && gsleep 0.001s 2>/dev/null; then
+		printf gsleep
+		return
+	fi
+	printf "No sleep command supporting fractional durations with suffixes\n" >&2
+	exit 1
+}
+
+is_valid_duration() {
+	echo "$1" | grep -E -q '^[0-9]+(\.[0-9]+)?[smhd]?$'
+}
+
+usage() {
+	printf "Usage: %s WORK BREAK\n" "$0" >&2
+	printf "  WORK  - work duration (e.g. 25m, 1.5h, 90s, 300)\n" >&2
+	printf "  BREAK - break duration (e.g. 5m, 0.5h, 300s, 300)\n" >&2
+	exit 1
+}
+
+command -v tsp >/dev/null 2>&1 || {
+	printf "Task spooler (tsp) not found, please install (or link tsp to ts in case installed as ts)\n" >&2
+	exit 1
+}
+
+if [ -z "$XDG_RUNTIME_DIR" ] || [ ! -d "$XDG_RUNTIME_DIR" ]; then
+	XDG_RUNTIME_DIR="/run/user/$(id -u)"
+	if [ ! -d "$XDG_RUNTIME_DIR" ]; then
+		XDG_RUNTIME_DIR="/tmp/xdg-runtime-$(id -u)"
+		mkdir -p -m 0700 "$XDG_RUNTIME_DIR"
+	fi
+fi
+
+TS_SOCKET="${XDG_RUNTIME_DIR}/pomodoro"
+export TS_SOCKET
+
+if [ $# -eq 0 ]; then
+	printf "Queue: %s\n" "$TS_SOCKET"
+	exec tsp -l
+fi
+
+if [ $# -ne 2 ]; then
+	usage
+fi
+
+if ! is_valid_duration "$1" || ! is_valid_duration "$2"; then
+	printf "Invalid duration. Use numbers with optional suffix (s/m/h/d)\n" >&2
+	usage
+fi
+
+SLEEP=$(detect_sleep)
+
+printf "Spooling pomodoros: work %s, break %s\n" "$1" "$2"
+tsp -S 1
+notify "Work for $1"
+tsp -n "$SLEEP" "$1"
+notify "Break for $2"
+tsp -n "$SLEEP" "$2"
+notify "Back to work"
+
+exec tsp -l
