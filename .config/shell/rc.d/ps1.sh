@@ -3,28 +3,45 @@
 _is_interactive || return 0
 
 if _have tmux; then
-    tmux_sock="${TMUX%%,*}"
-    if [ -n "$TMUX" ] && [ -S "${tmux_sock}" ] && tmux -S "${tmux_sock}" list-sessions >/dev/null 2>&1; then
-	TMUX_TTY=$(tmux -S "${tmux_sock}" display-message -p '#{pane_tty}')
-	TMUX_PTS=${TMUX_TTY##*/}
-	TMUX_HOST=$(hostname -s)
-	TMUX_STY="$(tmux -S ${tmux_sock} display-message -p '#S').${TMUX_PTS}.${TMUX_HOST}"
-    else
-	unset TMUX
-    fi
+	tmux_sock="${TMUX%%,*}"
+	if [ -n "$TMUX" ] && [ -S "${tmux_sock}" ] && tmux -S "${tmux_sock}" list-sessions >/dev/null 2>&1; then
+		TMUX_TTY=$(tmux -S "${tmux_sock}" display-message -p '#{pane_tty}')
+		TMUX_PTS=${TMUX_TTY##*/}
+		TMUX_HOST=$(hostname -s)
+		TMUX_STY="$(tmux -S ${tmux_sock} display-message -p '#S').${TMUX_PTS}.${TMUX_HOST}"
+	else
+		unset TMUX
+	fi
+	unset tmux_sock
 fi
 _session_label=$(hostname -s 2>/dev/null || hostname)
 if [ -n "$STY" ]; then
-    _session_label="$STY"
+	_session_label="$STY"
 elif [ -n "$TMUX_STY" ]; then
-    _session_label="$TMUX_STY"
+	_session_label="$TMUX_STY"
 fi
 
 if _have tput && [ "$(tput colors 2>/dev/null)" -ge 8 ]; then
-  # Using tput inline; \[...\] protects nonprinting chars for bash
-  PS1="\[\e]0;\u@${_session_label}: \w\a\]"\
-"$(tput setaf 2)\u@${_session_label}$(tput sgr0):"\
-"$(tput setaf 4)\w$(tput sgr0)\$ "
-else
-  PS1="\u@${_session_label}:\w\$ "
+	_ps1_green="$(tput setaf 2)"
+	_ps1_blue="$(tput setaf 4)"
+	_ps1_reset="$(tput sgr0)"
 fi
+
+if [ -n "${BASH_VERSION:-}" ]; then
+	if [ -n "${_ps1_green:-}" ]; then
+		### also sets title
+		PS1="\[\e]0;\u@${_session_label}: \w\a\]""\
+${_ps1_green}\u@${_session_label}${_ps1_reset}:""\
+${_ps1_blue}\w${_ps1_reset}\$ "
+	else
+		PS1="\u@${_session_label}:\w\$ "
+	fi
+else
+	### zsh/ksh
+	if [ -n "${_ps1_green:-}" ]; then
+		PS1="${_ps1_green}[\$(whoami)@${_session_label}${_ps1_reset}:${_ps1_blue}\$PWD${_ps1_reset}]$ "
+	else
+		PS1='[$(whoami)@${_session_label} $PWD]$ '
+	fi
+fi
+unset _ps1_green _ps1_blue _ps1_reset _session_label
