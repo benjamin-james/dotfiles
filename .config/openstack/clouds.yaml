@@ -1,0 +1,10 @@
+  clouds:
+    csail:
+      auth:
+        project_name: usersandbox_benjames
+        username: benjames@csail.mit.edu
+        auth_url: https://keystone.csail.mit.edu:35358/
+        user_domain_name: Default
+        project_domain_name: Default
+      region_name: CSAIL_Stata
+      identity_api_version: 3
