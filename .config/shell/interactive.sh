@@ -5,10 +5,10 @@ _DOTBASE=${_DOTBASE:-"$HOME/.config/shell"}
 
 _sourcedir "${_DOTBASE}/rc.d"
 
-if [ -n "$STY" ]; then
+if [ -n "${STY:-}" ]; then
 	export INSIDE_SCREEN=1
 fi
 
-if [ -n "$TMUX" ]; then
+if [ -n "${TMUX:-}" ]; then
 	export INSIDE_TMUX=1
 fi
