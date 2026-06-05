@@ -21,10 +21,14 @@ elif [ -n "${TMUX_STY:-}" ]; then
 	_session_label="$TMUX_STY"
 fi
 
-if _have tput && [ "$(tput colors 2>/dev/null)" -ge 8 ]; then
-	_ps1_green="$(tput setaf 2)"
-	_ps1_blue="$(tput setaf 4)"
-	_ps1_reset="$(tput sgr0)"
+if _have tput; then
+	_ncolor="$(tput colors 2>/dev/null)"
+	if [ "${_ncolor:-0}" -ge 8 ]; then
+		_ps1_green="$(tput setaf 2)"
+		_ps1_blue="$(tput setaf 4)"
+		_ps1_reset="$(tput sgr0)"
+	fi
+	unset _ncolor
 fi
 
 if [ -n "${BASH_VERSION:-}" ]; then
@@ -35,12 +39,6 @@ ${_ps1_green}\u@${_session_label}${_ps1_reset}:""\
 ${_ps1_blue}\w${_ps1_reset}\$ "
 	else
 		PS1="\u@${_session_label}:\w\$ "
-	fi
-else
-	if [ -n "${_ps1_green:-}" ]; then
-		PS1="${_ps1_green}[\$(whoami)@${_session_label}${_ps1_reset}:${_ps1_blue}\$PWD${_ps1_reset}]$ "
-	else
-		PS1='[$(whoami)@${_session_label} $PWD]$ '
 	fi
 fi
 unset _ps1_green _ps1_blue _ps1_reset _session_label
