@@ -3,26 +3,56 @@
 D="git --git-dir=$HOME/.dotgit --work-tree=$HOME"
 
 case "$1" in
-  ls)     shift; $D ls-files "$@" ;;
-  add)    shift; $D add "$@" ;;
-  rm)     shift; $D rm "$@" ;;
-  diff)   shift; $D diff "$@" ;;
-  status) shift; $D status "$@" ;;
-  push)   shift; $D push "$@" ;;
-  pull)   shift; $D pull "$@" ;;
-  log)    shift; $D log --oneline "$@" ;;
-  track)  shift; $D add "$@" && echo "Tracked: $*" ;;
-  untrack)shift; $D rm --cached "$@" ;;
-  bootstrap)
-    git clone --bare https://github.com/benjamin-james/dotfiles "$HOME/.dotgit"
-    $D config --local status.showUntrackedFiles no
-    $D checkout bare 2>/dev/null || echo "Resolve conflicts, then: dotgit checkout" && {
-	    printf "No addition of code to profile/login was added. To add, put\n"
-	    printf '[ -r "$HOME/.config/shell/login.sh" ] && . "$HOME/.config/shell/login.sh"\n'
-	    printf "into .profile (or .bash_profile if that exists) and add\n"
-	    printf '[ -r "$HOME/.config/shell/interactive.sh" ] && . "$HOME/.config/shell/interactive.sh"\n'
-	    printf "into .bashrc/.zshrc/.kshrc for per-session interactive usage\n"
-    }
-    ;;
-  *)      $D "$@" ;;
+ls)
+	shift
+	$D ls-files "$@"
+	;;
+add)
+	shift
+	$D add "$@"
+	;;
+rm)
+	shift
+	$D rm "$@"
+	;;
+diff)
+	shift
+	$D diff "$@"
+	;;
+status)
+	shift
+	$D status "$@"
+	;;
+push)
+	shift
+	$D push "$@"
+	;;
+pull)
+	shift
+	$D pull "$@"
+	;;
+log)
+	shift
+	$D log --oneline "$@"
+	;;
+track)
+	shift
+	$D add "$@" && echo "Tracked: $*"
+	;;
+untrack)
+	shift
+	$D rm --cached "$@"
+	;;
+bootstrap)
+	git clone --bare https://github.com/benjamin-james/dotfiles "$HOME/.dotgit"
+	$D config --local status.showUntrackedFiles no
+	$D checkout master 2>/dev/null || echo "Resolve conflicts, then: $0 checkout" && {
+		printf "No addition of code to profile/login was added. To add, put\n"
+		printf '[ -r "$HOME/.config/shell/login.sh" ] && . "$HOME/.config/shell/login.sh"\n'
+		printf "into .profile (or .bash_profile if that exists) and add\n"
+		printf '[ -r "$HOME/.config/shell/interactive.sh" ] && . "$HOME/.config/shell/interactive.sh"\n'
+		printf "into .bashrc/.zshrc/.kshrc/.shrc for per-session interactive usage\n"
+	}
+	;;
+*) $D "$@" ;;
 esac
