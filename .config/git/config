@@ -3,9 +3,20 @@
 	email = benjames@mit.edu
 [pull]
 	rebase = true
+	ff = only
 [init]
 	defaultBranch = main
+[branch]
+    sort = -committerdate
+
+[apply]
+    whitespace = fix
+
+[tag]
+    sort = version:refname
+
 [credential]
 	helper = cache
+
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+	pushInsteadOf = https://github.com/
