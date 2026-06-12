@@ -25,6 +25,18 @@
 (set-face-foreground 'trailing-whitespace (face-attribute 'default :foreground))
 (set-face-background 'trailing-whitespace (face-attribute 'secondary-selection :background))
 
+(defun my-disable-trailing-whitespace ()
+  "Disable trailing whitespace visibility in the current buffer."
+  (setq show-trailing-whitespace nil))
+
+(add-hook 'eshell-mode-hook #'my-disable-trailing-whitespace)
+(add-hook 'eat-mode-hook #'my-disable-trailing-whitespace)
+(add-hook 'eww-mode-hook #'my-disable-trailing-whitespace)
+
+(use-package nyan-mode
+  :init
+  (nyan-mode))
+
 (with-eval-after-load 'eglot
   (set-face-foreground 'eglot-mode-line (face-attribute 'mode-line :foreground))
   (set-face-background 'eglot-mode-line (face-attribute 'mode-line :background)))
