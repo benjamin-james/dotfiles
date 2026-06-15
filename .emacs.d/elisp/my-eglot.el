@@ -24,7 +24,7 @@
   (setq eglot-stay-out-of '(company))
   (add-to-list 'eglot-ignored-server-capabilites :documentOnTypeFormattingProvider) ;; use other formatting tools instead
   (add-to-list 'eglot-server-programs '((python-mode python-ts-mode) . ("pylsp")))
-  (add-to-list 'eglot-server-programs '((cperl-mode perl-mode perl-ts-mode) . ("pls")))
+  (add-to-list 'eglot-server-programs '((cperl-mode perl-mode perl-ts-mode) . ("perlbrew" "exec" "pls")))
   (setq-default eglot-workspace-configuration
 		'((:pylsp . (:plugins
 			     (:pycodestyle (:enabled :json-false)
