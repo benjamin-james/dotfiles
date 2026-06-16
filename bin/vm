@@ -14,6 +14,7 @@ DEF_OS_VARIANT = "debian13"
 DEF_NETWORK = "default"
 DEF_VCPUS = 2
 DEF_VMEM = 2048
+DEF_SIZE = 10
 
 QCOW2_MAGIC = b"QFI\xfb"
 
@@ -217,7 +218,7 @@ def cmd_create(args):
     try:
         v("vol-clone", "--pool", args.pool, "--vol", source, "--newname", vmvol)
 
-        if args.size:
+        if args.size > 1:  ### zero is not allowed
             print(f"Resizing volume '{vmvol}' to {args.size}G...")
             v("vol-resize", "--pool", args.pool, "--vol", vmvol, f"{args.size}G")
 
@@ -328,8 +329,8 @@ def main():
         "-s",
         dest="size",
         type=positive_int,
-        default=None,
-        help="Resize disk to SIZE GB",
+        default=DEF_SIZE,
+        help=f"Resize disk to SIZE GB (default: {DEF_SIZE}",
     )
     p.add_argument(
         "-p",
