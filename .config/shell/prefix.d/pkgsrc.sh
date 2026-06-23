@@ -1,7 +1,8 @@
 #!/bin/sh
 
 if [ -z "${MY_PKGSRC:-}" ]; then
-	for pfx in "$HOME/opt/pkg-2025Q2/" "$HOME/opt/pkg-2025Q3" "$HOME/opt/pkg-2025Q4" "$HOME/opt/pkg-2026Q1"; do
+	for pfx in "$HOME/opt/pkg-2025Q1" "$HOME/opt/pkg-2025Q3" "$HOME/opt/pkg-2025Q4" \
+		   "$HOME/opt/pkg-2026Q1" "$HOME/opt/pkg-2026Q2"; do
 		if [ -d "${pfx}/bin" ] && [ -d "${pfx}/sbin" ]; then
 			MY_PKGSRC=$(readlink -f "${pfx}")
 			export MY_PKGSRC
