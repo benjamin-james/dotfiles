@@ -37,7 +37,7 @@ EOF
 --make-jobs=$(
 (getconf _NPROCESSORS_ONLN 2>/dev/null) || echo 1
 )"
-    (cd "$PKGSRCDIR/bootstrap" && sh ./bootstrap "$BOOTSTRAP_ARGS" ) || {
+    (cd "$PKGSRCDIR/bootstrap" && sh ./bootstrap $BOOTSTRAP_ARGS ) || {
         echo "bootstrap failed" >&2
         rm -f "$MKFRAG"
         return 1
