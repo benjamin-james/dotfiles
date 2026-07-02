@@ -10,6 +10,8 @@ my %hypervisors = (
 	"kellislab2.csail.mit.edu" => "kl2",
         "kellislab3.csail.mit.edu" => "kl3",
 	"kellislab4.csail.mit.edu" => "kl4",
+	"jibx" => "jx",
+	"jiby" => "jy",
       );
 
 my $vm_config  = "$home_dir/.config/ssh/vm.conf";
