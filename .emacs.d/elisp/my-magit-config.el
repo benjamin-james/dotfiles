@@ -11,4 +11,7 @@
   :bind (("C-x g" . magit-status)
          ("C-x C-g" . magit-status)))
 
+(use-package forge
+  :after magit)
+
 (provide 'my-magit-config)
