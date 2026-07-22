@@ -214,8 +214,15 @@ def cmd_create(args):
 
     import_base_volume()
 
-    print(f"Cloning '{source}' -> '{vmvol}' in pool '{args.pool}'...")
+    meta_data_file = tempfile.NamedTemporaryFile(
+            prefix="virtinst-", suffix="-meta-data", delete=False, mode="w"
+    )
     try:
+        meta_data_file.write(
+            f"instance-id: {args.name}\nlocal-hostname: {args.name}\n"
+        )
+        meta_data_file.close()
+        print(f"Cloning '{source}' -> '{vmvol}' in pool '{args.pool}'...")
         v("vol-clone", "--pool", args.pool, "--vol", source, "--newname", vmvol)
 
         if args.size > 1:  ### zero is not allowed
@@ -223,13 +230,6 @@ def cmd_create(args):
             v("vol-resize", "--pool", args.pool, "--vol", vmvol, f"{args.size}G")
 
         print(f"Creating VM '{args.name}'...")
-        meta_data_file = tempfile.NamedTemporaryFile(
-            prefix="virtinst-", suffix="-meta-data", delete=False, mode="w"
-        )
-        meta_data_file.write(
-            f"instance-id: {args.name}\nlocal-hostname: {args.name}\n"
-        )
-        meta_data_file.close()
         run_cmd(
             "virt-install",
             "--connect",
@@ -257,8 +257,7 @@ def cmd_create(args):
             "--console",
             "pty,target_type=virtio",
             "--video",
-            "none",
-            f"--qemu-commandline=-smbios type=1,serial=ds=nocloud;h={args.name}",
+            "none"
         )
     except Fatal:
         print(f"Failed, cleaning up cloned volume '{vmvol}'...")
@@ -267,6 +266,8 @@ def cmd_create(args):
         except Fatal as e2:
             print(f"Warning: failed to clean up volume '{vmvol}': {e2}")
         raise
+    finally:
+        os.unlink(meta_data_file.name)
 
 
 def cmd_destroy(args):
