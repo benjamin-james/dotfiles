@@ -223,6 +223,13 @@ def cmd_create(args):
             v("vol-resize", "--pool", args.pool, "--vol", vmvol, f"{args.size}G")
 
         print(f"Creating VM '{args.name}'...")
+        meta_data_file = tempfile.NamedTemporaryFile(
+            prefix="virtinst-", suffix="-meta-data", delete=False, mode="w"
+        )
+        meta_data_file.write(
+            f"instance-id: {args.name}\nlocal-hostname: {args.name}\n"
+        )
+        meta_data_file.close()
         run_cmd(
             "virt-install",
             "--connect",
@@ -243,7 +250,7 @@ def cmd_create(args):
             "kvm",
             "--import",
             "--cloud-init",
-            f"user-data={args.cloud_config}",
+            f"user-data={args.cloud_config},meta-data={meta_data_file.name}",
             "--wait",
             "0",
             "--noautoconsole",
