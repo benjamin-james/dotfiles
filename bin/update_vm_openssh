@@ -75,6 +75,17 @@ for my $hv (sort keys %hypervisors) {
 		warn "virsh net-dhcp-leases failed on $hv\n";
 		next;
 	}
+
+	# Fetch defined domains so stale DHCP leases (from destroyed VMs whose
+	# leases haven't expired in dnsmasq yet) are filtered out. 
+	my @domain_lines = $ssh->capture(
+		{stdin_data => ''},
+		'LIBVIRT_DEFAULT_URI=qemu:///system virsh list --all --name');
+	if ($ssh->error) {
+		warn "virsh list --all failed on $hv; skipping stale-lease filter\n";
+		@domain_lines = ();
+	}
+	my %defined_domains = map { chomp; $_ => 1 } grep { /\S/ } @domain_lines;
 	my $header_line;
 	for my $line (@lease_lines) {
 		if ($line =~ /^\s*Expiry/i &&
@@ -116,6 +127,13 @@ for my $hv (sort keys %hypervisors) {
 
 		# Skip invalid/placeholder entries
 		next unless $host_raw && $host_raw ne '-' && $ip_raw;
+
+		# Skip stale leases: the VM was destroyed but dnsmasq hasn't
+		# expired the entry yet. Cross-reference against defined domains.
+		if (%defined_domains && !$defined_domains{$host_raw}) {
+			warn "[$hv] Skipping stale lease for '$host_raw' (domain not defined)\n";
+			next;
+		}
 
 		# Strip CIDR notation (e.g., /24)
 		$ip_raw =~ s{[/]\d+$}{};
