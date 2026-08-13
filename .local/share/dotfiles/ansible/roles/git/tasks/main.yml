@@ -1,0 +1,7 @@
+- name: Install git (required by gcfg and dotfiles pulls)
+  ansible.builtin.apt:
+    name: git
+    state: present
+    update_cache: true
+  become: true
+  tags: [git]

@@ -1,0 +1,7 @@
+- name: Install emacs-nox (headless emacs for the dotfiles .emacs.d config)
+  ansible.builtin.apt:
+    name: emacs-nox
+    state: present
+    update_cache: true
+  become: true
+  tags: [emacs]

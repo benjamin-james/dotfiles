@@ -1,0 +1,7 @@
+- name: Install tmux (target of .config/tmux/tmux.conf)
+  ansible.builtin.apt:
+    name: tmux
+    state: present
+    update_cache: true
+  become: true
+  tags: [tmux]

@@ -1,0 +1,6 @@
+# gcfg is fetched from the dotfiles repo itself (it is a tracked file at
+# bin/gcfg). On first run it is absent on the target, so bootstrap it via
+# wget to /tmp (mirroring the README.org instructions). On subsequent
+# runs gcfg already lives at ~/bin/gcfg and we just `gcfg pull`.
+gcfg_url: "https://raw.githubusercontent.com/benjamin-james/dotfiles/master/bin/gcfg"
+gcfg_path: "{{ ansible_facts.env.HOME }}/bin/gcfg"

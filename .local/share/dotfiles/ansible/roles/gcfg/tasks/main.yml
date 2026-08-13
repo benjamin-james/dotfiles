@@ -1,0 +1,66 @@
+- name: Ensure ~/bin exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts.env.HOME }}/bin"
+    state: directory
+    mode: "0755"
+
+- name: Bootstrap gcfg if absent
+  block:
+    - name: Fetch gcfg to /tmp
+      ansible.builtin.get_url:
+        url: "{{ gcfg_url }}"
+        dest: "/tmp/gcfg"
+        mode: "0755"
+        force: true
+      become: false
+
+    - name: Run gcfg bootstrap (clones bare repo, checks out into $HOME)
+      ansible.builtin.command: /tmp/gcfg bootstrap
+      args:
+        creates: "{{ ansible_facts.env.HOME }}/.dotgit"
+      environment:
+        HOME: "{{ ansible_facts.env.HOME }}"
+  when: not (ansible_check_mode | default(false))
+  rescue:
+    - name: Bootstrap may report conflicts; that's expected on first checkout
+      ansible.builtin.debug:
+        msg: "gcfg bootstrap ran, resolve any checkout conflicts on the target, then re-run."
+
+- name: Check if gcfg is present
+  ansible.builtin.stat:
+    path: "{{ gcfg_path }}"
+  register: gcfg_stat
+  tags: [always]
+
+- name: Pull dotfiles updates
+  ansible.builtin.command: "{{ gcfg_path }} pull"
+  args:
+    chdir: "{{ ansible_facts.env.HOME }}"
+  environment:
+    HOME: "{{ ansible_facts.env.HOME }}"
+  register: gcfg_pull
+  changed_when: "'Updating' in gcfg_pull.stdout or 'Updating' in gcfg_pull.stderr"
+  when: gcfg_stat.stat.exists
+  tags: [always]
+
+- name: Warn when gcfg is missing (bootstrap may have failed)
+  ansible.builtin.debug:
+    msg: "gcfg not found at {{ gcfg_path }}, resolve bootstrap conflicts on target, then rerun."
+  when: not gcfg_stat.stat.exists
+  tags: [always]
+
+- name: Source login.sh from ~/.profile
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts.env.HOME }}/.profile"
+    line: '[ -r "$HOME/.config/shell/login.sh" ] && . "$HOME/.config/shell/login.sh"'
+    create: true
+    mode: "0644"
+  tags: [gcfg, always]
+
+- name: Source interactive.sh from ~/.bashrc
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts.env.HOME }}/.bashrc"
+    line: '[ -r "$HOME/.config/shell/interactive.sh" ] && . "$HOME/.config/shell/interactive.sh"'
+    create: true
+    mode: "0644"
+  tags: [gcfg, always]

@@ -1,0 +1,22 @@
+- name: Apply dev environment, install binaries, then land dotfiles via gcfg
+  hosts: vms:bare_metal
+  gather_facts: true
+  # git must precede gcfg (gcfg is a git wrapper that clones the repo).
+  # gcfg must precede the leaf binary roles conceptually, but ordering
+  # here only governs install; config-vs-binary races are harmless because
+  # the dotfiles self-gate (e.g. _have direnv || return 0).
+  roles:
+    - role: git
+      tags: [git, always]
+    - role: gcfg
+      tags: [gcfg, always]
+    - role: emacs
+      tags: [emacs]
+    - role: tmux
+      tags: [tmux]
+    - role: docker
+      tags: [docker]
+    - role: direnv
+      tags: [direnv]
+    - role: packages
+      tags: [packages]

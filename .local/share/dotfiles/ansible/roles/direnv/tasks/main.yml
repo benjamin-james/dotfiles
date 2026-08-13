@@ -1,0 +1,7 @@
+- name: Install direnv (target of .config/shell/rc.d/direnv.sh)
+  ansible.builtin.apt:
+    name: direnv
+    state: present
+    update_cache: true
+  become: true
+  tags: [direnv]

@@ -1,0 +1,7 @@
+- name: Install dev packages
+  ansible.builtin.apt:
+    name: "{{ install_packages }}"
+    state: present
+    update_cache: true
+  become: true
+  tags: [packages]

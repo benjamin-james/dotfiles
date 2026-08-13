@@ -1,0 +1,22 @@
+# Binaries the dotfiles *config* targets. gcfg lands the config files;
+# these roles install the executables those configs expect to find on
+# PATH. Each is idempotent and independently taggable.
+# Kept trim: only what a dev VM commonly needs. Extend per host via
+# group_vars/host_vars overrides.
+install_packages:
+  # editor: emacs-nox (dotfiles .emacs.d is source-only; straight.el
+  # builds natively on the target after this lands)
+  - emacs-nox
+  # multiplexer: .config/tmux/tmux.conf targets this
+  - tmux
+  # vcs: gcfg is a git wrapper; also required to pull dotfiles on updates
+  - git
+  # containers: .config/shell/rc.d/direnv.sh + docker-compose usage
+  - docker.io
+  - docker-compose
+  # env management: .config/shell/rc.d/direnv.sh self-gates on _have direnv
+  - direnv
+  # sandboxing for reproducible builds / agent isolation
+  - bubblewrap
+  # toolchain for building native extensions (e.g. straight.el C deps)
+  - build-essential
