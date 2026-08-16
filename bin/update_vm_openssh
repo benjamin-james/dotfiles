@@ -145,6 +145,9 @@ for my $hv (sort keys %hypervisors) {
 		printf $fh "Host %s.%s %s\n",   $vm, $hv, $alias;
 		printf $fh "    HostName %s\n", $lease_map{$vm};
 		printf $fh "    ProxyJump %s\n",  $hv;
+		printf $fh "    ControlMaster auto\n";
+		printf $fh "    ControlPersist 1800\n";
+		printf $fh "    ControlPath ~/.ssh/cm_socket/%C\n";
 		print  $fh "    User agent\n\n";
 		push @{$inv_groups{$hypervisors{$hv}}}, $alias;
 	} 
