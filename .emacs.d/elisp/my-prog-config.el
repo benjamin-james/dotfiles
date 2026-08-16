@@ -32,8 +32,6 @@
   (apheleia-global-mode +1))
 
 (use-package flymake
-  :ensure t
-					;  :pin gnu
   :config
   (setq flymake-diagnostic-format-alist
         '((t . (origin code message)))))

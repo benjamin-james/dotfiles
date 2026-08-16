@@ -1,6 +1,6 @@
 
 (use-package org
-  :straight nil
+  :straight t
   :config (org-babel-do-load-languages
 	   'org-babel-load-languages
 	   '((python . t)

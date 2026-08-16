@@ -1,9 +1,12 @@
 
 (custom-set-variables
-; '(straight-repository-branch "develop")
+                                        ; '(straight-repository-branch "develop")
  '(straight-check-for-modifications '(check-on-save find-when-checking))
  '(straight-use-package-by-default t)
- '(straight-vc-git-default-clone-depth 1))
+ '(straight-vc-git-default-clone-depth 1)
+ '(straight-built-in-pseudo-packages
+   '(flymake eldoc jsonrpc project xref external-completion
+	     eglot)))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -27,6 +30,6 @@
  '(use-package-hook-name-suffix nil))
 
 (straight-use-package 'use-package)
+(straight-use-package 'org)
 (require 'use-package)
-(straight-use-package 'project)
 (provide '0-straight)
