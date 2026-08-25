@@ -26,6 +26,7 @@ altscreen on
 # QoL
 autodetach on
 zombie kr
+mousetrack off
 
 hardstatus alwayslastline
 bind h eval "hardstatus ignore"
