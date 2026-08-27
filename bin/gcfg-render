@@ -1,0 +1,212 @@
+#!/usr/bin/env perl
+# gcfg-render: in-place identity substitution for dotfiles.
+#
+# Reads identity.defaults.sh (search values) and optionally
+# identity.local.sh (replace values), then substitutes in registered
+# files per render-registry. Longer values are replaced first per file
+# to avoid substring collisions. Modified files are marked skip-worktree
+# so git status stays clean.
+#
+# Usage:
+#   gcfg-render render   # reset + substitute + skip-worktree
+#   gcfg-render check    # verify defaults exist in registered files
+#   gcfg-render reset    # restore skip-worktree files from HEAD
+
+use warnings;
+use strict;
+
+my $home     = $ENV{HOME} or die "HOME not set\n";
+my $dotbase  = $ENV{_DOTBASE}  // "$home/.config/shell";
+my $registry = $ENV{_REGISTRY} // "$home/.local/share/dotfiles/render-registry";
+my $mode     = $ARGV[0]        // '';
+
+# In a bare-checkout, .dotgit exists and we pass --git-dir/--work-tree
+# explicitly. In a normal clone (e.g. pre-commit hook context), git's
+# own GIT_DIR is already set, so we use plain git.
+my $bare = -d "$home/.dotgit" ? 1 : 0;
+
+# --- helpers ---------------------------------------------------------------
+
+sub source_identity {
+    my ($file) = @_;
+    return unless -r $file;
+    my %out;
+    open my $fh, '<', $file or die "Cannot read $file: $!\n";
+    while (<$fh>) {
+        /^\s*([A-Z_]+)="(.*)"\s*$/ and $out{$1} = $2;
+    }
+    close $fh;
+    return %out;
+}
+
+sub read_registry {
+    open my $fh, '<', $registry or die "Cannot read $registry: $!\n";
+    my @rules;
+    while (<$fh>) {
+        s/#.*//;
+        s/^\s+//;
+        s/\s+$//;
+        next unless /\S/;
+        my ( $var, @files ) = split /\s+/;
+        next unless $var && @files;
+        push @rules, { var => $var, files => \@files };
+    }
+    close $fh;
+    return @rules;
+}
+
+sub git {
+    my @args = @_;
+    my @prefix =
+      $bare
+      ? ( "--git-dir=$home/.dotgit", "--work-tree=$home" )
+      : ();
+    my $cmd = join( ' ', map { quotemeta } 'git', @prefix, @args );
+    open my $pipe, '-|', "$cmd 2>/dev/null" or return ();
+    my @lines = <$pipe>;
+    close $pipe;
+    return @lines;
+}
+
+sub git_skip_worktree_files {
+    my @out;
+    for ( git( 'ls-files', '-v' ) ) {
+        chomp;
+        next unless /^S /;
+        push @out, substr( $_, 2 );
+    }
+    return @out;
+}
+
+sub git_reset_file {
+    my ($f) = @_;
+    git( 'update-index', '--no-skip-worktree', $f );
+    git( 'checkout',     '--',                 $f );
+}
+
+sub git_set_skip_worktree {
+    my ($f) = @_;
+    git( 'update-index', '--skip-worktree', $f );
+}
+
+sub git_diff_quiet {
+    my ($f) = @_;
+    my @prefix =
+      $bare
+      ? ( "--git-dir=$home/.dotgit", "--work-tree=$home" )
+      : ();
+    my $cmd = join( ' ',
+        map { quotemeta } 'git',
+        @prefix, 'diff', '--quiet', 'HEAD', '--', $f );
+    system("$cmd 2>/dev/null");
+    return $? == 0;
+}
+
+# --- modes -----------------------------------------------------------------
+
+sub do_reset {
+    for my $f ( git_skip_worktree_files() ) {
+        git_reset_file($f);
+    }
+}
+
+sub do_render {
+    my %defaults = source_identity("$dotbase/identity.defaults.sh");
+    die "identity.defaults.sh not found in $dotbase\n" unless %defaults;
+
+    my %replace = %defaults;
+    if ( -r "$dotbase/identity.local.sh" ) {
+        %replace = source_identity("$dotbase/identity.local.sh");
+    }
+
+    do_reset();
+
+    my @rules = read_registry();
+
+    # Collect per-file substitution lists.
+    my %file_subs;
+    for my $rule (@rules) {
+        my $var    = $rule->{var};
+        my $search = $defaults{$var};
+        next unless defined $search && length $search;
+        my $repl = $replace{$var} // $search;
+        next if $search eq $repl;
+        for my $f ( @{ $rule->{files} } ) {
+            push @{ $file_subs{$f} }, [ $search, $repl ];
+        }
+    }
+
+    my $count = 0;
+    for my $f ( sort keys %file_subs ) {
+        my $path = "$home/$f";
+        next unless -f $path;
+
+        open my $fh, '<', $path or die "Cannot read $path: $!\n";
+        local $/;
+        my $content = <$fh>;
+        close $fh;
+
+        # Sort longest search first to avoid substring collisions.
+        # Use s{}{}g so only backslash needs escaping in the replacement.
+        my @subs =
+          sort { length $b->[0] <=> length $a->[0] } @{ $file_subs{$f} };
+        for my $pair (@subs) {
+            my ( $search, $repl ) = @$pair;
+            my $re = quotemeta $search;
+            ( my $rp = $repl ) =~ s/\\/\\\\/g;
+            $content =~ s{$re}{$rp}g;
+        }
+
+        open my $out, '>', $path or die "Cannot write $path: $!\n";
+        print $out $content;
+        close $out;
+
+        git_set_skip_worktree($f) unless git_diff_quiet($f);
+        $count++;
+    }
+    print "Rendered $count files.\n";
+}
+
+sub do_check {
+    my %defaults = source_identity("$dotbase/identity.defaults.sh");
+    die "identity.defaults.sh not found in $dotbase\n" unless %defaults;
+
+    my @rules = read_registry();
+    my $fail  = 0;
+
+    for my $rule (@rules) {
+        my $var    = $rule->{var};
+        my $search = $defaults{$var};
+        unless ( defined $search && length $search ) {
+            print STDERR "gcfg check: $var not set in defaults\n";
+            $fail = 1;
+            next;
+        }
+        for my $f ( @{ $rule->{files} } ) {
+
+            # Read from the git index and not disk. The index always holds
+            # the committed values (skip-worktree files are unchanged in
+            # the index), so the check is correct for both the author and
+            # forkers who have rendered local overrides onto disk.
+            my $content = join( '', git( 'show', ":$f" ) );
+            unless ( index( $content, $search ) >= 0 ) {
+                print STDERR "gcfg check: $var value not found in $f\n";
+                $fail = 1;
+            }
+        }
+    }
+
+    if ($fail) { exit 1 }
+    print "gcfg check: OK\n";
+}
+
+# --- dispatch --------------------------------------------------------------
+
+unless ($mode) {
+    die "Usage: gcfg-render [render|check|reset]\n";
+}
+
+if    ( $mode eq 'reset' )  { do_reset() }
+elsif ( $mode eq 'render' ) { do_render() }
+elsif ( $mode eq 'check' )  { do_check() }
+else                        { die "Unknown mode: $mode\n" }

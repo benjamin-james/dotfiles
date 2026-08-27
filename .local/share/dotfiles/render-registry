@@ -1,0 +1,20 @@
+# render-registry: maps identity variables to the files where they appear.
+#
+# gcfg render searches for each variable's identity.defaults.sh value
+# and replaces it with the identity.local.sh value (or defaults if no
+# local). Substitutions are applied longest-first per file to avoid
+# substring collisions (e.g. benjames@csail.mit.edu before benjames).
+#
+# gcfg check verifies every defaults value still exists in its
+# registered files — catches drift when a value changes in one place
+# but not the other.
+#
+# Format: VARIABLE  file1 file2 ...  (whitespace-separated; # comments)
+
+MY_GPG_KEYID     .gnupg/gpg.conf
+MY_EMAIL_CSAIL   .config/openstack/clouds.yaml .config/msmtp/config .emacs.d/elisp/my-mail.el
+MY_EMAIL         .config/git/config .config/msmtp/config .config/isyncrc .emacs.d/elisp/my-mail.el
+MY_OS_PROJECT    .config/openstack/clouds.yaml
+MY_GITHUB_USER   .local/share/dotfiles/README.org .local/share/dotfiles/ansible/roles/gcfg/defaults/main.yml
+MY_NAME          .config/git/config .emacs.d/elisp/my-mail.el
+MY_USER          .config/ssh/mit.conf .config/msmtp/config .config/isyncrc .emacs.d/elisp/my-mail.el bin/mail-secret

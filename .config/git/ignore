@@ -73,3 +73,6 @@ id_ed25519
 *.token
 *.auth
 *.env
+
+# Identity override (consumed by gcfg-render; copy identity.defaults.sh to override)
+/.config/shell/identity.local.sh

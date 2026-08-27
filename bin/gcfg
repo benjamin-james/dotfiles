@@ -1,6 +1,7 @@
 #!/bin/sh
-# Usage: dotgit <cmd> [args]
+# Usage: gcfg <cmd> [args]
 D="git --git-dir=$HOME/.dotgit --work-tree=$HOME"
+R="$HOME/bin/gcfg-render"
 
 case "$1" in
 ls)
@@ -29,7 +30,11 @@ push)
 	;;
 pull)
 	shift
+	"$R" reset
 	$D pull "$@"
+	_rc=$?
+	"$R" render
+	exit $_rc
 	;;
 log)
 	shift
@@ -44,15 +49,22 @@ untrack)
 	$D rm --cached "$@"
 	;;
 bootstrap)
-	git clone --bare https://github.com/benjamin-james/dotfiles "$HOME/.dotgit"
+	: "${DOTFILES_REPO:=https://github.com/benjamin-james/dotfiles}"
+	git clone --bare "$DOTFILES_REPO" "$HOME/.dotgit"
 	$D config --local status.showUntrackedFiles no
 	$D checkout master 2>/dev/null || echo "Resolve conflicts, then: $0 checkout" && {
 		printf "No addition of code to profile/login was added. To add, put\n"
+		# shellcheck disable=SC2016  # literal $HOME, not expansion
 		printf '[ -r "$HOME/.config/shell/login.sh" ] && . "$HOME/.config/shell/login.sh"\n'
 		printf "into .profile (or .bash_profile if that exists) and add\n"
+		# shellcheck disable=SC2016  # literal $HOME, not expansion
 		printf '[ -r "$HOME/.config/shell/interactive.sh" ] && . "$HOME/.config/shell/interactive.sh"\n'
 		printf "into .bashrc/.zshrc/.kshrc/.shrc for per-session interactive usage\n"
 	}
+	"$R" render
+	$D config --local core.hooksPath "$HOME/.local/share/dotfiles/hooks"
 	;;
+render) "$R" render ;;
+check) "$R" check ;;
 *) $D "$@" ;;
 esac

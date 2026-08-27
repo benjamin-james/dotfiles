@@ -1,0 +1,4 @@
+#!/bin/sh
+# Pre-commit: verify identity defaults match registered files in the index.
+_root=$(cd "$(dirname "$0")/../../../.." && pwd)
+HOME="$_root" exec "$_root/bin/gcfg-render" check

@@ -44,3 +44,24 @@ echo "gitdir: $HOME/.dotgit" > ~/.git
        --eval '(ql:quickload "swank")'
 #+end_src
 
+** Identity
+Personal identity (name, email, GPG key, SSH user, etc.) is committed
+as real values in config files so a fresh clone works with zero setup.
+
+To use these dotfiles as your own:
+1. Copy =identity.defaults.sh= to =identity.local.sh= (gitignored)
+2. Edit the values in =identity.local.sh=
+3. Run =gcfg render=
+
+=gcfg render= does in-place substitution using a registry
+(=~/.local/share/dotfiles/render-registry=) that maps identity
+variables to the files where they appear. Longer values are replaced
+first per file to avoid substring collisions (e.g.
+=benjames@csail.mit.edu= before =benjames=). Rendered files are
+auto-marked =skip-worktree= so =git status= stays clean; =gcfg pull=
+temporarily reveals them for update, then re-renders.
+
+=gcfg check= (wired as a pre-commit hook) verifies every default value
+still exists in its registered files and catches drift when a value
+changes in one place but not the other.
+
