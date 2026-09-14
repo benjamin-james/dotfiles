@@ -29,12 +29,12 @@ if ! command -v port >/dev/null 2>&1; then
 			PATH="$mp_path" "$mp_port" "$@"
 			;;
 		esac
-		unset my_port
+		unset mp_port
 		unset mp_path
 	}
 fi
 
-if _have otool && ! type -P ldd; then
+if _have otool && ! _have ldd; then
 	ldd() {
 		### don't bother learning mac os x syntax
 		if [ "$#" -eq 0 ]; then

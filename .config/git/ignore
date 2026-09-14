@@ -76,3 +76,6 @@ id_ed25519
 
 # Identity override (consumed by gcfg-render; copy identity.defaults.sh to override)
 /.config/shell/identity.local.sh
+
+# Auto-generated VM inventory (update_vm_openssh); static hosts live in hosts.yml
+/.local/share/dotfiles/ansible/inventory/vms.yml
