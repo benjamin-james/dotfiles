@@ -295,7 +295,7 @@ def cmd_destroy(args):
 
     if args.remove_base:
         source = os.path.basename(args.url or DEF_URL)
-        pool = DEF_VMPOOL
+        pool = args.pool
         if v.ok("vol-info", "--pool", pool, "--vol", source):
             print(f"Deleting base image '{source}' from pool '{pool}'...")
             v("vol-delete", "--pool", pool, "--vol", source)
@@ -376,6 +376,12 @@ def main():
     )
     p.add_argument("-n", dest="name", required=True, help="Name of VM")
     p.add_argument("-u", dest="url", default=None, help="Base image URL (for -b)")
+    p.add_argument(
+        "-p",
+        dest="pool",
+        default=DEF_VMPOOL,
+        help=f"Storage pool for base image (default: {DEF_VMPOOL})",
+    )
     p.add_argument(
         "-b", dest="remove_base", action="store_true", help="Also delete the base image"
     )
