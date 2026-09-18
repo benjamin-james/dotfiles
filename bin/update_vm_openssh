@@ -142,7 +142,7 @@ for my $hv (sort keys %hypervisors) {
 	}
 	for my $vm (sort keys %lease_map) {
 		my $alias = "$vm.$hypervisors{$hv}";
-		printf $fh "Host %s.%s %s\n",   $vm, $hv, $alias;
+		printf $fh "Host %s\n",   $alias;
 		printf $fh "    HostName %s\n", $lease_map{$vm};
 		printf $fh "    ProxyJump %s\n",  $hv;
 		printf $fh "    ControlMaster auto\n";
