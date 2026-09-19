@@ -2,12 +2,15 @@
 #
 # gcfg render searches for each variable's identity.defaults.sh value
 # and replaces it with the identity.local.sh value (or defaults if no
-# local). Substitutions are applied longest-first per file to avoid
-# substring collisions (e.g. benjames@csail.mit.edu before benjames).
+# local). Substitutions are applied longest-first per file in a single
+# pass to avoid substring collisions (e.g. benjames@csail.mit.edu
+# before benjames); replacement values may safely contain other
+# search values.
 #
 # gcfg check verifies every defaults value still exists in its
 # registered files — catches drift when a value changes in one place
-# but not the other.
+# but not the other. A short value (benjames) must appear on its own,
+# not merely inside a longer registered value.
 #
 # Format: VARIABLE  file1 file2 ...  (whitespace-separated; # comments)
 

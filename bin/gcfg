@@ -30,11 +30,11 @@ push)
 	;;
 pull)
 	shift
-	"$R" reset
-	$D pull "$@"
-	_rc=$?
+	# Only re-render after a clean pull; rendering into conflicted
+	# or failed-merge state would corrupt files.
+	"$R" reset &&
+	$D pull "$@" &&
 	"$R" render
-	exit $_rc
 	;;
 log)
 	shift

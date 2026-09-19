@@ -3,9 +3,11 @@
 #
 # Reads identity.defaults.sh (search values) and optionally
 # identity.local.sh (replace values), then substitutes in registered
-# files per render-registry. Longer values are replaced first per file
-# to avoid substring collisions. Modified files are marked skip-worktree
-# so git status stays clean.
+# files per render-registry. All substitutions for a file run in a
+# single pass with searches ordered longest-first, so neither
+# substring collisions between searches nor a replacement containing
+# another search value can corrupt the result. Modified files are
+# marked skip-worktree so git status stays clean.
 #
 # Usage:
 #   gcfg-render render   # reset + substitute + skip-worktree
@@ -20,23 +22,85 @@ my $dotbase  = $ENV{_DOTBASE}  // "$home/.config/shell";
 my $registry = $ENV{_REGISTRY} // "$home/.local/share/dotfiles/render-registry";
 my $mode     = $ARGV[0]        // '';
 
-# In a bare-checkout, .dotgit exists and we pass --git-dir/--work-tree
+# In a bare checkout, .dotgit exists and we pass --git-dir/--work-tree
 # explicitly. In a normal clone (e.g. pre-commit hook context), git's
-# own GIT_DIR is already set, so we use plain git.
+# own GIT_DIR is already set, so we use plain git. Otherwise, when HOME
+# itself is a clone, run git from there so manual invocations work from
+# any cwd.
 my $bare = -d "$home/.dotgit" ? 1 : 0;
 
+my $GIT_ERR = 0;    # wait status of the last git() call (0 = success)
+
 # --- helpers ---------------------------------------------------------------
+
+sub parse_identity {
+    my ( $name, @lines ) = @_;
+    my %out;
+    for my $ln (@lines) {
+        $ln =~ s/^\s+//;
+        $ln =~ s/\s+$//;
+        next unless length $ln;
+        next if $ln =~ /^#/;
+
+        # Double-quoted (\" and \\ escape per shell), single-quoted
+        # (fully literal), or bare word. A trailing # comment is
+        # allowed after any form. Values containing # must be quoted.
+        my ( $var, $val );
+        if ( $ln =~ /^([A-Z_]+)\s*=\s*"((?:\\.|[^"\\])*)"\s*(?:#.*)?$/ ) {
+            ( $var, $val ) = ( $1, $2 );
+            $val =~ s/\\(["\\])/$1/g;
+        }
+        elsif ( $ln =~ /^([A-Z_]+)\s*=\s*'([^']*)'\s*(?:#.*)?$/ ) {
+            ( $var, $val ) = ( $1, $2 );
+        }
+        elsif ( $ln =~ /^([A-Z_]+)\s*=\s*([^\s#'"]+)\s*(?:#.*)?$/ ) {
+            ( $var, $val ) = ( $1, $2 );
+        }
+
+        if ( defined $var ) {
+            if ( length $val ) { $out{$var} = $val }
+            else { warn "gcfg: $name: empty value for $var ignored\n" }
+        }
+        else {
+            warn "gcfg: $name: unrecognized line ignored: $ln\n";
+        }
+    }
+    return %out;
+}
 
 sub source_identity {
     my ($file) = @_;
     return unless -r $file;
-    my %out;
     open my $fh, '<', $file or die "Cannot read $file: $!\n";
-    while (<$fh>) {
-        /^\s*([A-Z_]+)="(.*)"\s*$/ and $out{$1} = $2;
-    }
+    chomp( my @lines = <$fh> );
     close $fh;
-    return %out;
+    return parse_identity( $file, @lines );
+}
+
+# Defaults for check: prefer the index copy (what a commit will
+# contain) and fall back to the worktree copy outside a repo or when
+# the file is untracked.
+sub check_defaults {
+    my $rel = $dotbase =~ s{^\Q$home\E/}{}r;
+    my $key = length $rel ? "$rel/identity.defaults.sh" : 'identity.defaults.sh';
+
+    my @idx = git( 'show', ":$key" );
+    if ( !$GIT_ERR && @idx ) {
+        my %idx = parse_identity( "index:$key", @idx );
+        if (%idx) {
+            my %disk = source_identity("$dotbase/identity.defaults.sh");
+            if ( %disk
+                and join( '', map { "$_=$disk{$_}\n" } sort keys %disk )
+                ne join( '', map { "$_=$idx{$_}\n" } sort keys %idx ) )
+            {
+                warn
+                  "gcfg check: identity.defaults.sh differs on disk and in"
+                  . " the index; checking the index copy\n";
+            }
+            return %idx;
+        }
+    }
+    return source_identity("$dotbase/identity.defaults.sh");
 }
 
 sub read_registry {
@@ -56,15 +120,19 @@ sub read_registry {
 }
 
 sub git {
-    my @args = @_;
-    my @prefix =
-      $bare
-      ? ( "--git-dir=$home/.dotgit", "--work-tree=$home" )
-      : ();
+    my (@args) = @_;
+    my @prefix;
+    if ($bare) {
+        @prefix = ( "--git-dir=$home/.dotgit", "--work-tree=$home" );
+    }
+    elsif ( !defined $ENV{GIT_DIR} && -e "$home/.git" ) {
+        @prefix = ( '-C', $home );
+    }
     my $cmd = join( ' ', map { quotemeta } 'git', @prefix, @args );
-    open my $pipe, '-|', "$cmd 2>/dev/null" or return ();
+    open my $pipe, '-|', "$cmd 2>/dev/null" or die "Cannot run git: $!\n";
     my @lines = <$pipe>;
     close $pipe;
+    $GIT_ERR = $?;
     return @lines;
 }
 
@@ -81,25 +149,23 @@ sub git_skip_worktree_files {
 sub git_reset_file {
     my ($f) = @_;
     git( 'update-index', '--no-skip-worktree', $f );
-    git( 'checkout',     '--',                 $f );
+    die "gcfg: git update-index failed for $f\n" if $GIT_ERR;
+    git( 'checkout', 'HEAD', '--', $f );
+    die "gcfg: git checkout HEAD -- $f failed\n" if $GIT_ERR;
 }
 
 sub git_set_skip_worktree {
     my ($f) = @_;
     git( 'update-index', '--skip-worktree', $f );
+    die "gcfg: git update-index --skip-worktree failed for $f\n" if $GIT_ERR;
 }
 
 sub git_diff_quiet {
     my ($f) = @_;
-    my @prefix =
-      $bare
-      ? ( "--git-dir=$home/.dotgit", "--work-tree=$home" )
-      : ();
-    my $cmd = join( ' ',
-        map { quotemeta } 'git',
-        @prefix, 'diff', '--quiet', 'HEAD', '--', $f );
-    system("$cmd 2>/dev/null");
-    return $? == 0;
+    git( 'diff', '--quiet', 'HEAD', '--', $f );
+    return 0 if $GIT_ERR == 256;    # exit 1: differences exist
+    die "gcfg: git diff failed for $f\n" if $GIT_ERR;
+    return 1;
 }
 
 # --- modes -----------------------------------------------------------------
@@ -128,33 +194,61 @@ sub do_render {
     for my $rule (@rules) {
         my $var    = $rule->{var};
         my $search = $defaults{$var};
-        next unless defined $search && length $search;
+        if ( !defined $search || !length $search ) {
+            warn "gcfg render: $var not set in defaults\n";
+            next;
+        }
         my $repl = $replace{$var} // $search;
         next if $search eq $repl;
         for my $f ( @{ $rule->{files} } ) {
-            push @{ $file_subs{$f} }, [ $search, $repl ];
+            push @{ $file_subs{$f} }, $var;
         }
     }
 
     my $count = 0;
     for my $f ( sort keys %file_subs ) {
         my $path = "$home/$f";
-        next unless -f $path;
+        if ( !-f $path ) {
+            warn "gcfg render: $f: not on disk, skipped\n";
+            next;
+        }
 
         open my $fh, '<', $path or die "Cannot read $path: $!\n";
         local $/;
-        my $content = <$fh>;
+        my $content = <$fh> // '';
         close $fh;
 
-        # Sort longest search first to avoid substring collisions.
-        # Use s{}{}g so only backslash needs escaping in the replacement.
-        my @subs =
-          sort { length $b->[0] <=> length $a->[0] } @{ $file_subs{$f} };
-        for my $pair (@subs) {
-            my ( $search, $repl ) = @$pair;
-            my $re = quotemeta $search;
-            ( my $rp = $repl ) =~ s/\\/\\\\/g;
-            $content =~ s{$re}{$rp}g;
+        # Single pass, longest search first. Alternation ordered
+        # longest-first makes the regex pick the longest default at
+        # each position (no substring collisions between searches),
+        # and one pass means replacement text is never re-scanned by a
+        # later substitution (a replacement may safely contain another
+        # search value, and two values may even swap). The /e hash
+        # lookup inserts the replacement literally, so no escaping of
+        # the replacement is needed or correct.
+        my %map;
+        for my $var ( @{ $file_subs{$f} } ) {
+            my ( $s, $r ) =
+              ( $defaults{$var}, $replace{$var} // $defaults{$var} );
+            if ( defined $map{$s} && $map{$s} ne $r ) {
+                warn "gcfg render: $f: '$s' has conflicting replacements;"
+                  . " keeping '$map{$s}'\n";
+            }
+            else { $map{$s} = $r }
+        }
+        next unless %map;
+
+        my @searches = sort { length $b <=> length $a } keys %map;
+        my $alt      = join '|', map { quotemeta } @searches;
+        my %hits;
+        $content =~ s{($alt)}{ $hits{$1}++; $map{$1} }ge;
+
+        # Surface drift (registry/file mismatch, uncommitted defaults
+        # edits, lost skip-worktree bits) instead of substituting
+        # nothing in silence.
+        for my $s (@searches) {
+            warn "gcfg render: $f: default value '$s' not found\n"
+              unless $hits{$s};
         }
 
         open my $out, '>', $path or die "Cannot write $path: $!\n";
@@ -168,12 +262,16 @@ sub do_render {
 }
 
 sub do_check {
-    my %defaults = source_identity("$dotbase/identity.defaults.sh");
+    my %defaults = check_defaults();
     die "identity.defaults.sh not found in $dotbase\n" unless %defaults;
 
     my @rules = read_registry();
     my $fail  = 0;
 
+    # Group rules by file so searches also run longest-first per file,
+    # mirroring render: a short default must match on its own, not
+    # merely inside a longer registered default.
+    my %file_vars;
     for my $rule (@rules) {
         my $var    = $rule->{var};
         my $search = $defaults{$var};
@@ -182,14 +280,26 @@ sub do_check {
             $fail = 1;
             next;
         }
-        for my $f ( @{ $rule->{files} } ) {
+        push @{ $file_vars{$_} }, $var for @{ $rule->{files} };
+    }
 
-            # Read from the git index and not disk. The index always holds
-            # the committed values (skip-worktree files are unchanged in
-            # the index), so the check is correct for both the author and
-            # forkers who have rendered local overrides onto disk.
-            my $content = join( '', git( 'show', ":$f" ) );
-            unless ( index( $content, $search ) >= 0 ) {
+    for my $f ( sort keys %file_vars ) {
+        my @lines = git( 'show', ":$f" );
+        if ($GIT_ERR) {
+            print STDERR "gcfg check: cannot read :$f from the index\n";
+            $fail = 1;
+            next;
+        }
+        my $content = join '', @lines;
+
+        my %map      = map { $defaults{$_} => $_ } @{ $file_vars{$f} };
+        my @searches = sort { length $b <=> length $a } keys %map;
+        my $alt      = join '|', map { quotemeta } @searches;
+        my %hits;
+        $hits{$1}++ while $content =~ /($alt)/g;
+
+        for my $var ( @{ $file_vars{$f} } ) {
+            unless ( $hits{ $defaults{$var} } ) {
                 print STDERR "gcfg check: $var value not found in $f\n";
                 $fail = 1;
             }

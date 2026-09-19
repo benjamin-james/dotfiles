@@ -55,9 +55,10 @@ To use these dotfiles as your own:
 
 =gcfg render= does in-place substitution using a registry
 (=~/.local/share/dotfiles/render-registry=) that maps identity
-variables to the files where they appear. Longer values are replaced
-first per file to avoid substring collisions (e.g.
-=benjames@csail.mit.edu= before =benjames=). Rendered files are
+variables to the files where they appear. Substitutions run in a
+single pass, longest values first, to avoid substring collisions
+(e.g. =benjames@csail.mit.edu= before =benjames=); replacement values
+may safely contain other search values. Rendered files are
 auto-marked =skip-worktree= so =git status= stays clean; =gcfg pull=
 temporarily reveals them for update, then re-renders.
 
